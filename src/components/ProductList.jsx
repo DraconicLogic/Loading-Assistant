@@ -24,14 +24,14 @@ class ProductList extends Component {
     }
   })
     return (
-      <div>
+      <div id="product-list">
         Product List
         <div>Tabs: Small - Big - Giant</div>
         <div id='product-buttons'>
         {smallBales.map((bale) => {
           return <ProductButton product={bale}/>
         })}
-        Product buttons</div>
+        </div>
       </div>
     );
   }

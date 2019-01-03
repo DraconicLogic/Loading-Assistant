@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ProductList from './components/ProductList.jsx'
 import Stack from './components/Stack.jsx'
 import './App.css';
@@ -15,8 +15,12 @@ class App extends Component {
 
       <div id="App">
         <h1>Stack Builder</h1>
-        <div id="Product-list"><ProductList/></div>
-        <div id="Stack"><Stack/></div>
+        <Fragment>
+          <ProductList/>
+        </Fragment>
+        <Fragment>
+          <Stack/>
+        </Fragment>
       </div>
     );
   }

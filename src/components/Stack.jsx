@@ -8,7 +8,7 @@ class Stack extends Component {
   }
   render() {
     return (
-      <div>
+      <div id="Stack">
         <div>Stack Viewer</div>
         <div>Stack Options</div>
       </div>
