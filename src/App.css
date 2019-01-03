@@ -18,10 +18,26 @@
   margin: 2px;
 }
 
-#Stack {
+#stack-section {
   border: solid;
   height: 30vh;
   max-height: 30vh;
+  display: grid;
+  grid-template-columns: auto 2cm
+}
+
+#stack-editor {
+  border: solid;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.stack-editor__bale {
+  border: solid
+}
+#stack-options {
+  border: solid;
 }
 
 #small-bales {
