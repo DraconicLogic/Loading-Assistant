@@ -39,6 +39,11 @@ class ProductList extends Component {
       </Fragment>  
     );
   }
+
+  selectFromList = () => {}
+
+  addToStack = () => {}
+
 }
 
 export default ProductList;

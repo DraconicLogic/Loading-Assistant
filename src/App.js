@@ -14,19 +14,9 @@ class App extends Component {
 
       <div id="App">
         <h1>Stack Builder</h1>
-        <Fragment>
           <ProductList/>
-        </Fragment>
       </div>
     );
-  }
-
-  selectFromList = () => {
-
-  }
-
-  addToStack = () => {
-
   }
 }
 
