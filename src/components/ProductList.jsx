@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import products from '../products.json';
 import ProductButton from './ProductButton.jsx';
+import StackEditor from './StackEditor.jsx';
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 // import Tabs from '@material-ui/core/Tabs';
@@ -24,15 +25,18 @@ class ProductList extends Component {
     }
   })
     return (
-      <div id="product-list">
-        Product List
-        <div>Tabs: Small - Big - Giant</div>
-        <div id='product-buttons'>
-        {smallBales.map((bale) => {
-          return <ProductButton product={bale}/>
-        })}
+      <Fragment>
+        <div id="product-list">
+          Product List
+          <div>Tabs: Small - Big - Giant</div>
+          <div id='product-buttons'>
+          {smallBales.map((bale) => {
+            return <ProductButton product={bale}/>
+          })}
+          </div>
         </div>
-      </div>
+        <StackEditor></StackEditor>
+      </Fragment>  
     );
   }
 }

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import ProductList from './components/ProductList.jsx'
-import Stack from './components/Stack.jsx'
 import './App.css';
 
 class App extends Component {
@@ -18,11 +17,16 @@ class App extends Component {
         <Fragment>
           <ProductList/>
         </Fragment>
-        <Fragment>
-          <Stack/>
-        </Fragment>
       </div>
     );
+  }
+
+  selectFromList = () => {
+
+  }
+
+  addToStack = () => {
+
   }
 }
 

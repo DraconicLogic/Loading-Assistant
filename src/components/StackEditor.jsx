@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Stack extends Component {
+class StackEditor extends Component {
   state = {
     bales: {
 
@@ -31,4 +31,4 @@ class Stack extends Component {
   }
 }
 
-export default Stack;
+export default StackEditor;
