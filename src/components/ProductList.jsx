@@ -13,6 +13,7 @@ class ProductList extends Component {
     selected: '',
     currentStack: []
   }
+
   render() {
     const { add } = this.props
     const { selected, currentStack } = this.state
@@ -38,7 +39,7 @@ class ProductList extends Component {
           })}
           </div>
         </div>
-        <StackEditor bale={selected} stack={currentStack}/>
+        <StackEditor bale={selected} stack={currentStack} handleContainer={this.handleAddContainer}/>
       </Fragment>  
     );
   }
@@ -64,16 +65,25 @@ class ProductList extends Component {
   addToStack = (baleCode) => {
     const {currentStack} = this.state
 
-    if (currentStack.length < 13) {
+    if (currentStack.length < 12) {
       const newStack = [...currentStack]
       newStack.push(products[baleCode])
       this.setState({
       currentStack: newStack
       })
     }
-    
-
   }
+
+  handleAddContainer = () => {
+    const { add } = this.props
+    const { currentStack } = this.state
+    add(currentStack)
+    this.setState({
+      currentStack: []
+    })
+  }
+
+  
 
 }
 

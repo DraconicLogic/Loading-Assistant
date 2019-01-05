@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class StackEditor extends Component {
 
   render() {
-    const { bale, stack } = this.props
+    const { bale, stack, handleContainer } = this.props
     console.log(stack)
     return (
       <div id="stack-section">
@@ -23,6 +23,7 @@ class StackEditor extends Component {
         </div>
         <div id="stack-options">
           Stack Options
+          <button onClick={handleContainer}>Add to container</button>
         </div>
       </div>
     );
