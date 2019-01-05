@@ -18,6 +18,10 @@
   margin: 2px;
 }
 
+#product-button--selected {
+  border: blue;
+}
+
 #stack-section {
   border: solid;
   height: 30vh;

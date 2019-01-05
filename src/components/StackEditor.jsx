@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
 
 class StackEditor extends Component {
-  state = {
-    bales: {
-
-    }
-  }
+  
   render() {
+    const { bale, add, stack } = this.props
+    console.log(stack)
     return (
       <div id="stack-section">
         <div id="stack-editor">
-          <div className="stack-editor__bale" id="bale-one"></div>
-          <div className="stack-editor__bale" id="bale-two"></div>
-          <div className="stack-editor__bale" id="bale-three"></div>
-          <div className="stack-editor__bale" id="bale-four"></div>
-          <div className="stack-editor__bale" id="bale-five"></div>
-          <div className="stack-editor__bale" id="bale-six"></div>
-          <div className="stack-editor__bale" id="bale-seven"></div>
-          <div className="stack-editor__bale" id="bale-eight"></div>
-          <div className="stack-editor__bale" id="bale-nine"></div>
-          <div className="stack-editor__bale" id="bale-ten"></div>
-          <div className="stack-editor__bale" id="bale-eleven"></div>
-          <div className="stack-editor__bale" id="bale-twelve"></div>
+          <div className="stack-editor__bale" id="bale-1"onClick={() => add(bale)}></div>
+          <div className="stack-editor__bale" id="bale-2"></div>
+          <div className="stack-editor__bale" id="bale-3"></div>
+          <div className="stack-editor__bale" id="bale-4"></div>
+          <div className="stack-editor__bale" id="bale-5"></div>
+          <div className="stack-editor__bale" id="bale-6"></div>
+          <div className="stack-editor__bale" id="bale-7"></div>
+          <div className="stack-editor__bale" id="bale-8"></div>
+          <div className="stack-editor__bale" id="bale-9"></div>
+          <div className="stack-editor__bale" id="bale-10"></div>
+          <div className="stack-editor__bale" id="bale-11"></div>
+          <div className="stack-editor__bale" id="bale-12"></div>
         </div>
         <div id="stack-options">
           Stack Options
@@ -29,6 +27,7 @@ class StackEditor extends Component {
       </div>
     );
   }
+
 }
 
 export default StackEditor;

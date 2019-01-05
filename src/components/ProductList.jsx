@@ -10,9 +10,11 @@ import StackEditor from './StackEditor.jsx';
 
 class ProductList extends Component {
   state = {
-
+    selected: '',
+    currentStack: []
   }
   render() {
+    const { selected, currentStack } = this.state
     const productCodes = Object.keys(products)
     const smallBales = productCodes.filter((product) => {
       if (products[product].baleSize === 'small') {
@@ -31,18 +33,42 @@ class ProductList extends Component {
           <div>Tabs: Small - Big - Giant</div>
           <div id='product-buttons'>
           {smallBales.map((bale) => {
-            return <ProductButton product={bale}/>
+            return <ProductButton selector={this.selectFromList} product={bale} selected={selected} />
           })}
           </div>
         </div>
-        <StackEditor></StackEditor>
+        <StackEditor bale={selected} add={this.addToStack} stack={currentStack}/>
       </Fragment>  
     );
   }
 
-  selectFromList = () => {}
+  selectFromList = (event) => {
+    const { value } = event.target
+    const { selected } = this.state
+    if (value === selected) {
+      this.addToStack(value)
+      this.setState({
+        selected : ""
+      })
+    } else {
+      this.setState({
+        selected: value
+      })
+    }
 
-  addToStack = () => {}
+
+     
+  }
+
+  addToStack = (baleCode) => {
+    const {currentStack} = this.state
+    const newStack = [...currentStack]
+    newStack.push(products[baleCode])
+    this.setState({
+      currentStack: newStack
+    })
+
+  }
 
 }
 

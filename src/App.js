@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ProductList from './components/ProductList.jsx'
 import './App.css';
 

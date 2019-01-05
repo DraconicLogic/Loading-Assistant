@@ -1,9 +1,9 @@
 import React from 'react';
 
 const ProductButton = (props) => {
-  const { product } =  props
+  const { product, selector, selected } =  props
   return (
-    <button id="product-button">{product}</button>
+    <button id={selected === product ? "product-button--selected" : "product-button"} onClick={selector} value={product}>{product}</button>
   );
 };
 
