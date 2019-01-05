@@ -29,7 +29,6 @@ class ProductList extends Component {
     return (
       <Fragment>
         <div id="product-list">
-          Product List
           <div>Tabs: Small - Big - Giant</div>
           <div id='product-buttons'>
           {smallBales.map((bale) => {
@@ -37,7 +36,7 @@ class ProductList extends Component {
           })}
           </div>
         </div>
-        <StackEditor bale={selected} add={this.addToStack} stack={currentStack}/>
+        <StackEditor bale={selected} stack={currentStack}/>
       </Fragment>  
     );
   }
