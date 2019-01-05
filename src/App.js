@@ -6,7 +6,6 @@ class App extends Component {
   state = {
     container: [],
     containerOverview: false,
-    stack: []
   }
   render() {
     return (
@@ -14,9 +13,17 @@ class App extends Component {
 
       <div id="App">
         <h1>Stack Builder</h1>
-          <ProductList/>
+          <ProductList add={this.addToContainer}/>
       </div>
     );
+  }
+  addToContainer = (stack) => {
+    const { container } = this.state
+    const modifiedContainer = [...container]
+    modifiedContainer.push(stack)
+    this.setState({
+      container: modifiedContainer
+    })
   }
 }
 

@@ -14,6 +14,7 @@ class ProductList extends Component {
     currentStack: []
   }
   render() {
+    const { add } = this.props
     const { selected, currentStack } = this.state
     const productCodes = Object.keys(products)
     const smallBales = productCodes.filter((product) => {
@@ -30,6 +31,7 @@ class ProductList extends Component {
       <Fragment>
         <div id="product-list">
           <div>Tabs: Small - Big - Giant</div>
+          <div>Top 5 Bales</div>
           <div id='product-buttons'>
           {smallBales.map((bale) => {
             return <ProductButton selector={this.selectFromList} product={bale} selected={selected} />
@@ -61,11 +63,15 @@ class ProductList extends Component {
 
   addToStack = (baleCode) => {
     const {currentStack} = this.state
-    const newStack = [...currentStack]
-    newStack.push(products[baleCode])
-    this.setState({
+
+    if (currentStack.length < 13) {
+      const newStack = [...currentStack]
+      newStack.push(products[baleCode])
+      this.setState({
       currentStack: newStack
-    })
+      })
+    }
+    
 
   }
 
