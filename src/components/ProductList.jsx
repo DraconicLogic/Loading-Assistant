@@ -39,7 +39,11 @@ class ProductList extends Component {
           })}
           </div>
         </div>
-        <StackEditor bale={selected} stack={currentStack} handleContainer={this.handleAddContainer}/>
+        <StackEditor 
+        bale={selected} 
+        stack={currentStack} 
+        handleContainer={this.handleAddContainer}
+        clear={this.clearStack}/>
       </Fragment>  
     );
   }
@@ -78,12 +82,15 @@ class ProductList extends Component {
     const { add } = this.props
     const { currentStack } = this.state
     add(currentStack)
+    this.clearStack()
+  }
+
+  clearStack = () => {
+    const { currentStack } = this.state
     this.setState({
       currentStack: []
     })
   }
-
-  
 
 }
 

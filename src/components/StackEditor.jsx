@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class StackEditor extends Component {
 
   render() {
-    const { bale, stack, handleContainer } = this.props
+    const { bale, stack, handleContainer, clear } = this.props
     console.log(stack)
     return (
       <div id="stack-section">
@@ -24,6 +24,7 @@ class StackEditor extends Component {
         <div id="stack-options">
           Stack Options
           <button onClick={handleContainer}>Add to container</button>
+          <button onClick={clear}>Clear Stack</button>
         </div>
       </div>
     );
