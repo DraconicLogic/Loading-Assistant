@@ -1,6 +1,8 @@
 #App {
   text-align: center;
   max-height: 100vh;
+  /* display: grid;
+  grid-template-rows: 2in auto */
 }
 
 
