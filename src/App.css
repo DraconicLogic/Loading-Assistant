@@ -42,6 +42,55 @@
 .stack-editor__bale {
   border: solid
 }
+
+#stack-editor__bale-1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+#stack-editor__bale-2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+#stack-editor__bale-3 {
+  grid-column: 1;
+  grid-row: 3;
+}
+#stack-editor__bale-4 {
+  grid-column: 2;
+  grid-row: 1;
+}
+#stack-editor__bale-5 {
+  grid-column: 2;
+  grid-row: 2;
+}
+#stack-editor__bale-6 {
+  grid-column: 2;
+  grid-row: 3;
+}
+#stack-editor__bale-7 {
+  grid-column: 3;
+  grid-row: 1;
+}
+#stack-editor__bale-8 {
+  grid-column: 3;
+  grid-row: 2;
+}
+#stack-editor__bale-9 {
+  grid-column: 3;
+  grid-row: 3;
+}
+#stack-editor__bale-10 {
+  grid-column: 4;
+  grid-row: 1;
+}
+#stack-editor__bale-11{
+  grid-column: 4;
+  grid-row: 2;
+}
+#stack-editor__bale-12 {
+  grid-column: 4;
+  grid-row: 3;
+}
 #stack-options {
   border: solid;
 }
