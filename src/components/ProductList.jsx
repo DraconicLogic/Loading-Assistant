@@ -11,27 +11,27 @@ import StackEditor from './StackEditor.jsx';
 class ProductList extends Component {
   state = {
     selected: '',
-    currentStack: []
+    currentStack: [],
+    productSize: 'small'
   }
 
   render() {
     const { add } = this.props
-    const { selected, currentStack } = this.state
+    const { selected, currentStack, productSize } = this.state
     const productCodes = Object.keys(products)
     const smallBales = productCodes.filter((product) => {
-      if (products[product].baleSize === 'small') {
+      if (products[product].baleSize === productSize) {
         return product
       }
     })
-    const bigBales = productCodes.filter((product) => {
-    if (products[product].baleSize === 'big') {
-      return product
-    }
-  })
     return (
       <Fragment>
         <div id="product-list">
-          <div>Tabs: Small - Big - Giant</div>
+          <div className="tab">Tabs: Small - Big - Giant
+            <button className="tab-links" onClick={this.displayProducts} value="small">Small</button>
+            <button className="tab-links" onClick={this.displayProducts} value="big">Big</button>
+            <button className="tab-links" onClick={this.displayProducts} value="giant">Giant</button>
+          </div>
           <div>Top 5 Bales</div>
           <div id='product-buttons'>
           {smallBales.map((bale) => {
@@ -64,6 +64,14 @@ class ProductList extends Component {
 
 
      
+  }
+
+  displayProducts = (event) => {
+    console.log(event.target.value)
+    const { value } =  event.target
+    this.setState({
+      productSize: value
+    })
   }
 
   addToStack = (baleCode) => {
