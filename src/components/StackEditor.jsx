@@ -10,10 +10,10 @@ class StackEditor extends Component {
     return (
       <div id="stack-section">
         <div className="tab" id="stack-tab">
-          <button className="tab-links">12</button>
-          <button className="tab-links">6</button>
-          <button className="tab-links">3</button>
-          <button className="tab-links">1</button>
+          <button className="tab-links" onClick={() => this.toggleStacksize(12)}>12</button>
+          <button className="tab-links" onClick={() =>this.toggleStacksize(6)}>6</button>
+          <button className="tab-links" onClick={() =>this.toggleStacksize(3)}>3</button>
+          <button className="tab-links" onClick={() =>this.toggleStacksize(1)}>1</button>
         </div>
         <div id="stack-editor">
           <div className="stack-editor__bale" id="stack-editor__bale-1">{stack[0] ? stack[0].code: null}</div>
@@ -37,7 +37,10 @@ class StackEditor extends Component {
     );
   }
 
-  toggleStacksize = () => {
+  toggleStacksize = (stackSize) => {
+    this.setState({
+      stackSize
+    })
 
   }
 
