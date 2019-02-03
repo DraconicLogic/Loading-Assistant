@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import products from '../products.json';
 import ProductButton from './ProductButton.jsx';
 import StackEditor from './StackEditor.jsx';
+import Tab from './Tab.jsx';
+import ContainerPreview from './ContainerPreview.jsx';
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 // import Tabs from '@material-ui/core/Tabs';
@@ -16,7 +18,7 @@ class ProductList extends Component {
   }
 
   render() {
-    const { add } = this.props
+    const { add, container } = this.props
     const { selected, currentStack, productSize } = this.state
     const productCodes = Object.keys(products)
     const smallBales = productCodes.filter((product) => {
@@ -27,11 +29,12 @@ class ProductList extends Component {
     return (
       <Fragment>
         <div id="product-list">
-          <div className="tab">Tabs: Small - Big - Giant
+          {/* <div className="tab">
             <button className="tab-links" onClick={this.displayProducts} value="small">Small</button>
             <button className="tab-links" onClick={this.displayProducts} value="big">Big</button>
             <button className="tab-links" onClick={this.displayProducts} value="giant">Giant</button>
-          </div>
+          </div> */}
+          <Tab displayProducts={this.displayProducts}/>
           <div>Top 5 Bales</div>
           <div id='product-buttons'>
           {smallBales.map((bale) => {
@@ -39,6 +42,7 @@ class ProductList extends Component {
           })}
           </div>
         </div>
+        <ContainerPreview container={container}/>
         <StackEditor 
         bale={selected} 
         stack={currentStack} 
@@ -48,7 +52,8 @@ class ProductList extends Component {
     );
   }
 
-  selectFromList = (event) => {
+  selectFromList = (event, val) => {
+    console.log(val)
     const { value } = event.target
     const { selected } = this.state
     if (value === selected) {
@@ -67,6 +72,7 @@ class ProductList extends Component {
   }
 
   displayProducts = (event) => {
+    console.log('FIRING')
     console.log(event.target.value)
     const { value } =  event.target
     this.setState({

@@ -5,7 +5,7 @@ import ContainerOverview from './components/ContainerOverview.jsx';
 
 class App extends Component {
   state = {
-    container: [],
+    container: [["AC","AC","AC","AC","AC","AC","AC","AC","AC","AC","AC","AC"]],
     containerOverview: false,
   }
   render() {
@@ -17,7 +17,7 @@ class App extends Component {
           <h1>Stack Builder</h1>
           <button onClick={this.toggleContainerOverview}>Container Overview</button>
             {!containerOverview ? 
-            <ProductList add={this.addToContainer}/> : 
+            <ProductList add={this.addToContainer} container={container}/> : 
             <ContainerOverview container={container}/>
             }
             

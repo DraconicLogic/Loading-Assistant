@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
 
 class StackEditor extends Component {
-
+  state = {
+    stackSize: 12
+  }
   render() {
     const { bale, stack, handleContainer, clear } = this.props
     console.log(stack)
     return (
       <div id="stack-section">
+        <div className="tab" id="stack-tab">
+          <button className="tab-links">12</button>
+          <button className="tab-links">6</button>
+          <button className="tab-links">3</button>
+          <button className="tab-links">1</button>
+        </div>
         <div id="stack-editor">
           <div className="stack-editor__bale" id="stack-editor__bale-1">{stack[0] ? stack[0].code: null}</div>
           <div className="stack-editor__bale" id="stack-editor__bale-2">{stack[1] ? stack[1].code: null}</div>
@@ -22,12 +30,15 @@ class StackEditor extends Component {
           <div className="stack-editor__bale" id="stack-editor__bale-12">{stack[11] ? stack[11].code: null}</div>
         </div>
         <div id="stack-options">
-          Stack Options
           <button onClick={handleContainer}>Add to container</button>
           <button onClick={clear}>Clear Stack</button>
         </div>
       </div>
     );
+  }
+
+  toggleStacksize = () => {
+
   }
 
 }
