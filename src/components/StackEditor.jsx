@@ -6,16 +6,12 @@ class StackEditor extends Component {
   }
   render() {
     const { bale, stack, handleContainer, clear } = this.props
-    console.log(stack)
+    const {stackSize} = this.state
+    const arr = []
+    arr.length = stackSize
     return (
-      <div id="stack-section">
-        <div className="tab" id="stack-tab">
-          <button className="tab-links" onClick={() => this.toggleStacksize(12)}>12</button>
-          <button className="tab-links" onClick={() =>this.toggleStacksize(6)}>6</button>
-          <button className="tab-links" onClick={() =>this.toggleStacksize(3)}>3</button>
-          <button className="tab-links" onClick={() =>this.toggleStacksize(1)}>1</button>
-        </div>
-        <div id="stack-editor">
+      <div id="stack-section">        
+        <div id="stack-editor">      
           <div className="stack-editor__bale" id="stack-editor__bale-1">{stack[0] ? stack[0].code: null}</div>
           <div className="stack-editor__bale" id="stack-editor__bale-2">{stack[1] ? stack[1].code: null}</div>
           <div className="stack-editor__bale" id="stack-editor__bale-3">{stack[2] ? stack[2].code: null}</div>
@@ -41,7 +37,6 @@ class StackEditor extends Component {
     this.setState({
       stackSize
     })
-
   }
 
 }
