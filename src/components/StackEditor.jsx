@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 
 class StackEditor extends Component {
-  state = {
-    stackSize: 12
-  }
   render() {
     const { bale, stack, handleContainer, clear } = this.props
-    const {stackSize} = this.state
-    const arr = []
-    arr.length = stackSize
     return (
       <div id="stack-section">        
         <div id="stack-editor">      
@@ -32,13 +26,6 @@ class StackEditor extends Component {
       </div>
     );
   }
-
-  toggleStacksize = (stackSize) => {
-    this.setState({
-      stackSize
-    })
-  }
-
 }
 
 export default StackEditor;
