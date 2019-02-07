@@ -62,7 +62,14 @@
 }
 
 .stack-editor__bale {
-  border: solid
+  border: solid;
+  
+}
+
+.stack-editor__bale--selected {
+  border: solid blue;
+  display: grid;
+  grid-template-columns: 1fr 10px;
 }
 
 #stack-editor__bale-1 {

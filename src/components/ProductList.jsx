@@ -13,13 +13,14 @@ import ContainerPreview from './ContainerPreview.jsx';
 class ProductList extends Component {
   state = {
     selected: '',
+    stackPosition: null,
     currentStack: [],
     productSize: 'small'
   }
 
   render() {
     const { add, container } = this.props
-    const { selected, currentStack, productSize } = this.state
+    const { selected, stackPosition, currentStack, productSize } = this.state
     const productCodes = Object.keys(products)
     const smallBales = productCodes.filter((product) => {
       if (products[product].baleSize === productSize) {
@@ -46,8 +47,11 @@ class ProductList extends Component {
         <StackEditor 
         bale={selected} 
         stack={currentStack} 
+        position={stackPosition}
         handleContainer={this.handleAddContainer}
-        clear={this.clearStack}/>
+        clear={this.clearStack}
+        mark={this.markPosition}/>
+        
       </Fragment>  
     );
   }
@@ -71,9 +75,13 @@ class ProductList extends Component {
      
   }
 
+  markPosition = (stackPosition) => {
+    this.setState({
+      stackPosition
+    })
+  }
+
   displayProducts = (event) => {
-    console.log('FIRING')
-    console.log(event.target.value)
     const { value } =  event.target
     this.setState({
       productSize: value
