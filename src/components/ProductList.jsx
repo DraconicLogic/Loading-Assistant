@@ -56,11 +56,10 @@ class ProductList extends Component {
     );
   }
 
-  selectFromList = (event, val) => {
-    console.log(val)
+  selectFromList = (event) => {
     const { value } = event.target
-    const { selected } = this.state
-    if (value === selected) {
+    const { selected, stackPosition } = this.state
+    if (value === selected || stackPosition !== null) {
       this.addToStack(value)
       this.setState({
         selected : ""
@@ -75,9 +74,18 @@ class ProductList extends Component {
      
   }
 
-  markPosition = (stackPosition) => {
+  insertIntoStack = () => {
+
+  }
+
+  markPosition = (marker) => {
+
+    const { stackPosition, selected } = this.state
+    if (selected) {
+      this.addToStack(selected)
+    } else if (stackPosition === marker) marker = null
     this.setState({
-      stackPosition
+      stackPosition: marker
     })
   }
 
@@ -89,9 +97,16 @@ class ProductList extends Component {
   }
 
   addToStack = (baleCode) => {
-    const {currentStack} = this.state
+    const {currentStack, stackPosition} = this.state
 
-    if (currentStack.length < 12) {
+    if (stackPosition !== null) {
+      const newStack = [...currentStack]
+      newStack[stackPosition] = products[baleCode]
+      this.setState({
+        currentStack: newStack,
+        stackPosition: null
+      })
+    } else if (currentStack.length < 12) {
       const newStack = [...currentStack]
       newStack.push(products[baleCode])
       this.setState({
