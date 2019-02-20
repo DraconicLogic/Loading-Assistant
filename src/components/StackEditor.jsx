@@ -2,10 +2,16 @@ import React, { Component } from 'react';
 
 class StackEditor extends Component {
   render() {
-    const { bale, stack, position, handleContainer, clear, mark } = this.props
+    const { bale, stack, position, handleContainer, clear, mark, context } = this.props
+    
+    const stackStyle = {
+      height: '40%',
+      width: '40%'
+    }
+
     return (
       <div id="stack-section">        
-        <div id="stack-editor">      
+        <div id="stack-editor" style={context === "preview" ? stackStyle : null}>      
           <div className={position === 0 ? "stack-editor__bale--selected" : "stack-editor__bale"} id="stack-editor__bale-1" onClick={() => mark(0)}>{stack[0] ? stack[0].code: null}</div>
           <div className={position === 1 ? "stack-editor__bale--selected" : "stack-editor__bale"} id="stack-editor__bale-2" onClick={() => mark(1)}>{stack[1] ? stack[1].code: null}</div>
           <div className={position === 2 ? "stack-editor__bale--selected" : "stack-editor__bale"} id="stack-editor__bale-3" onClick={() => mark(2)}>{stack[2] ? stack[2].code: null}</div>

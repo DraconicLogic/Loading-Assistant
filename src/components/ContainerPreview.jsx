@@ -7,10 +7,10 @@ const ContainerPreview = ({container}) => {
     <div id="container-preview">
     Container Preview
       {container.map((stack) => {
-        return <StackEditor stack={stack} style="height: 10px width: 40px"/>
+        return <StackEditor stack={stack} context="preview"/>
       })}
     </div>
   );
 };
 
-export default ContainerPreview;
+export default ContainerPreview ;

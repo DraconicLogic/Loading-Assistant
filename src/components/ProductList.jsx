@@ -50,7 +50,8 @@ class ProductList extends Component {
         position={stackPosition}
         handleContainer={this.handleAddContainer}
         clear={this.clearStack}
-        mark={this.markPosition}/>
+        mark={this.markPosition}
+        context="editor"/>
         
       </Fragment>  
     );
