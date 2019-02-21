@@ -10,13 +10,21 @@
   max-height: 20vh;
   border: red;
   
-  overflow-x: scroll;
+  text-align: center;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-#container-preview > * {
+#container-preview > span {
   display: inline-block;
-  text-align: center
+  /* float: left; */
+  /* margin-left: 1px;
+  margin-right: 1px; */
+  margin-top: 20px;
+  padding: 5px;
 }
+
+
 
 
 #product-list {
@@ -51,15 +59,18 @@
 #stack-options {
   grid-row: 2;
   grid-column: 2;
+  border: solid;
 }
 
-#stack-editor {
+
+.stack-editor {
   grid-row: 2;
-  border: solid;
+  /* border: solid; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 1fr);
 }
+
 
 .stack-editor__bale {
   border: solid;
@@ -117,9 +128,6 @@
 #stack-editor__bale-12 {
   grid-column: 4;
   grid-row: 3;
-}
-#stack-options {
-  border: solid;
 }
 
 #small-bales {

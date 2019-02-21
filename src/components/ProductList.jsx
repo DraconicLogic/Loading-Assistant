@@ -44,14 +44,19 @@ class ProductList extends Component {
           </div>
         </div>
         <ContainerPreview container={container}/>
-        <StackEditor 
-        bale={selected} 
-        stack={currentStack} 
-        position={stackPosition}
-        handleContainer={this.handleAddContainer}
-        clear={this.clearStack}
-        mark={this.markPosition}
-        context="editor"/>
+        <div id="stack-section"> 
+          <StackEditor 
+          bale={selected} 
+          stack={currentStack} 
+          position={stackPosition}
+          mark={this.markPosition}
+          context="editor"/>
+          <div id="stack-options">
+            <button onClick={this.handleAddContainer}>Add to container</button>
+            <button onClick={this.clearStack}>Clear Stack</button>
+        </div>
+        </div>
+        
         
       </Fragment>  
     );
@@ -124,7 +129,6 @@ class ProductList extends Component {
   }
 
   clearStack = () => {
-    const { currentStack } = this.state
     this.setState({
       currentStack: []
     })

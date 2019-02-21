@@ -5,9 +5,12 @@ const ContainerPreview = ({container}) => {
   
   return (
     <div id="container-preview">
-    Container Preview
       {container.map((stack) => {
-        return <StackEditor stack={stack} context="preview"/>
+        return (
+          <span>
+            <StackEditor stack={stack} context="preview"/>
+          </span>
+        )
       })}
     </div>
   );
