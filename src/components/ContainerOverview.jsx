@@ -1,5 +1,8 @@
 import React from 'react';
-
+/*
+   TODO: * Plan layout for page
+         * Add estimated weight of container
+*/
 const ContainerOverview = ({container}) => {
   const flatContainer = container.flat(1)
   console.log(flatContainer)

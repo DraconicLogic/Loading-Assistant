@@ -36,7 +36,6 @@ class ProductList extends Component {
             <button className="tab-links" onClick={this.displayProducts} value="giant">Giant</button>
           </div> */}
           <Tab displayProducts={this.displayProducts}/>
-          <div>Top 5 Bales</div>
           <div id='product-buttons'>
           {smallBales.map((bale) => {
             return <ProductButton selector={this.selectFromList} product={bale} selected={selected} />
@@ -95,10 +94,9 @@ class ProductList extends Component {
     })
   }
 
-  displayProducts = (event) => {
-    const { value } =  event.target
+  displayProducts = (size) => {
     this.setState({
-      productSize: value
+      productSize: size
     })
   }
 

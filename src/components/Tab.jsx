@@ -30,9 +30,17 @@ class SimpleTabs extends React.Component {
   };
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevState.value !== this.state.value) {
     const { value } = this.state 
     const { displayProducts } = this.props;
-
+    console.log(value)
+    const sizeObj = {
+      0: 'small',
+      1: 'big',
+      2: 'giant' 
+    }
+    displayProducts(sizeObj[value])
+    }
   }
 
   handleChange = (event, value) => {
@@ -53,9 +61,9 @@ console.log(this.props)
             <Tab label="Giant Bales" />
           </Tabs>
         </AppBar>
-        {value === 0 && <TabContainer value="small" >Small Bales</TabContainer>}
-        {value === 1 && <TabContainer value="big"  >Big Bales</TabContainer>}
-        {value === 2 && <TabContainer value="giant"  >Giant Bales</TabContainer>}
+        {value === 0 && <TabContainer value="small" ></TabContainer>}
+        {value === 1 && <TabContainer value="big"  ></TabContainer>}
+        {value === 2 && <TabContainer value="giant"  ></TabContainer>}
       </div>
     );
   }

@@ -6,7 +6,7 @@ import testData from './testData.json'
 
 class App extends Component {
   state = {
-    container: testData,
+    container: [],
     containerOverview: false,
   }
   render() {
