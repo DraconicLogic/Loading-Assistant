@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 
 function TabContainer(props) {
-  console.log(props)
+  // console.log(props)
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
       {props.children}
@@ -33,7 +33,7 @@ class SimpleTabs extends React.Component {
     if (prevState.value !== this.state.value) {
     const { value } = this.state 
     const { displayProducts } = this.props;
-    console.log(value)
+    // console.log(value)
     const sizeObj = {
       0: 'small',
       1: 'big',
@@ -44,14 +44,14 @@ class SimpleTabs extends React.Component {
   }
 
   handleChange = (event, value) => {
-    console.log(event.target)
+    // console.log(event.target)
     this.setState({ value });
   };
 
   render() {
     const { classes, displayProducts } = this.props;
     const { value } = this.state;
-console.log(this.props)
+// console.log(this.props)
     return (
       <div className={classes.root}>
         <AppBar position="static">

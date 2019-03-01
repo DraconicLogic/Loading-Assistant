@@ -22,7 +22,7 @@ class ProductList extends Component {
     const { add, container } = this.props
     const { selected, stackPosition, currentStack, productSize } = this.state
     const productCodes = Object.keys(products)
-    const smallBales = productCodes.filter((product) => {
+    const bales = productCodes.filter((product) => {
       if (products[product].baleSize === productSize) {
         return product
       }
@@ -30,14 +30,9 @@ class ProductList extends Component {
     return (
       <Fragment>
         <div id="product-list">
-          {/* <div className="tab">
-            <button className="tab-links" onClick={this.displayProducts} value="small">Small</button>
-            <button className="tab-links" onClick={this.displayProducts} value="big">Big</button>
-            <button className="tab-links" onClick={this.displayProducts} value="giant">Giant</button>
-          </div> */}
           <Tab displayProducts={this.displayProducts}/>
           <div id='product-buttons'>
-          {smallBales.map((bale) => {
+          {bales.map((bale) => {
             return <ProductButton selector={this.selectFromList} product={bale} selected={selected} />
           })}
           </div>
@@ -63,12 +58,29 @@ class ProductList extends Component {
 
   selectFromList = (event) => {
     const { value } = event.target
-    const { selected, stackPosition } = this.state
-    if (value === selected || stackPosition !== null) {
-      this.addToStack(value)
+    const { selected, stackPosition, currentStack } = this.state
+    
+    if (value === selected) {
+      let emptyPosition;
+      
+      for(let i = 0; i < currentStack.length; i++) {
+        if (!currentStack[i]) {
+          emptyPosition = i;
+          break;
+        }
+      }
+
+      console.log(emptyPosition, 'Empty position')
+      this.addToStack(value, emptyPosition )
       this.setState({
-        selected : ""
-      })
+        selected : ''
+      }) 
+    }
+    if (stackPosition) {
+      this.addToStack(value, stackPosition)
+      this.setState({
+        selected : ''
+      }) 
     } else {
       this.setState({
         selected: value
@@ -84,14 +96,25 @@ class ProductList extends Component {
   }
 
   markPosition = (marker) => {
-
     const { stackPosition, selected } = this.state
+ 
     if (selected) {
-      this.addToStack(selected)
-    } else if (stackPosition === marker) marker = null
-    this.setState({
-      stackPosition: marker
-    })
+      //This block adds a bale to the stack if a product button is already clicked
+      this.addToStack(selected, marker)
+      this.setState({
+        stackPosition: null
+      })
+
+    } else {
+      // the if statment below removes the marker if the same stack position is clicked again
+        if (stackPosition === marker) marker = null
+        // console.log(marker, 'MARKER')
+        this.setState({
+          stackPosition: marker
+        })
+      }
+
+    
   }
 
   displayProducts = (size) => {
@@ -100,21 +123,17 @@ class ProductList extends Component {
     })
   }
 
-  addToStack = (baleCode) => {
-    const {currentStack, stackPosition} = this.state
-
-    if (stackPosition !== null) {
+  addToStack = (baleCode, position) => {
+    const {currentStack } = this.state
+    
+    if (currentStack.length < 12) {
       const newStack = [...currentStack]
-      newStack[stackPosition] = products[baleCode]
+      newStack[position] = products[baleCode]
+      console.log(newStack,'new stack')
       this.setState({
         currentStack: newStack,
+        selected: '',
         stackPosition: null
-      })
-    } else if (currentStack.length < 12) {
-      const newStack = [...currentStack]
-      newStack.push(products[baleCode])
-      this.setState({
-      currentStack: newStack
       })
     }
   }
