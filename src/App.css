@@ -40,7 +40,7 @@
 }
 
 #product-button--selected {
-  border: blue;
+  background-color: lightskyblue;
 }
 
 #stack-section {
