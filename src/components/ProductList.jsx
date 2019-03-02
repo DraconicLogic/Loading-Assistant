@@ -4,6 +4,7 @@ import ProductButton from './ProductButton.jsx';
 import StackEditor from './StackEditor.jsx';
 import Tab from './Tab.jsx';
 import ContainerPreview from './ContainerPreview.jsx';
+import * as utils from '../utils.js'
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 // import Tabs from '@material-ui/core/Tabs';
@@ -14,7 +15,7 @@ class ProductList extends Component {
   state = {
     selected: '',
     stackPosition: null,
-    currentStack: [],
+    currentStack: Array(12),
     productSize: 'small'
   }
 
@@ -61,34 +62,15 @@ class ProductList extends Component {
     const { selected, stackPosition, currentStack } = this.state
     
     if (value === selected) {
-      let emptyPosition;
-      
-      for(let i = 0; i < currentStack.length; i++) {
-        if (!currentStack[i]) {
-          emptyPosition = i;
-          break;
-        }
-      }
-
-      console.log(emptyPosition, 'Empty position')
+      const emptyPosition = utils.findEmptyPosition(currentStack)
       this.addToStack(value, emptyPosition )
-      this.setState({
-        selected : ''
-      }) 
-    }
-    if (stackPosition) {
+    } else if (stackPosition) {
       this.addToStack(value, stackPosition)
-      this.setState({
-        selected : ''
-      }) 
     } else {
       this.setState({
         selected: value
       })
     }
-
-
-     
   }
 
   insertIntoStack = () => {
@@ -126,7 +108,7 @@ class ProductList extends Component {
   addToStack = (baleCode, position) => {
     const {currentStack } = this.state
     
-    if (currentStack.length < 12) {
+    if (currentStack.length <= 12) {
       const newStack = [...currentStack]
       newStack[position] = products[baleCode]
       console.log(newStack,'new stack')
