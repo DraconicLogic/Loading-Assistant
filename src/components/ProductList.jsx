@@ -16,12 +16,13 @@ class ProductList extends Component {
     selected: '',
     stackPosition: null,
     currentStack: Array(12),
-    productSize: 'small'
+    productSize: 'small',
+    previewVisable: false
   }
 
   render() {
     const { add, container } = this.props
-    const { selected, stackPosition, currentStack, productSize } = this.state
+    const { selected, stackPosition, currentStack, productSize, previewVisable } = this.state
     const productCodes = Object.keys(products)
     const bales = productCodes.filter((product) => {
       if (products[product].baleSize === productSize) {
@@ -38,7 +39,7 @@ class ProductList extends Component {
           })}
           </div>
         </div>
-        <ContainerPreview container={container}/>
+        <ContainerPreview container={container} visable={previewVisable}/>
         <div id="stack-section"> 
           <StackEditor 
           bale={selected} 
@@ -49,6 +50,7 @@ class ProductList extends Component {
           <div id="stack-options">
             <button onClick={this.handleAddContainer}>Add to container</button>
             <button onClick={this.clearStack}>Clear Stack</button>
+            <button onClick={this.togglePreview}>{previewVisable ? "Hide Preview" : "Show Preview"}</button>
         </div>
         </div>
         
@@ -130,6 +132,13 @@ class ProductList extends Component {
   clearStack = () => {
     this.setState({
       currentStack: []
+    })
+  }
+
+  togglePreview = () => {
+    const { previewVisable } =  this.state
+    this.setState({
+      previewVisable: !previewVisable
     })
   }
 

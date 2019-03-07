@@ -15,6 +15,11 @@
   white-space: nowrap;
 }
 
+#container-preview--hidden {
+  height: 0vh;
+  overflow: hidden;
+}
+
 #container-preview > span {
   display: inline-block;
   /* float: left; */

@@ -1,10 +1,10 @@
 import React from 'react';
 import StackEditor from './StackEditor';
 
-const ContainerPreview = ({container}) => {
+const ContainerPreview = ({container, visable}) => {
   
   return (
-    <div id="container-preview">
+    <div id={visable ? "container-preview" : "container-preview--hidden"}>
       {container.map((stack) => {
         return (
           <span>
