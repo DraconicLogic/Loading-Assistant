@@ -36,6 +36,7 @@
   border: solid;
   height: 40vh;
   max-height: 40vh;
+  overflow: hidden;
   
 
 }
@@ -46,6 +47,9 @@
 
 #product-button--selected {
   background-color: lightskyblue;
+}
+#product-buttons {
+  
 }
 
 #stack-section {
