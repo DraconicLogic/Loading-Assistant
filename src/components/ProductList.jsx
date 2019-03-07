@@ -5,6 +5,7 @@ import StackEditor from './StackEditor.jsx';
 import Tab from './Tab.jsx';
 import ContainerPreview from './ContainerPreview.jsx';
 import * as utils from '../utils.js'
+import StackSize from './StackSize.jsx';
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 // import Tabs from '@material-ui/core/Tabs';
@@ -41,6 +42,7 @@ class ProductList extends Component {
         </div>
         <ContainerPreview container={container} visable={previewVisable}/>
         <div id="stack-section"> 
+          <StackSize size={this.toggleStackSize}/>
           <StackEditor 
           bale={selected} 
           stack={currentStack} 
@@ -142,6 +144,11 @@ class ProductList extends Component {
     })
   }
 
+  toggleStackSize = (size) => {
+    this.setState({
+      currentStack: Array(size)
+    })
+  }
 }
 
 export default ProductList;
