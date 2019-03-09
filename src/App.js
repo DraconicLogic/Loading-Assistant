@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ProductList from './components/ProductList.jsx'
 import './App.css';
 import ContainerOverview from './components/ContainerOverview.jsx';
-import testData from './testData.json'
+// import testData from './testData.json'
 
 
 class App extends Component {

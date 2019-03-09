@@ -22,9 +22,10 @@ class ProductList extends Component {
   }
 
   render() {
-    const { add, container } = this.props
+    const { container } = this.props
     const { selected, stackPosition, currentStack, productSize, previewVisable } = this.state
     const productCodes = Object.keys(products)
+    // eslint-disable-next-line
     const bales = productCodes.filter((product) => {
       if (products[product].baleSize === productSize) {
         return product
@@ -40,7 +41,7 @@ class ProductList extends Component {
           })}
           </div>
         </div>
-        <ContainerPreview container={container} visable={previewVisable}/>
+        <ContainerPreview container={container} currentStack={currentStack} visable={previewVisable}/>
         <div id="stack-section"> 
           <StackSize size={this.toggleStackSize}/>
           <StackEditor 
@@ -64,7 +65,6 @@ class ProductList extends Component {
   selectFromList = (event) => {
     const { value } = event.target
     const { selected, stackPosition, currentStack } = this.state
-    
     if (value === selected) {
       const emptyPosition = utils.findEmptyPosition(currentStack)
       this.addToStack(value, emptyPosition )
@@ -77,30 +77,21 @@ class ProductList extends Component {
     }
   }
 
-  insertIntoStack = () => {
-
-  }
-
   markPosition = (marker) => {
     const { stackPosition, selected } = this.state
- 
     if (selected) {
       //This block adds a bale to the stack if a product button is already clicked
       this.addToStack(selected, marker)
       this.setState({
         stackPosition: null
       })
-
     } else {
       // the if statment below removes the marker if the same stack position is clicked again
         if (stackPosition === marker) marker = null
-        // console.log(marker, 'MARKER')
         this.setState({
           stackPosition: marker
         })
       }
-
-    
   }
 
   displayProducts = (size) => {
@@ -115,7 +106,6 @@ class ProductList extends Component {
     if (currentStack.length <= 12) {
       const newStack = [...currentStack]
       newStack[position] = products[baleCode]
-      console.log(newStack,'new stack')
       this.setState({
         currentStack: newStack,
         selected: '',
@@ -132,8 +122,9 @@ class ProductList extends Component {
   }
 
   clearStack = () => {
+    const {currentStack} = this.state
     this.setState({
-      currentStack: []
+      currentStack: Array(currentStack.length)
     })
   }
 

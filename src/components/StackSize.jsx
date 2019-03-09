@@ -1,18 +1,18 @@
 import React from 'react';
 
-
-
 const StackSize = ({size}) => {
+   
   return (
-    
-      <form>
-        <input type="radio" value="12"/>
-        <input type="radio" value="6"/>
-        <input type="radio" value="3"/>
-        <input type="radio" value="1"/>
-      </form>
+    <div>
+      <button onClick={() => size(12)}>12</button>
+      <button onClick={() => size(6)}>6</button>
+      <button onClick={() => size(3)}>3</button>
+      <button onClick={() => size(1)}>1</button>
+    </div>
+     
     
   );
+  
 };
 
 export default StackSize;

@@ -49,7 +49,7 @@ class SimpleTabs extends React.Component {
   };
 
   render() {
-    const { classes, displayProducts } = this.props;
+    const { classes } = this.props;
     const { value } = this.state;
 // console.log(this.props)
     return (
