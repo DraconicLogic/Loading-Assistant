@@ -37,7 +37,7 @@ class ProductList extends Component {
           <Tab displayProducts={this.displayProducts}/>
           <div id='product-buttons'>
           {bales.map((bale) => {
-            return <ProductButton selector={this.selectFromList} product={bale} selected={selected} />
+            return <ProductButton selector={this.selectFromList} product={bale} selected={selected} key={bale} />
           })}
           </div>
         </div>

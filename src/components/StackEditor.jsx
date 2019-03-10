@@ -14,10 +14,12 @@ class StackEditor extends Component {
       fullStack.push('')
     }    
     return (
-       
-        <div className="stack-editor"  style={context === "preview" ? stackStyle : null}>   
+        <div className="stack-editor"  style={context === "preview" ? stackStyle : null}>
+
         {fullStack.map((bale, index) => {
-          return (<div className={position === index ? "stack-editor__bale--selected" : "stack-editor__bale"} id={`stack-editor__bale-${index + 1}`} onClick={() => this.handleClick(index)}>{stack[index] ? stack[index].code: null}</div>)
+          return (
+            <div className={position === index ? "stack-editor__bale--selected" : "stack-editor__bale"} id={`stack-editor__bale-${index + 1}`} onClick={() => this.handleClick(index)} key={index}>{stack[index] ? stack[index].code: null}</div>
+            )
         })}
         </div>
         
