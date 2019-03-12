@@ -6,11 +6,11 @@ const ContainerPreview = ({container, visable, currentStack}) => {
   
   return (
     <div id={visable ? "container-preview" : "container-preview--hidden"}>
-      {container.map((stack) => {
+      {container.map((stack, index) => {
         return (
-          
-            <StackEditor stack={stack} context={context}/>
-          
+            <span key={index}>
+              <StackEditor stack={stack} context={context}  />
+            </span>
         )
       })}
       <span>
