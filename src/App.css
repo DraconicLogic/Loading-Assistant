@@ -29,7 +29,9 @@
   padding: 5px;
 }
 
-
+.container-preview__stack--selected {
+  background-color: greenyellow
+}
 
 
 #product-list {

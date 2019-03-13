@@ -18,16 +18,17 @@ class ProductList extends Component {
     stackPosition: null,
     currentStack: Array(12),
     productSize: 'small',
-    previewVisable: false
+    previewVisable: false,
+    workingStack: null,
   }
 
   render() {
     const { container, overview } = this.props
-    const { selected, stackPosition, currentStack, productSize, previewVisable } = this.state
+    const { selected, stackPosition, currentStack, productSize, previewVisable, workingStack } = this.state
     const productCodes = Object.keys(products)
     // eslint-disable-next-line
     const bales = productCodes.filter((product) => {
-      if (products[product].baleSize === productSize) {
+      if (products[product].balueSize === productSize) {
         return product
       }
     })
@@ -41,7 +42,7 @@ class ProductList extends Component {
           })}
           </div>
         </div>
-        <ContainerPreview container={container} currentStack={currentStack} visable={previewVisable}/>
+        <ContainerPreview container={container} currentStack={currentStack} visable={previewVisable} select={this.selectStack} workking={workingStack}/>
         <div id="stack-section"> 
           <StackSize size={this.toggleStackSize}/>
           <StackEditor 
@@ -141,6 +142,15 @@ class ProductList extends Component {
       currentStack: Array(size)
     })
   }
+
+  selectStack = (stack) => {
+    console.log(stack)
+    this.setState({
+      workingStack: stack
+    })
+  }
 }
+
+
 
 export default ProductList;

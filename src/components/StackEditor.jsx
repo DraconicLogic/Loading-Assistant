@@ -9,14 +9,14 @@ class StackEditor extends Component {
       width: '70%'
     }
 
-    const fullStack = []
+    const fillStack = []
     for (let i = 0; i < stack.length; i++) {
-      fullStack.push('')
+      fillStack.push('')
     }    
     return (
         <div className="stack-editor"  style={context === "preview" ? stackStyle : null}>
 
-        {fullStack.map((bale, index) => {
+        {fillStack.map((bale, index) => {
           return (
             <div className={position === index ? "stack-editor__bale--selected" : "stack-editor__bale"} id={`stack-editor__bale-${index + 1}`} onClick={() => this.handleClick(index)} key={index}>{stack[index] ? stack[index].code: null}</div>
             )
