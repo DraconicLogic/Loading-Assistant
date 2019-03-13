@@ -28,7 +28,7 @@ class ProductList extends Component {
     const productCodes = Object.keys(products)
     // eslint-disable-next-line
     const bales = productCodes.filter((product) => {
-      if (products[product].balueSize === productSize) {
+      if (products[product].baleSize === productSize) {
         return product
       }
     })
