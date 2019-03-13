@@ -16,11 +16,9 @@ class App extends Component {
         
 
         <div id="App">
-          <h1>Stack Builder</h1>
-          <button onClick={this.toggleContainerOverview}>Container Overview</button>
             {!containerOverview ? 
-            <ProductList add={this.addToContainer} container={container}/> : 
-            <ContainerOverview container={container}/>
+            <ProductList add={this.addToContainer} container={container} overview={this.toggleContainerOverview}/> : 
+            <ContainerOverview container={container} overview={this.toggleContainerOverview}/>
             }
             
         </div>

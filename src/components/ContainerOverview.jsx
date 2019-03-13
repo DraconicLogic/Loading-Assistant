@@ -3,9 +3,8 @@ import React from 'react';
    TODO: * Plan layout for page
          * Add estimated weight of container
 */
-const ContainerOverview = ({container}) => {
+const ContainerOverview = ({container, overview}) => {
   const flatContainer = container.flat(1)
-  console.log(flatContainer)
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
     if (!tallyObj[bale.code]) {
       tallyObj[bale.code] = 1
@@ -15,11 +14,11 @@ const ContainerOverview = ({container}) => {
     return tallyObj
   },{})
   const baleCountArray = Object.entries(baleCount)
-  console.log(baleCount)
   
   return (
     <div>
       <h1>Container Overview</h1>
+      <button onClick={overview}>Back To Editor</button>
       <table>
         {baleCountArray.map((bale) => {
           return (

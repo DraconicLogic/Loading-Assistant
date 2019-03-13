@@ -22,7 +22,7 @@ class ProductList extends Component {
   }
 
   render() {
-    const { container } = this.props
+    const { container, overview } = this.props
     const { selected, stackPosition, currentStack, productSize, previewVisable } = this.state
     const productCodes = Object.keys(products)
     // eslint-disable-next-line
@@ -54,6 +54,7 @@ class ProductList extends Component {
             <button onClick={this.handleAddContainer}>Add to container</button>
             <button onClick={this.clearStack}>Clear Stack</button>
             <button onClick={this.togglePreview}>{previewVisable ? "Hide Preview" : "Show Preview"}</button>
+            <button onClick={overview}>Overview</button>
         </div>
         </div>
         
