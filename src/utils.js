@@ -20,13 +20,6 @@ export function getDate () {
   return (`${day}-${month}-${year}`)
 }
 
-export function checkForCurrent () {
-  let current;
-  try {
-    current = require('./storage/current.json')
-  } catch(err) {
-    console.error(err)
-  }
-  console.log(current)
-  return current !== undefined ? true : false;
+export function saveContainer () {
+  
 }

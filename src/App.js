@@ -64,6 +64,10 @@ class App extends Component {
     const { date } = this.state
     localStorage.setItem(date, JSON.stringify(this.state))
   }
+
+  finishContainer = () => {
+    
+  }
 }
 
 export default App;
