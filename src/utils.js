@@ -20,6 +20,12 @@ export function getDate () {
   return (`${day}-${month}-${year}`)
 }
 
-export function saveContainer () {
-  
+export function saveContainer (container) {
+  const date = getDate()
+  const data = {}
+  data[date] = container
+  fs.appendFile('./storage.json', JSON.stringify(data), (err) => {
+    if (err) throw err;
+    console.log('data should be appended')
+  }) 
 }
