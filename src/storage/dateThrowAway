@@ -1,0 +1,10 @@
+const currentDate = new Date
+const day = currentDate.getDate()
+const month = (currentDate.getMonth() + 1)
+const year = currentDate.getFullYear()
+
+console.log(currentDate)
+console.log(day, 'day')
+console.log((month), 'month')
+console.log(year, 'year')
+console.log(`${day}-${month}-${year}`)

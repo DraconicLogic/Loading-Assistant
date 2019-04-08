@@ -2,14 +2,31 @@ import React, { Component } from 'react';
 import ProductList from './components/ProductList.jsx'
 import './App.css';
 import ContainerOverview from './components/ContainerOverview.jsx';
+import * as utils from './utils.js'
 // import testData from './testData.json'
 
 
 class App extends Component {
   state = {
+    date: '',
+    containerNumber: '',
+    sealNumber: '',
     container: [],
     containerOverview: false,
   }
+
+  componentDidMount () {
+    if (!localStorage.getItem(utils.getDate())) {
+      const date = utils.getDate()
+      this.setState({
+        date
+      })
+    } else {
+      const currentContainer = JSON.parse(localStorage.getItem(utils.getDate())) 
+      this.setState(currentContainer)
+    }
+  }
+
   render() {
     const { container, containerOverview } = this.state
       return (
@@ -32,7 +49,7 @@ class App extends Component {
     this.setState({
       container: modifiedContainer
     }, () => {
-      console.log(container)
+      this.saveProgress()
     })
   }
 
@@ -41,6 +58,11 @@ class App extends Component {
     this.setState({
       containerOverview: !containerOverview
     })
+  }
+
+  saveProgress = () => {
+    const { date } = this.state
+    localStorage.setItem(date, JSON.stringify(this.state))
   }
 }
 
