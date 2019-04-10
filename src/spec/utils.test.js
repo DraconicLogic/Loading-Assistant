@@ -1,9 +1,9 @@
-import { checkForCurrent } from '../utils.js'
+import { saveContainer } from '../utils.js'
+import testData2 from '../testData2' 
 
-
-describe('checkForCurrent()', () => {
-  it('returns true if current.json is present', () => {
-    console.log(checkForCurrent())
-    expect(checkForCurrent()).toBe(true)
+describe('saveContainer()', () => {
+  it('test', () => {
+    
+    expect(saveContainer(testData2)).toBe(true)
   })
 })

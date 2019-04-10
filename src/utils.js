@@ -1,5 +1,5 @@
-const fs = require('fs')
-const path = require('path')
+
+import {db, options} from './config.js'
 
 export function findEmptyPosition (array) {
   let emptyPosition;
@@ -21,11 +21,16 @@ export function getDate () {
 }
 
 export function saveContainer (container) {
-  const date = getDate()
-  const data = {}
-  data[date] = container
-  fs.appendFile('./storage.json', JSON.stringify(data), (err) => {
-    if (err) throw err;
-    console.log('data should be appended')
-  }) 
+  const { containerOverview, ...data } = container
+  return fetch((db.url + db.binRoute), {...options, body: JSON.stringify(data), name: (data.date)})
+    .then((res) => {
+      const { data } = res.json()
+      console.log(res.json())
+      console.log(res)
+      console.log(data)
+      return data
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 }

@@ -3,7 +3,7 @@ import React from 'react';
    TODO: * Plan layout for page
          * Add estimated weight of container
 */
-const ContainerOverview = ({container, overview}) => {
+const ContainerOverview = ({container, overview, finish}) => {
   const flatContainer = container.flat(1)
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
     if (!tallyObj[bale.code]) {
@@ -29,6 +29,7 @@ const ContainerOverview = ({container, overview}) => {
           )
         })}
       </table>
+      <button onClick={finish}>CONTAINER FINISHED</button>
     </div>
   );
 };

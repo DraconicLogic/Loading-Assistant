@@ -35,7 +35,7 @@ class App extends Component {
         <div id="App">
             {!containerOverview ? 
             <ProductList add={this.addToContainer} container={container} overview={this.toggleContainerOverview}/> : 
-            <ContainerOverview container={container} overview={this.toggleContainerOverview}/>
+            <ContainerOverview container={container} overview={this.toggleContainerOverview} finish={this.finishContainer}/>
             }
             
         </div>
@@ -66,7 +66,14 @@ class App extends Component {
   }
 
   finishContainer = () => {
-    
+    const { sealNumber, containerNumber } = this.state
+    if (sealNumber && containerNumber) {
+      utils.saveContainer(this.state)
+      localStorage.clear()
+    } else {
+      alert("Please fill in BOTH Container Number and Seal Number")
+    }
+
   }
 }
 

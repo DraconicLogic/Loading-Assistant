@@ -1,20 +1,26 @@
-const products = require('./products.json')
+// const saveContainer = require('./utils.js') 
+// const testData2 = require('./testData2.json') 
 
-console.log(Object.keys(products).length, "Number of all products")
 
-const smallBales = Object.values(products).filter((product) => {
-  if (product.baleSize === 'small') {
-    return product
-  }
-})
+// saveContainer(testData2)
+// const products = require('./products.json')
 
-const smallBaleKeys = smallBales.map((bale) => bale.code)
+// console.log(Object.keys(products).length, "Number of all products")
 
-const sortedBales = smallBaleKeys.sort((a, b) => {
-    return a.localeCompare(b)
-  })
-console.log(sortedBales[35])
+// const smallBales = Object.values(products).filter((product) => {
+//   if (product.baleSize === 'small') {
+//     return product
+//   }
+// })
 
-const ak = sortedBales.filter((bale) => {
-  bale.start
-})
+// const smallBaleKeys = smallBales.map((bale) => bale.code)
+
+// const sortedBales = smallBaleKeys.sort((a, b) => {
+//     return a.localeCompare(b)
+//   })
+// console.log(sortedBales[35])
+
+// const ak = sortedBales.filter((bale) => {
+//   bale.start
+// })
+
