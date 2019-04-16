@@ -35,7 +35,11 @@ class App extends Component {
         <div id="App">
             {!containerOverview ? 
             <ProductList add={this.addToContainer} container={container} overview={this.toggleContainerOverview}/> : 
-            <ContainerOverview container={container} overview={this.toggleContainerOverview} finish={this.finishContainer}/>
+            <ContainerOverview 
+            containerDetails={this.state} 
+            overview={this.toggleContainerOverview} 
+            finish={this.finishContainer}
+            update={this.updateContainerAndSeal}/>
             }
             
         </div>
@@ -73,8 +77,16 @@ class App extends Component {
     } else {
       alert("Please fill in BOTH Container Number and Seal Number")
     }
-
   }
+
+  updateContainerAndSeal = ({containerNumber, sealNumber}) => {
+    console.log('APP__UPDATE CONTAINER')
+    this.setState({
+      containerNumber,
+      sealNumber
+    })
+  }
+
 }
 
 export default App;
