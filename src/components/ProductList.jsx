@@ -107,7 +107,7 @@ class ProductList extends Component {
     
     if (currentStack.length <= 12) {
       const newStack = [...currentStack]
-      newStack[position] = products[baleCode]
+      newStack[position] = baleCode
       this.setState({
         currentStack: newStack,
         selected: '',
