@@ -19,18 +19,20 @@ const ContainerOverview = ({containerDetails, overview, finish, update}) => {
     return tallyObj
   },{})
 
+  const braCount = flatContainer.filter((bale) => bale === 'BRA')
+ 
   const containerWeight = flatContainer.reduce((netWeight, bale) => {
-
-
-
     return netWeight += products[bale].size;
   }, 0)
   const baleCountArray = Object.entries(baleCount)
-  console.log(container, 'RAW DATA')
-  console.log(flatContainer, 'DATA FLATTENED')
-  console.log(baleCount, 'BALE COUNT OBJECT')
-  console.log(baleCountArray)
-  console.log(containerWeight, 'ESTIMATED WEIGHT OF CONTAINER')
+  
+  const smallBales = flatContainer.filter((bale) => {
+    return (products[bale].baleSize === 'small') 
+  })
+
+  const bigBales = flatContainer.filter((bale) => {
+    return (products[bale].baleSize === 'big')
+  })
   
   return (
     <div>
@@ -38,15 +40,21 @@ const ContainerOverview = ({containerDetails, overview, finish, update}) => {
       <button onClick={overview}>Back To Editor</button>
       <div>
         <ContainerSealForm update={update} containerDetails={containerDetails}/>
-      
+        <p>Estimated Weight: {containerWeight}</p>
+        <p>BRA: {braCount.length}</p>
+        <p>Small Bales: {smallBales.length}</p>
+        <p>Big Bales: {bigBales.length}</p>
+        <p>Total Bales: {flatContainer.length}</p>
       </div>
       <table>
-        {baleCountArray.map((bale) => {
+        {baleCountArray.map((bale, index) => {
           return (
-            <tr>
-              <td>{bale[0]}</td>
-              <td>{bale[1]}</td>
-            </tr>
+            <tbody>
+              <tr key={index}>
+                <td >{bale[0]}</td>
+                <td>{bale[1]}</td>
+              </tr>
+            </tbody>  
           )
         })}
       </table>

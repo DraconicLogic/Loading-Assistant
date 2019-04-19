@@ -5,34 +5,54 @@ const ContainerSealForm = ({update, containerDetails}) => {
   const [container, setContainerNumber] = useState('')
   const [seal, setSealNumber] = useState('')
 
-  console.log(update)
+
   const handleForm = (event) => {
     const { value, name } = event.target
     if (name === 'container') setContainerNumber(value)
     if (name === 'seal') setSealNumber(value)
   }
 
-  const handleSubmit = (event) => {
-    console.log('HANDLE SUMBIT')
-    console.log(event.target.value)
-    const { value } = event.target
-    //TODO: Once Saved we appear to be locked out form editing the seal and container numbers. FIX PLEASE
-    const details = {
-      containerNumber: value === 'Edit' ? '' : container,
-      sealNumber: value === 'Edit' ? '' : seal
-    }
-    update(details)
+  const checkContainerSealNum = () => {
+    let bool = false
+    if (containerNumber && sealNumber) bool = true
+    return bool
   }
 
+  const handleSubmit = () => {
+    if (container && seal) {
+      const details = {
+      containerNumber: checkContainerSealNum() ? '' : container,
+      sealNumber: checkContainerSealNum() ? '' : seal
+      }
+      update(details)
+    } else {
+      alert('Please fill in BOTH Container Number and Seal Number')
+    }
+
+    
+  }
+  
+  const renderInput = (name) => {
+    if (checkContainerSealNum()) {
+      return (
+        <p>{name === 'container' ? containerNumber : sealNumber}</p>
+      )
+    } else {
+      return (
+        <input type="text" name={name} onChange={handleForm}></input>
+      )
+    }
+  }
+  // Fix styling when input field is changed to p tag
   return (
     <div>
         <label htmlFor="container">Container Number</label>
-        <input type="text" name="container" disabled={containerNumber ? true : false} onChange={handleForm}></input>
-
+        {renderInput("container")}
+        
         <label htmlFor="seal">Seal Number</label>
-        <input type="text" disabled={sealNumber ? true : false} name="seal" onChange={handleForm}></input>
+        {renderInput("seal")}
 
-        <button onClick={handleSubmit}>{containerNumber && sealNumber ? 'Edit' : 'Save'}</button>
+        <button onClick={handleSubmit}>{checkContainerSealNum() ? 'Edit' : 'Save'}</button>
       </div>
   )
 }
