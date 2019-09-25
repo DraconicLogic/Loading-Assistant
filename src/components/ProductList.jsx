@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import products from '../products.json';
+import products from '../products/products.json';
 import ProductButton from './ProductButton.jsx';
 import StackEditor from './StackEditor.jsx';
 import Tab from './Tab.jsx';

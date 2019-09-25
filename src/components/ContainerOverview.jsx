@@ -1,6 +1,6 @@
 import React from 'react';
 import ContainerSealForm from './ContainerSealForm';
-import products from '../products.json'
+import products from '../products/products.json'
 /*
    TODO: * Plan layout for page
          * Add estimated weight of container
