@@ -1,11 +1,11 @@
-import React, { Component, Fragment } from 'react';
-import products from '../products/products.json';
-import ProductButton from './ProductButton.jsx';
-import StackEditor from './StackEditor.jsx';
-import Tab from './Tab.jsx';
-import ContainerPreview from './ContainerPreview.jsx';
-import * as utils from '../utils.js'
-import StackSize from './StackSize.jsx';
+import React, { Component, Fragment } from "react";
+import products from "../products/products.json";
+import ProductButton from "./ProductButton.jsx";
+import StackEditor from "./StackEditor.jsx";
+import Tab from "./Tab.jsx";
+import ContainerPreview from "./ContainerPreview.jsx";
+import * as utils from "../utils.js";
+import StackSize from "./StackSize.jsx";
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 // import Tabs from '@material-ui/core/Tabs';
@@ -14,143 +14,160 @@ import StackSize from './StackSize.jsx';
 
 class ProductList extends Component {
   state = {
-    selected: '',
+    selected: "",
     stackPosition: null,
     currentStack: Array(12),
-    productSize: 'small',
+
     previewVisable: false,
-    workingStack: null,
-  }
+    workingStack: null
+  };
 
   render() {
-    const { container, overview } = this.props
-    const { selected, stackPosition, currentStack, productSize, previewVisable, workingStack } = this.state
-    const productCodes = Object.keys(products)
+    const { container, overview } = this.props;
+    const {
+      selected,
+      stackPosition,
+      currentStack,
+      productSize,
+      previewVisable,
+      workingStack
+    } = this.state;
+    const productCodes = Object.keys(products);
     // eslint-disable-next-line
-    const bales = productCodes.filter((product) => {
-      if (products[product].baleSize === productSize) {
-        return product
-      }
-    })
+    const bales = productCodes.sort();
+    console.log("Bales alphbetical order: ", bales);
+
     return (
       <Fragment>
         <div id="product-list">
-          <Tab displayProducts={this.displayProducts}/>
-          <div id='product-buttons'>
-          {bales.map((bale) => {
-            return <ProductButton selector={this.selectFromList} product={bale} selected={selected} key={bale} />
-          })}
+          <Tab displayProducts={this.displayProducts} />
+          <div id="product-list__buttons">
+            {bales.map(bale => {
+              return (
+                <ProductButton
+                  selector={this.selectFromList}
+                  product={bale}
+                  selected={selected}
+                  key={bale}
+                />
+              );
+            })}
           </div>
         </div>
-        <ContainerPreview container={container} currentStack={currentStack} visable={previewVisable} select={this.selectStack} workking={workingStack}/>
-        <div id="stack-section"> 
-          <StackSize size={this.toggleStackSize}/>
-          <StackEditor 
-          bale={selected} 
-          stack={currentStack} 
-          position={stackPosition}
-          mark={this.markPosition}
-          context="editor"/>
+        <ContainerPreview
+          container={container}
+          currentStack={currentStack}
+          visable={previewVisable}
+          select={this.selectStack}
+          workking={workingStack}
+        />
+        <div id="stack-section">
+          <StackSize size={this.toggleStackSize} />
+          <StackEditor
+            bale={selected}
+            stack={currentStack}
+            position={stackPosition}
+            mark={this.markPosition}
+            context="editor"
+          />
           <div id="stack-options">
             <button onClick={this.handleAddContainer}>Add to container</button>
             <button onClick={this.clearStack}>Clear Stack</button>
-            <button onClick={this.togglePreview}>{previewVisable ? "Hide Preview" : "Show Preview"}</button>
+            <button onClick={this.togglePreview}>
+              {previewVisable ? "Hide Preview" : "Show Preview"}
+            </button>
             <button onClick={overview}>Overview</button>
+          </div>
         </div>
-        </div>
-        
-        
-      </Fragment>  
+      </Fragment>
     );
   }
 
-  selectFromList = (event) => {
-    const { value } = event.target
-    const { selected, stackPosition, currentStack } = this.state
+  selectFromList = event => {
+    const { value } = event.target;
+    const { selected, stackPosition, currentStack } = this.state;
     if (value === selected) {
-      const emptyPosition = utils.findEmptyPosition(currentStack)
-      this.addToStack(value, emptyPosition )
+      const emptyPosition = utils.findEmptyPosition(currentStack);
+      this.addToStack(value, emptyPosition);
     } else if (stackPosition) {
-      this.addToStack(value, stackPosition)
+      this.addToStack(value, stackPosition);
     } else {
       this.setState({
         selected: value
-      })
+      });
     }
-  }
+  };
 
-  markPosition = (marker) => {
-    const { stackPosition, selected } = this.state
+  markPosition = marker => {
+    const { stackPosition, selected } = this.state;
     if (selected) {
       //This block adds a bale to the stack if a product button is already clicked
-      this.addToStack(selected, marker)
+      this.addToStack(selected, marker);
       this.setState({
         stackPosition: null
-      })
+      });
     } else {
       // the if statment below removes the marker if the same stack position is clicked again
-        if (stackPosition === marker) marker = null
-        this.setState({
-          stackPosition: marker
-        })
-      }
-  }
+      if (stackPosition === marker) marker = null;
+      this.setState({
+        stackPosition: marker
+      });
+    }
+  };
 
-  displayProducts = (size) => {
+  displayProducts = size => {
     this.setState({
       productSize: size
-    })
-  }
+    });
+  };
 
   addToStack = (baleCode, position) => {
-    const {currentStack } = this.state
-    
+    const { currentStack } = this.state;
+
     if (currentStack.length <= 12) {
-      const newStack = [...currentStack]
-      newStack[position] = baleCode
+      const newStack = [...currentStack];
+      newStack[position] = baleCode;
       this.setState({
         currentStack: newStack,
-        selected: '',
+        selected: "",
         stackPosition: null
-      })
+      });
     }
-  }
+  };
 
   handleAddContainer = () => {
-    const { add } = this.props
-    const { currentStack } = this.state
-    add(currentStack)
-    this.clearStack()
-  }
+    const { add } = this.props;
+    const { currentStack } = this.state;
+    add(currentStack);
+    this.clearStack();
+  };
 
   clearStack = () => {
-    const {currentStack} = this.state
+    const { currentStack } = this.state;
     this.setState({
       currentStack: Array(currentStack.length)
-    })
-  }
+    });
+  };
 
   togglePreview = () => {
-    const { previewVisable } =  this.state
+    const { previewVisable } = this.state;
     this.setState({
       previewVisable: !previewVisable
-    })
-  }
+    });
+  };
 
-  toggleStackSize = (size) => {
+  toggleStackSize = size => {
     this.setState({
       currentStack: Array(size)
-    })
-  }
+    });
+  };
 
-  selectStack = (stack) => {
-    console.log(stack)
+  selectStack = stack => {
+    console.log(stack);
     this.setState({
       workingStack: stack
-    })
-  }
+    });
+  };
 }
-
-
 
 export default ProductList;

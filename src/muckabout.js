@@ -8,6 +8,7 @@ const smallBales = Object.values(products).filter((product) => {
   if (product.baleSize === 'small') {
     return product
   }
+  return null
 })
 console.log(smallBales.length, 'Number of small bales')
 
@@ -49,7 +50,7 @@ const sortedBales = smallBaleKeys.sort((a, b) => {
   })
 console.log(sortedBales[35])
 
-const ak = sortedBales.filter((bale) => {
-  bale.start
-})
+// const ak = sortedBales.filter((bale) => {
+//   // bale.start
+// })
 

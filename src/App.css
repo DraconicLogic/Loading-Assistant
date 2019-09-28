@@ -9,7 +9,7 @@
   height: 20vh;
   max-height: 20vh;
   border: red;
-  
+
   text-align: center;
   overflow-x: auto;
   white-space: nowrap;
@@ -30,25 +30,34 @@
 }
 
 .container-preview__stack--selected {
-  background-color: greenyellow
+  background-color: greenyellow;
 }
-
 
 #product-list {
   border: solid;
   height: 40vh;
   max-height: 40vh;
-  overflow: hidden;
-  
+  overflow: scroll;
+}
 
+#product-list__buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
 }
 
 #product-button {
   margin: 2px;
+  font-weight: bolder;
+  font-size: large;
+  border: solid;
 }
 
 #product-button--selected {
   background-color: lightskyblue;
+  margin: 2px;
+  font-weight: bolder;
+  font-size: large;
 }
 
 #stack-section {
@@ -70,7 +79,6 @@
   border: solid;
 }
 
-
 .stack-editor {
   grid-row: 2;
   /* border: solid; */
@@ -79,10 +87,8 @@
   grid-template-rows: repeat(3, 1fr);
 }
 
-
 .stack-editor__bale {
   border: solid;
-  
 }
 
 .stack-editor__bale--selected {
@@ -129,7 +135,7 @@
   grid-column: 4;
   grid-row: 1;
 }
-#stack-editor__bale-11{
+#stack-editor__bale-11 {
   grid-column: 4;
   grid-row: 2;
 }
