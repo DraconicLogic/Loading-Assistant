@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import ProductList from './components/ProductList.jsx'
 import './App.css';
 import ContainerOverview from './components/ContainerOverview.jsx';
+// import ProductListTab from "./components/ProductListTab.jsx";
 import * as utils from './utils.js'
+import StoredBales from './components/StoredBales.jsx';
+import stacks from './stacks.json'
 // import testData from './testData.json'
 
 
@@ -13,6 +16,8 @@ class App extends Component {
     sealNumber: '',
     container: [],
     containerOverview: false,
+    view: 0,
+    stacks
   }
 
   componentDidMount () {
@@ -27,20 +32,66 @@ class App extends Component {
     }
   }
 
+  downloadStacks = () => {
+    //download saved stack an put into state
+  }
+
+  handleViews = (event) => {
+    const { value } = event.target
+    this.changeView(Number(value))
+  }
+
+  changeView = (view) => {
+    this.setState({
+      view
+    })
+  }
+
+  displayView = (viewIndex, container) => {
+    let view;
+    switch (viewIndex) {
+      case 0:
+        view = <StoredBales stacks={this.state.stacks} />
+        break;
+      case 1:
+        view = <ProductList add={this.addToContainer} container={container} />
+        break;
+      case 2:
+        view = <ContainerOverview 
+        containerDetails={this.state} 
+        overview={this.toggleContainerOverview} 
+        finish={this.finishContainer}
+        update={this.updateContainerAndSeal}/>
+        break;
+      default:
+        view = <h1>500 - Something's gone horribly wrong</h1>
+    }
+    return view
+  }
+
   render() {
-    const { container, containerOverview } = this.state
+    const { container, containerOverview, view } = this.state
       return (
         
 
         <div id="App">
-            {!containerOverview ? 
+          {/* Temporirly offline till I figure out how to make it work */}
+          {/* <ProductListTab /> */}
+          {/* -------------------------------------------------------- */}
+          <div id="temp-tab" onClick={this.handleViews}>
+            <button value="0" >STORED</button>
+            <button value="1">PRODUCT LIST</button>
+            <button value="2">OVERVIEW</button>
+          </div>
+          {this.displayView(view, container)}
+            {/* {!containerOverview ? 
             <ProductList add={this.addToContainer} container={container} overview={this.toggleContainerOverview}/> : 
             <ContainerOverview 
             containerDetails={this.state} 
             overview={this.toggleContainerOverview} 
             finish={this.finishContainer}
             update={this.updateContainerAndSeal}/>
-            }
+            } */}
             
         </div>
       );

@@ -5,6 +5,14 @@
   grid-template-rows: 2in auto */
 }
 
+.code-input {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+  border: solid;
+  margin: 2px;
+}
+
 #container-preview {
   height: 20vh;
   max-height: 20vh;
@@ -33,7 +41,20 @@
   background-color: greenyellow;
 }
 
+MuiTabs {
+  /* position: fixed; */
+  /* position: sticky; */
+}
+
+MuiAppBar {
+  grid-row: 1;
+  color: secondary;
+  height: 100px;
+}
+
 #product-list {
+  display: grid;
+  grid-template-rows: auto auto;
   border: solid;
   height: 40vh;
   max-height: 40vh;
@@ -41,16 +62,19 @@
 }
 
 #product-list__buttons {
+  grid-row: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
+  margin-top: 50px;
 }
 
 #product-button {
   margin: 2px;
-  font-weight: bolder;
+  font-weight: bold;
   font-size: large;
   border: solid;
+  height: 50px;
 }
 
 #product-button--selected {
@@ -89,6 +113,7 @@
 
 .stack-editor__bale {
   border: solid;
+  height: 50px;
 }
 
 .stack-editor__bale--selected {
@@ -99,46 +124,57 @@
   grid-column: 1;
   grid-row: 1;
 }
+
 #stack-editor__bale-2 {
   grid-column: 1;
   grid-row: 2;
 }
+
 #stack-editor__bale-3 {
   grid-column: 1;
   grid-row: 3;
 }
+
 #stack-editor__bale-4 {
   grid-column: 2;
   grid-row: 1;
 }
+
 #stack-editor__bale-5 {
   grid-column: 2;
   grid-row: 2;
 }
+
 #stack-editor__bale-6 {
   grid-column: 2;
   grid-row: 3;
 }
+
 #stack-editor__bale-7 {
   grid-column: 3;
   grid-row: 1;
 }
+
 #stack-editor__bale-8 {
   grid-column: 3;
   grid-row: 2;
 }
+
 #stack-editor__bale-9 {
   grid-column: 3;
   grid-row: 3;
 }
+
 #stack-editor__bale-10 {
   grid-column: 4;
   grid-row: 1;
 }
+
 #stack-editor__bale-11 {
   grid-column: 4;
   grid-row: 2;
 }
+
 #stack-editor__bale-12 {
   grid-column: 4;
   grid-row: 3;
@@ -148,4 +184,10 @@
   height: fit-content;
   display: block;
   overflow: auto;
+}
+
+/* Temporary */
+
+#temp-tab {
+  display: inline-block;
 }

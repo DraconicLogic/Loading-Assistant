@@ -2,14 +2,14 @@ import React, { Component, Fragment } from "react";
 import products from "../products/products.json";
 import ProductButton from "./ProductButton.jsx";
 import StackEditor from "./StackEditor.jsx";
-import Tab from "./Tab.jsx";
+// import Tab from "./Tab.jsx";
 import ContainerPreview from "./ContainerPreview.jsx";
 import * as utils from "../utils.js";
 import StackSize from "./StackSize.jsx";
+import ProductListTab from "./ProductListTab.jsx";
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
-// import Tabs from '@material-ui/core/Tabs';
-// import Tab from '@material-ui/core/Tab';
+
 // import Typography from '@material-ui/core/Typography';
 
 class ProductList extends Component {
@@ -35,12 +35,14 @@ class ProductList extends Component {
     const productCodes = Object.keys(products);
     // eslint-disable-next-line
     const bales = productCodes.sort();
-    console.log("Bales alphbetical order: ", bales);
+    console.log(currentStack);
 
     return (
       <Fragment>
         <div id="product-list">
-          <Tab displayProducts={this.displayProducts} />
+          <h1>PRODUCT LIST</h1>
+          {/* <Tab displayProducts={this.displayProducts} /> */}
+          {/* <ProductListTab /> */}
           <div id="product-list__buttons">
             {bales.map(bale => {
               return (
@@ -76,7 +78,10 @@ class ProductList extends Component {
             <button onClick={this.togglePreview}>
               {previewVisable ? "Hide Preview" : "Show Preview"}
             </button>
-            <button onClick={overview}>Overview</button>
+
+            {/* ---------------------------- Due for deletion ---------------------------- */}
+            {/* <button onClick={overview}>Overview</button> */}
+            {/* ---------------------------- Due for deletion ---------------------------- */}
           </div>
         </div>
       </Fragment>
