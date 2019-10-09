@@ -2,23 +2,33 @@ import React, { useState } from "react";
 import StackEditor from "./StackEditor";
 
 const StoredBales = ({ stacks }) => {
-  const [stack, setStack] = useState(Array(12));
+  const [currentStack, setStack] = useState(Array(12));
   const [code, setCode] = useState(Array(3));
 
   const handleInput = event => {
     const { value, id } = event.target;
-    console.log("STORED BALES VALUE", value);
-    console.log("STORED BALES ID", id);
     const newCode = [...code];
     const index = id[id.length - 1];
     newCode[index] = value;
     setCode(newCode);
+    moveFocus(id);
+  };
+
+  const moveFocus = id => {
+    const idSansIndex = id.slice(0, id.length - 1);
+    let newIndex = id.slice(id.length - 1);
+    console.log("ID: ", id);
+    console.log("ID Sans Index: ", idSansIndex);
+    console.log("New Index: ", newIndex);
+    console.log("Test function", newIndex + 1);
+    if (newIndex < 2) {
+      newIndex += 1;
+      document.getElementById(`${idSansIndex}${newIndex}`).focus();
+    }
   };
 
   const retrieveStack = codeArray => {
     const formattedCode = codeArray.join("");
-    console.log("FORMATTED CODE: ", formattedCode);
-    console.log("CODE ARRAY: ", codeArray);
     if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
     } else {
@@ -53,7 +63,7 @@ const StoredBales = ({ stacks }) => {
       </div>
 
       <button onClick={() => retrieveStack(code)}>Retreive Stack</button>
-      <StackEditor stack={stack} />
+      <StackEditor stack={currentStack} />
     </div>
   );
 };
