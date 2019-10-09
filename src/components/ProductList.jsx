@@ -78,10 +78,6 @@ class ProductList extends Component {
             <button onClick={this.togglePreview}>
               {previewVisable ? "Hide Preview" : "Show Preview"}
             </button>
-
-            {/* ---------------------------- Due for deletion ---------------------------- */}
-            {/* <button onClick={overview}>Overview</button> */}
-            {/* ---------------------------- Due for deletion ---------------------------- */}
           </div>
         </div>
       </Fragment>
