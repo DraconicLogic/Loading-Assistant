@@ -52,7 +52,7 @@ class App extends Component {
     let view;
     switch (viewIndex) {
       case 0:
-        view = <StoredBales stacks={this.state.stacks} />
+        view = <StoredBales stacks={this.state.stacks} add={this.addToContainer}/>
         break;
       case 1:
         view = <ProductList add={this.addToContainer} container={container} />

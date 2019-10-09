@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StackEditor from "./StackEditor";
 
-const StoredBales = ({ stacks }) => {
+const StoredBales = ({ stacks, add }) => {
   const [currentStack, setStack] = useState(Array(12));
   const [code, setCode] = useState(Array(3));
 
@@ -35,6 +35,15 @@ const StoredBales = ({ stacks }) => {
     } else if (index === 2) {
       document.getElementById(`retrive-stack`).focus();
     }
+  };
+
+  const clearStack = () => {
+    setStack(Array(12));
+  };
+
+  const handleAddToContainer = () => {
+    add(currentStack);
+    clearStack();
   };
 
   const retrieveStack = codeArray => {
@@ -78,16 +87,8 @@ const StoredBales = ({ stacks }) => {
       <div id="stack-section">
         <StackEditor stack={currentStack} />
         <div id="stack-options">
-          <button
-          // onClick={this.handleAddContainer}
-          >
-            Add to container
-          </button>
-          <button
-          //  onClick={this.clearStack}
-          >
-            Clear Stack
-          </button>
+          <button onClick={handleAddToContainer}>Add to container</button>
+          <button onClick={() => clearStack()}>Clear Stack</button>
         </div>
       </div>
     </div>
