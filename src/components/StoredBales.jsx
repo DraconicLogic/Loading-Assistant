@@ -16,35 +16,22 @@ const StoredBales = ({ stacks, add }) => {
   const handleInput = event => {
     const { value, id } = event.target;
     const newCode = { ...code };
-    console.log("Before auto remove: ", newCode);
+
     if (newCode[id]) newCode[id] = null;
-    numInput.current.innerHTML = "";
-    console.log("After auto remove: ", newCode);
-    console.log("Before input: ", newCode);
+
     newCode[id] = value;
-    console.log("After input: ", newCode);
+
     setCode(newCode);
     moveFocus(id);
-  };
-
-  const handleOnFocus = event => {
-    console.log("HANDLE ON FOCUS", event.target);
   };
 
   const startFocus = () => {
     document.getElementById("firstDigit").focus();
   };
 
-  // Doesnt work
   const clearFields = () => {
-    const fields = document.getElementsByClassName("code-input");
-    console.log("Fields: ", fields);
-    for (let i = 0; i < fields.length; i++) {
-      fields[i].innerText = "";
-    }
+    document.getElementById("three-digit-code").reset();
   };
-
-  let numInput = React.createRef();
 
   const moveFocus = id => {
     let nextElement;
@@ -70,6 +57,7 @@ const StoredBales = ({ stacks, add }) => {
   const handleAddToContainer = () => {
     add(currentStack);
     clearStack();
+    clearFields();
     startFocus();
   };
 
@@ -81,39 +69,34 @@ const StoredBales = ({ stacks, add }) => {
       alert(
         `The stack: ${formattedCode} does not appear to be in the database`
       );
+      clearFields();
     }
   };
 
   return (
     <div>
       <h1>STORED</h1>
-      <div onChange={handleInput} id="three-digit-code">
+      <form onChange={handleInput} id="three-digit-code">
         <input
           id="firstDigit"
           className="code-input"
-          type="number"
+          type="text"
           maxLength="1"
-          value={code.firstDigit}
-          ref={numInput}
-          onFocus={handleOnFocus}
         />
 
         <input
           id="secondDigit"
           className="code-input"
-          type="number"
+          type="text"
           maxLength="1"
-          ref={numInput}
         />
         <input
           id="thirdDigit"
           className="code-input"
-          type="number"
+          type="text"
           maxLength="1"
-          value={code.thirdDigit}
-          ref={numInput}
         />
-      </div>
+      </form>
 
       <button id="retrive-stack" onClick={() => retrieveStack(code)}>
         Retreive Stack
