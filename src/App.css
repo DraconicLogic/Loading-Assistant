@@ -11,6 +11,13 @@
   font-size: 50px;
   border: solid;
   margin: 2px;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 #container-preview {
@@ -28,7 +35,7 @@
   overflow: hidden;
 }
 
-#container-preview > span {
+#container-preview>span {
   display: inline-block;
   /* float: left; */
   /* margin-left: 1px;

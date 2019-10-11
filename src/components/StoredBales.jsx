@@ -3,7 +3,11 @@ import StackEditor from "./StackEditor";
 
 const StoredBales = ({ stacks, add }) => {
   const [currentStack, setStack] = useState(Array(12));
-  const [code, setCode] = useState(Array(3));
+  const [code, setCode] = useState({
+    firstDigit: "",
+    secondDigit: "",
+    thirdDigit: ""
+  });
 
   useEffect(() => {
     startFocus();
@@ -11,30 +15,52 @@ const StoredBales = ({ stacks, add }) => {
 
   const handleInput = event => {
     const { value, id } = event.target;
-    const newCode = [...code];
-    const index = id[id.length - 1];
-    newCode[index] = value;
+    const newCode = { ...code };
+    console.log("Before auto remove: ", newCode);
+    if (newCode[id]) newCode[id] = null;
+    numInput.current.innerHTML = "";
+    console.log("After auto remove: ", newCode);
+    console.log("Before input: ", newCode);
+    newCode[id] = value;
+    console.log("After input: ", newCode);
     setCode(newCode);
     moveFocus(id);
   };
 
-  const startFocus = () => {
-    document.getElementById("three-digit-code__0").focus();
+  const handleOnFocus = event => {
+    console.log("HANDLE ON FOCUS", event.target);
   };
 
-  const moveFocus = id => {
-    const idSansIndex = id.slice(0, id.length - 1);
-    let index = Number(id.slice(id.length - 1));
-    console.log("ID: ", id);
-    console.log("ID Sans Index: ", idSansIndex);
-    console.log("New Index: ", index);
-    console.log("Test function", index + 1);
-    if (index < 2) {
-      index += 1;
-      document.getElementById(`${idSansIndex}${index}`).focus();
-    } else if (index === 2) {
-      document.getElementById(`retrive-stack`).focus();
+  const startFocus = () => {
+    document.getElementById("firstDigit").focus();
+  };
+
+  // Doesnt work
+  const clearFields = () => {
+    const fields = document.getElementsByClassName("code-input");
+    console.log("Fields: ", fields);
+    for (let i = 0; i < fields.length; i++) {
+      fields[i].innerText = "";
     }
+  };
+
+  let numInput = React.createRef();
+
+  const moveFocus = id => {
+    let nextElement;
+    switch (id) {
+      case "firstDigit":
+        nextElement = "secondDigit";
+        break;
+      case "secondDigit":
+        nextElement = "thirdDigit";
+        break;
+      case "thirdDigit":
+        nextElement = "retrive-stack";
+        break;
+      default:
+    }
+    document.getElementById(nextElement).focus();
   };
 
   const clearStack = () => {
@@ -44,10 +70,11 @@ const StoredBales = ({ stacks, add }) => {
   const handleAddToContainer = () => {
     add(currentStack);
     clearStack();
+    startFocus();
   };
 
-  const retrieveStack = codeArray => {
-    const formattedCode = codeArray.join("");
+  const retrieveStack = ({ firstDigit, secondDigit, thirdDigit }) => {
+    const formattedCode = firstDigit + secondDigit + thirdDigit;
     if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
     } else {
@@ -62,28 +89,36 @@ const StoredBales = ({ stacks, add }) => {
       <h1>STORED</h1>
       <div onChange={handleInput} id="three-digit-code">
         <input
-          id="three-digit-code__0"
+          id="firstDigit"
           className="code-input"
           type="number"
-          maxLength="2"
+          maxLength="1"
+          value={code.firstDigit}
+          ref={numInput}
+          onFocus={handleOnFocus}
+        />
+
+        <input
+          id="secondDigit"
+          className="code-input"
+          type="number"
+          maxLength="1"
+          ref={numInput}
         />
         <input
-          id="three-digit-code__1"
+          id="thirdDigit"
           className="code-input"
           type="number"
-          maxLength="2"
-        />
-        <input
-          id="three-digit-code__2"
-          className="code-input"
-          type="number"
-          maxLength="2"
+          maxLength="1"
+          value={code.thirdDigit}
+          ref={numInput}
         />
       </div>
 
       <button id="retrive-stack" onClick={() => retrieveStack(code)}>
         Retreive Stack
       </button>
+      <button onClick={() => clearFields()}>CLEAR FIELDS</button>
       <div id="stack-section">
         <StackEditor stack={currentStack} />
         <div id="stack-options">

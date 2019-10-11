@@ -6,7 +6,7 @@ import ContainerOverview from './components/ContainerOverview.jsx';
 import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
 
-import stacks from './stacks.json'
+import storedStacks from './stacks.json'
 // import testData from './testData.json'
 
 
@@ -15,10 +15,11 @@ class App extends Component {
     date: '',
     containerNumber: '',
     sealNumber: '',
+    // TODO: change "container" to "content"
     container: [],
     containerOverview: false,
     view: 0,
-    stacks
+    storedStacks
   }
 
   componentDidMount () {
@@ -52,7 +53,7 @@ class App extends Component {
     let view;
     switch (viewIndex) {
       case 0:
-        view = <StoredBales stacks={this.state.stacks} add={this.addToContainer}/>
+        view = <StoredBales stacks={this.state.storedStacks} add={this.addToContainer}/>
         break;
       case 1:
         view = <ProductList add={this.addToContainer} container={container} />
