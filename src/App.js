@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ProductList from './components/ProductList.jsx'
 import './App.css';
 import ContainerOverview from './components/ContainerOverview.jsx';
-// import ProductListTab from "./components/ProductListTab.jsx";
+import ProductListTab from "./components/ProductListTab.jsx";
 import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
 
@@ -78,7 +78,7 @@ class App extends Component {
 
         <div id="App">
           {/* Temporirly offline till I figure out how to make it work */}
-          {/* <ProductListTab /> */}
+          <ProductListTab />
           {/* -------------------------------------------------------- */}
           <div id="temp-tab" onClick={this.handleViews}>
             <button value="0" >STORED</button>

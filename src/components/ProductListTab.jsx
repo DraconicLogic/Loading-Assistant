@@ -5,9 +5,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 
 function TabPanel(props) {
+  console.log("TabPanel Props: ", props);
+
   const { children, value, index, ...other } = props;
 
   return (
@@ -18,9 +19,7 @@ function TabPanel(props) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
-    >
-      <Box p={3}>{children}</Box>
-    </Typography>
+    ></Typography>
   );
 }
 
@@ -36,18 +35,18 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`
   };
 }
-console.log("makestyles: ", makeStyles);
+
 const useStyles = makeStyles(theme => {
   console.log("THEME", theme);
   return {
     root: {
-      flexGrow: 1,
+      flexGrow: 1
       // backgroundColor: theme.palette.background.paper
     }
   };
 });
 
-function ProductListTab() {
+export default function ProductListTab() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -80,5 +79,3 @@ function ProductListTab() {
     </div>
   );
 }
-
-export default ProductListTab;
