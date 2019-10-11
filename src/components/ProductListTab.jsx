@@ -5,6 +5,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
+import { ThemeProvider } from "@material-ui/styles";
+
+const theme = {
+  background: "1D8549"
+};
 
 function TabPanel(props) {
   console.log("TabPanel Props: ", props);
@@ -37,7 +42,6 @@ function a11yProps(index) {
 }
 
 const useStyles = makeStyles(theme => {
-  console.log("THEME", theme);
   return {
     root: {
       flexGrow: 1
@@ -46,28 +50,38 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-export default function ProductListTab() {
+export default function ProductListTab({ changeView }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+
+  const theme = {
+    background: "#1D8549"
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  React.useEffect(() => {
+    changeView(value);
+  }, [value]);
+
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="simple tabs example"
-        >
-          <Tab label="STORED" {...a11yProps(0)} />
-          <Tab label="PRODUCT LIST" {...a11yProps(1)} />
-          <Tab label="OVERVIEW" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
+      <ThemeProvider theme={theme}>
+        <AppBar position="static">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="simple tabs example"
+          >
+            <Tab label="STORED" {...a11yProps(0)} />
+            <Tab label="PRODUCT LIST" {...a11yProps(1)} />
+            <Tab label="OVERVIEW" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+      </ThemeProvider>
+      {/* <TabPanel value={value} index={0}>
         Item One
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -75,7 +89,7 @@ export default function ProductListTab() {
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

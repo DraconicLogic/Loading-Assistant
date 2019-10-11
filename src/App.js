@@ -5,10 +5,13 @@ import ContainerOverview from './components/ContainerOverview.jsx';
 import ProductListTab from "./components/ProductListTab.jsx";
 import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
-
+import { ThemeProvider } from '@material-ui/styles'
 import storedStacks from './stacks.json'
 // import testData from './testData.json'
 
+const theme = {
+  background: '1D8549'
+}
 
 class App extends Component {
   state = {
@@ -33,6 +36,7 @@ class App extends Component {
       this.setState(currentContainer)
     }
   }
+
 
   downloadStacks = () => {
     //download saved stack an put into state
@@ -77,14 +81,9 @@ class App extends Component {
         
 
         <div id="App">
-          {/* Temporirly offline till I figure out how to make it work */}
-          <ProductListTab />
-          {/* -------------------------------------------------------- */}
-          <div id="temp-tab" onClick={this.handleViews}>
-            <button value="0" >STORED</button>
-            <button value="1">PRODUCT LIST</button>
-            <button value="2">OVERVIEW</button>
-          </div>
+         
+          <ProductListTab changeView={this.changeView} />
+
           {this.displayView(view, container)}
             {/* {!containerOverview ? 
             <ProductList add={this.addToContainer} container={container} overview={this.toggleContainerOverview}/> : 
