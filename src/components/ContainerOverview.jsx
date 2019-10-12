@@ -1,64 +1,69 @@
-import React from 'react';
-import ContainerSealForm from './ContainerSealForm';
-import products from '../products/products.json'
+import React from "react";
+import ContainerSealForm from "./ContainerSealForm";
+import products from "../products/products.json";
+import ContainerPreview from "./ContainerPreview";
 /*
    TODO: * Plan layout for page
          * Add estimated weight of container
 */
-const ContainerOverview = ({containerDetails, overview, finish, update}) => {
-  const { container } = containerDetails
- 
-  const flatContainer = container.flat(1)
+const ContainerOverview = ({ containerDetails, overview, finish, update }) => {
+  const { container } = containerDetails;
+
+  const flatContainer = container.flat(1);
 
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
     if (!tallyObj[bale]) {
-      tallyObj[bale] = 1
+      tallyObj[bale] = 1;
     } else if (!!tallyObj[bale]) {
-      tallyObj[bale] += 1
+      tallyObj[bale] += 1;
     }
-    return tallyObj
-  },{})
+    return tallyObj;
+  }, {});
 
-  const braCount = flatContainer.filter((bale) => bale === 'BRA')
- 
+  const braCount = flatContainer.filter(bale => bale === "BRA");
+
   const containerWeight = flatContainer.reduce((netWeight, bale) => {
-    return netWeight += products[bale].size;
-  }, 0)
-  const baleCountArray = Object.entries(baleCount)
-  
-  const smallBales = flatContainer.filter((bale) => {
-    return (products[bale].baleSize === 'small') 
-  })
+    return (netWeight += products[bale].size);
+  }, 0);
+  const baleCountArray = Object.entries(baleCount);
 
-  const bigBales = flatContainer.filter((bale) => {
-    return (products[bale].baleSize === 'big')
-  })
-  
+  const smallBales = flatContainer.filter(bale => {
+    return products[bale].baleSize === "small";
+  });
+
+  const bigBales = flatContainer.filter(bale => {
+    return products[bale].baleSize === "big";
+  });
+
   return (
     <div>
-      <h1>Container Overview</h1>
-      <button onClick={overview}>Back To Editor</button>
       <div>
-        <ContainerSealForm update={update} containerDetails={containerDetails}/>
+        <ContainerSealForm
+          update={update}
+          containerDetails={containerDetails}
+        />
         <p>Estimated Weight: {containerWeight}</p>
         <p>BRA: {braCount.length}</p>
         <p>Small Bales: {smallBales.length}</p>
         <p>Big Bales: {bigBales.length}</p>
         <p>Total Bales: {flatContainer.length}</p>
       </div>
-      <table>
-        {baleCountArray.map((bale, index) => {
-          return (
-            <tbody>
-              <tr key={index}>
-                <td >{bale[0]}</td>
-                <td>{bale[1]}</td>
-              </tr>
-            </tbody>  
-          )
-        })}
-      </table>
-      <button onClick={finish}>CONTAINER FINISHED</button>
+      <div className="App__view">
+        <table>
+          {baleCountArray.map((bale, index) => {
+            return (
+              <tbody>
+                <tr key={index}>
+                  <td>{bale[0]}</td>
+                  <td>{bale[1]}</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
+        <ContainerPreview container={container} />
+        {/* <button onClick={finish}>CONTAINER FINISHED</button> */}
+      </div>
     </div>
   );
 };

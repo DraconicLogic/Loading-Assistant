@@ -30,7 +30,7 @@ const StoredBales = ({ stacks, add }) => {
   };
 
   const clearFields = () => {
-    document.getElementById("three-digit-code").reset();
+    document.getElementById("recallid-input").reset();
   };
 
   const moveFocus = id => {
@@ -75,32 +75,36 @@ const StoredBales = ({ stacks, add }) => {
 
   return (
     <div id="stored-bales" className="App__view">
-      <form onChange={handleInput} id="three-digit-code">
-        <input
-          id="firstDigit"
-          className="code-input"
-          type="text"
-          maxLength="1"
-        />
+      <div>
+        <form onChange={handleInput} id="recallid-input">
+          <input
+            id="firstDigit"
+            className="code-input"
+            type="text"
+            maxLength="1"
+          />
 
-        <input
-          id="secondDigit"
-          className="code-input"
-          type="text"
-          maxLength="1"
-        />
-        <input
-          id="thirdDigit"
-          className="code-input"
-          type="text"
-          maxLength="1"
-        />
-      </form>
+          <input
+            id="secondDigit"
+            className="code-input"
+            type="text"
+            maxLength="1"
+          />
+          <input
+            id="thirdDigit"
+            className="code-input"
+            type="text"
+            maxLength="1"
+          />
+        </form>
+        <div>
+          <button id="retrive-stack" onClick={() => retrieveStack(code)}>
+            Retreive Stack
+          </button>
+          <button onClick={() => clearFields()}>CLEAR FIELDS</button>
+        </div>
+      </div>
 
-      <button id="retrive-stack" onClick={() => retrieveStack(code)}>
-        Retreive Stack
-      </button>
-      <button onClick={() => clearFields()}>CLEAR FIELDS</button>
       <div id="stack-section">
         <StackEditor stack={currentStack} />
         <div id="stack-options">

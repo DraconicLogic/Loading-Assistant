@@ -14,7 +14,14 @@ body {
 .App__view {
   display: grid;
   grid-template-rows: auto auto;
-  height: 90%;
+  /* height: 90%; */
+  height: 93vh;
+}
+
+/* This is temporary.*/
+/* TODO: Consolidate this with ".App__view" above */
+.App__view-2 {
+  display: ;
 }
 
 .code-input {
@@ -23,6 +30,11 @@ body {
   font-size: 50px;
   border: solid;
   margin: 2px;
+}
+
+#container-seal-section {
+  border: solid;
+  height: 2em;
 }
 
 input::-webkit-outer-spin-button,
@@ -59,15 +71,17 @@ input::-webkit-inner-spin-button {
   background-color: greenyellow;
 }
 
-MuiTabs {
-  /* position: fixed; */
-  /* position: sticky; */
-}
-
+/* TODO: check if this selector is doing anything */
 MuiAppBar {
   grid-row: 1;
   color: secondary;
   height: 100px;
+}
+
+/* TODO: Find selector to get this working */
+MuiAppBar-colorPrimary-8 {
+  color: #fff;
+  background-color: #1d8549;
 }
 
 #product-list {
@@ -102,6 +116,14 @@ MuiAppBar {
   margin: 2px;
   font-weight: bolder;
   font-size: large;
+}
+
+#recallid-input {
+  display: block;
+  margin: 5em;
+}
+
+.code-input {
 }
 
 #stack-section {
@@ -205,10 +227,4 @@ MuiAppBar {
   height: fit-content;
   display: block;
   overflow: auto;
-}
-
-/* Temporary */
-
-#temp-tab {
-  display: inline-block;
 }
