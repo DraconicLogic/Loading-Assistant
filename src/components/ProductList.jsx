@@ -35,7 +35,6 @@ class ProductList extends Component {
     const productCodes = Object.keys(products);
     // eslint-disable-next-line
     const bales = productCodes.sort();
-    console.log(currentStack);
 
     return (
       <div id="product-list" className="App__view">

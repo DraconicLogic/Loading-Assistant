@@ -13,15 +13,11 @@ body {
 
 .App__view {
   display: grid;
-  grid-template-rows: auto auto;
-  /* height: 90%; */
-  height: 93vh;
-}
+  grid-template-rows: 70% 30%;
 
-/* This is temporary.*/
-/* TODO: Consolidate this with ".App__view" above */
-.App__view-2 {
-  display: ;
+  grid-template-rows: auto auto;
+  height: 93vh;
+  /* height: 90%; */
 }
 
 .code-input {
@@ -44,18 +40,19 @@ input::-webkit-inner-spin-button {
 }
 
 #container-preview {
-  height: 20vh;
-  max-height: 20vh;
-  border: red;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  row-gap: solid;
+  height: 35vh;
+  max-height: 35vh;
+  border: solid;
+  /* float: bottom; */
 
+  bottom: 0;
   text-align: center;
   overflow-x: auto;
   white-space: nowrap;
-}
-
-#container-preview--hidden {
-  height: 0vh;
-  overflow: hidden;
 }
 
 #container-preview > span {

@@ -21,9 +21,6 @@ const ContainerPreview = ({ container, currentStack, select, working }) => {
           </span>
         );
       })}
-      <span>
-        <StackEditor stack={currentStack} context={context} />
-      </span>
     </div>
   );
 };

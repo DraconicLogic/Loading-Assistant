@@ -8,7 +8,7 @@ import ContainerPreview from "./ContainerPreview";
 */
 const ContainerOverview = ({ containerDetails, overview, finish, update }) => {
   const { container } = containerDetails;
-
+  console.log("Container: ", container);
   const flatContainer = container.flat(1);
 
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
@@ -47,6 +47,7 @@ const ContainerOverview = ({ containerDetails, overview, finish, update }) => {
         <p>Small Bales: {smallBales.length}</p>
         <p>Big Bales: {bigBales.length}</p>
         <p>Total Bales: {flatContainer.length}</p>
+        <button onClick={finish}>CONTAINER FINISHED</button>
       </div>
       <div className="App__view">
         <table>
@@ -62,7 +63,6 @@ const ContainerOverview = ({ containerDetails, overview, finish, update }) => {
           })}
         </table>
         <ContainerPreview container={container} />
-        {/* <button onClick={finish}>CONTAINER FINISHED</button> */}
       </div>
     </div>
   );
