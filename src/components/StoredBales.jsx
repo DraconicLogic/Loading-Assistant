@@ -74,8 +74,7 @@ const StoredBales = ({ stacks, add }) => {
   };
 
   return (
-    <div>
-      <h1>STORED</h1>
+    <div id="stored-bales" className="App__view">
       <form onChange={handleInput} id="three-digit-code">
         <input
           id="firstDigit"

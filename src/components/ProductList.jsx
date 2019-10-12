@@ -38,7 +38,7 @@ class ProductList extends Component {
     console.log(currentStack);
 
     return (
-      <div id="product-list">
+      <div id="product-list" className="App__view">
         <div id="product-list__buttons">
           {bales.map(bale => {
             return (

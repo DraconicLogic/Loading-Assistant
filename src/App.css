@@ -11,6 +11,12 @@ body {
   grid-template-rows: 2in auto */
 }
 
+.App__view {
+  display: grid;
+  grid-template-rows: auto auto;
+  height: 90%;
+}
+
 .code-input {
   height: 50px;
   width: 50px;
@@ -65,9 +71,10 @@ MuiAppBar {
 }
 
 #product-list {
-  display: grid;
+  /* display: grid;
   grid-template-rows: auto auto;
-  height: 90%;
+  height: 90%; */
+
   /* max-height: 100%; */
   /* overflow: hidden; */
 }
