@@ -1,6 +1,11 @@
+body {
+  height: 100vh;
+  max-height: 100vh;
+}
+
 #App {
   text-align: center;
-  /* max-height: 100%; */
+  max-height: 100vh;
   height: 100vh;
   /* display: grid;
   grid-template-rows: 2in auto */
@@ -63,10 +68,9 @@ MuiAppBar {
   display: grid;
   grid-template-rows: 70% auto;
   border: solid;
-  /* height: 70%; */
-  max-height: 70vh;
-  overflow: hidden;
-  overflow: scroll;
+  height: 100%;
+  /* max-height: 100%; */
+  /* overflow: hidden; */
 }
 
 #product-list__buttons {
@@ -74,7 +78,7 @@ MuiAppBar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-  margin-top: 50px;
+  overflow: scroll;
 }
 
 #product-button {
