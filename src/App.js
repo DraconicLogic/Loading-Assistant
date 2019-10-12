@@ -21,7 +21,7 @@ class App extends Component {
     // TODO: change "container" to "content"
     container: [],
     containerOverview: false,
-    view: 0,
+    view: 1,
     storedStacks
   }
 

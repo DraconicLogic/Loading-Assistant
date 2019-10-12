@@ -38,31 +38,19 @@ class ProductList extends Component {
     console.log(currentStack);
 
     return (
-      <Fragment>
-        <div id="product-list">
-          <h1>PRODUCT LIST</h1>
-          {/* <Tab displayProducts={this.displayProducts} /> */}
-          {/* <ProductListTab /> */}
-          <div id="product-list__buttons">
-            {bales.map(bale => {
-              return (
-                <ProductButton
-                  selector={this.selectFromList}
-                  product={bale}
-                  selected={selected}
-                  key={bale}
-                />
-              );
-            })}
-          </div>
+      <div id="product-list">
+        <div id="product-list__buttons">
+          {bales.map(bale => {
+            return (
+              <ProductButton
+                selector={this.selectFromList}
+                product={bale}
+                selected={selected}
+                key={bale}
+              />
+            );
+          })}
         </div>
-        <ContainerPreview
-          container={container}
-          currentStack={currentStack}
-          visable={previewVisable}
-          select={this.selectStack}
-          workking={workingStack}
-        />
         <div id="stack-section">
           <StackSize size={this.toggleStackSize} />
           <StackEditor
@@ -80,7 +68,7 @@ class ProductList extends Component {
             </button>
           </div>
         </div>
-      </Fragment>
+      </div>
     );
   }
 
