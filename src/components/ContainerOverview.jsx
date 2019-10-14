@@ -6,7 +6,7 @@ import ContainerPreview from "./ContainerPreview";
    TODO: * Plan layout for page
          * Add estimated weight of container
 */
-const ContainerOverview = ({ containerDetails, overview, finish, update }) => {
+const ContainerOverview = ({ containerDetails, overview, update }) => {
   const { container } = containerDetails;
   console.log("Container: ", container);
   const flatContainer = container.flat(1);
@@ -47,7 +47,6 @@ const ContainerOverview = ({ containerDetails, overview, finish, update }) => {
         <p>Small Bales: {smallBales.length}</p>
         <p>Big Bales: {bigBales.length}</p>
         <p>Total Bales: {flatContainer.length}</p>
-        <button onClick={finish}>CONTAINER FINISHED</button>
       </div>
       <div className="App__view">
         <table>

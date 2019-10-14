@@ -20,7 +20,6 @@ class App extends Component {
     sealNumber: '',
     // TODO: change "container" to "content"
     container: [],
-    containerOverview: false,
     view: 1,
     storedStacks
   }
@@ -37,9 +36,13 @@ class App extends Component {
     }
   }
 
+  checkForLoadingSession = () => {
+    
+  }
+
 
   downloadStacks = () => {
-    //download saved stack an put into state
+    //download saved stacks an put into state
   }
 
   handleViews = (event) => {
@@ -66,7 +69,6 @@ class App extends Component {
         view = <ContainerOverview 
         containerDetails={this.state} 
         overview={this.toggleContainerOverview} 
-        finish={this.finishContainer}
         update={this.updateContainerAndSeal}/>
         break;
       default:
@@ -76,24 +78,11 @@ class App extends Component {
   }
 
   render() {
-    const { container, containerOverview, view } = this.state
-      return (
-        
-
-        <div id="App">
-         
+    const { container, view } = this.state
+      return (    
+        <div id="App">         
           <ProductListTab changeView={this.changeView} />
-
-          {this.displayView(view, container)}
-            {/* {!containerOverview ? 
-            <ProductList add={this.addToContainer} container={container} overview={this.toggleContainerOverview}/> : 
-            <ContainerOverview 
-            containerDetails={this.state} 
-            overview={this.toggleContainerOverview} 
-            finish={this.finishContainer}
-            update={this.updateContainerAndSeal}/>
-            } */}
-            
+          {this.displayView(view, container)}            
         </div>
       );
     
@@ -121,15 +110,7 @@ class App extends Component {
     localStorage.setItem(date, JSON.stringify(this.state))
   }
 
-  finishContainer = () => {
-    const { sealNumber, containerNumber } = this.state
-    if (sealNumber && containerNumber) {
-      utils.saveContainer(this.state)
-      localStorage.clear()
-    } else {
-      alert("Please fill in BOTH Container Number and Seal Number")
-    }
-  }
+
 
   updateContainerAndSeal = ({containerNumber, sealNumber}) => {
     console.log('APP__UPDATE CONTAINER')
