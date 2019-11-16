@@ -7,6 +7,8 @@ import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
 import { ThemeProvider } from '@material-ui/styles'
 import storedStacks from './stacks.json'
+import * as api from "./api.js"
+import ResponseModal from './components/ResponseModal.jsx';
 // import testData from './testData.json'
 
 const theme = {
@@ -21,7 +23,8 @@ class App extends Component {
     // TODO: change "container" to "content"
     container: [],
     view: 1,
-    storedStacks
+    storedStacks,
+    response: null
   }
 
   componentDidMount () {
@@ -63,7 +66,11 @@ class App extends Component {
         view = <StoredBales stacks={this.state.storedStacks} add={this.addToContainer}/>
         break;
       case 1:
-        view = <ProductList add={this.addToContainer} container={container} />
+        view = <ProductList 
+        add={this.addToContainer} 
+        container={container} 
+        addToDB={this.addToDB}
+        />
         break;
       case 2:
         view = <ContainerOverview 
@@ -78,11 +85,12 @@ class App extends Component {
   }
 
   render() {
-    const { container, view } = this.state
+    const { container, view, response } = this.state
       return (    
         <div id="App">         
           <ProductListTab changeView={this.changeView} />
-          {this.displayView(view, container)}            
+          {this.displayView(view, container)} 
+          {!!response && <ResponseModal response={response} close={this.closeModal} />}
         </div>
       );
     
@@ -98,6 +106,16 @@ class App extends Component {
     })
   }
 
+  addToDB = async (item) => {
+    console.log('runn')
+    const response = await api.saveStackToDB(item)
+    
+    console.log(response)
+    this.setState({
+      response: response.data
+    })
+  }
+
   toggleContainerOverview = () => {
     const { containerOverview } = this.state
     this.setState({
@@ -110,6 +128,11 @@ class App extends Component {
     localStorage.setItem(date, JSON.stringify(this.state))
   }
 
+  closeModal = () => {
+    this.setState({
+      response: null
+    })
+  }
 
 
   updateContainerAndSeal = ({containerNumber, sealNumber}) => {

@@ -7,6 +7,7 @@ import ContainerPreview from "./ContainerPreview.jsx";
 import * as utils from "../utils.js";
 import StackSize from "./StackSize.jsx";
 import ProductListTab from "./ProductListTab.jsx";
+
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
 
@@ -60,6 +61,7 @@ class ProductList extends Component {
             context="editor"
           />
           <div id="stack-options">
+            <button onClick={this.handleAddToDB}>Add to database</button>
             <button onClick={this.handleAddContainer}>Add to container</button>
             <button onClick={this.clearStack}>Clear Stack</button>
             <button onClick={this.togglePreview}>
@@ -155,6 +157,12 @@ class ProductList extends Component {
     this.setState({
       workingStack: stack
     });
+  };
+
+  handleAddToDB = () => {
+    const { currentStack } = this.state;
+    const { addToDB } = this.props;
+    addToDB(currentStack);
   };
 }
 
