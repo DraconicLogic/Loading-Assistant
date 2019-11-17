@@ -88,9 +88,9 @@ class App extends Component {
     const { container, view, response } = this.state
       return (    
         <div id="App">         
+          {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} />
           {this.displayView(view, container)} 
-          {!!response && <ResponseModal response={response} close={this.closeModal} />}
         </div>
       );
     

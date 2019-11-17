@@ -133,10 +133,10 @@ MuiAppBar-colorPrimary-8 {
 }
 
 #response-modal__content {
-  background-color: #fefefe;
+  background-color: white;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
+  border: solid;
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
