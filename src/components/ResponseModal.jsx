@@ -9,7 +9,7 @@ const ResponseModal = ({ response, close }) => {
     const options = {
       title: "Close Recall ID Box",
       message:
-        "Have you written the ID on the stack.\b It is difficult to retrieve the code if you do not",
+        "Have you written the ID on the stack?\b It is difficult to retrieve the code if you do not",
       buttons: [
         {
           label: "Yes",
@@ -33,7 +33,7 @@ const ResponseModal = ({ response, close }) => {
   return (
     <div id="response-modal">
       <div id="response-modal__content">
-        Here is the ID for the stack. Please make sure you write it cleary on
+        Here is the ID for the stack. Please make sure you write it clearly on
         the bale
         <h1>{response.recallid}</h1>
         <span onClick={handleClose}>
