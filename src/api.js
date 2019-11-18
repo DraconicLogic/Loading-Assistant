@@ -18,3 +18,12 @@ export function saveStackToDB(stack){
   })
   .catch((error) => console.error(error))
 }
+
+export function getStacks(){
+  const url = `${nnennaAPI}/stacks`
+  return axios.get(url)
+    .then((stacks) => {
+      console.log(stacks)
+      return stacks
+    })
+}

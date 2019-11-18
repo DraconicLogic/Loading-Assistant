@@ -22,6 +22,7 @@ export function getDate () {
 }
 
 
+
 // TODO: This function needs rewriting. Will probably send a request to api
 // export function saveContainer (container) {
 //   const { containerOverview, ...data } = container

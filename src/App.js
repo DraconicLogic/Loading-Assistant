@@ -6,7 +6,7 @@ import ProductListTab from "./components/ProductListTab.jsx";
 import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
 import { ThemeProvider } from '@material-ui/styles'
-import storedStacks from './stacks.json'
+// import storedStacks from './stacks.json'
 import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
 // import testData from './testData.json'
@@ -23,7 +23,7 @@ class App extends Component {
     // TODO: change "container" to "content"
     container: [],
     view: 1,
-    storedStacks,
+    storedStacks: [],
     response: null
   }
 
