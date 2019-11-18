@@ -76,6 +76,7 @@ const StoredBales = ({ stacks, add }) => {
   return (
     <div id="stored-bales" className="App__view">
       <div>
+        <h3>Please enter 3 digit code on Stack</h3>
         <form onChange={handleInput} id="recallid-input">
           <input
             id="firstDigit"
