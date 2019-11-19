@@ -53,6 +53,9 @@ class App extends Component {
     
   }
 
+  finishContainer = () => {
+
+  }
 
   downloadStacks = () => {
     //download saved stacks an put into state
@@ -108,11 +111,10 @@ class App extends Component {
     
   }
   addToContainer = (stack) => {
-    const { container } = this.state
-    const modifiedContainer = [...container]
-    modifiedContainer.push(stack)
+    const newContainer = [...this.state.container]
+    newContainer.push(stack)
     this.setState({
-      container: modifiedContainer
+      container: newContainer
     }, () => {
       this.saveProgress()
     })
