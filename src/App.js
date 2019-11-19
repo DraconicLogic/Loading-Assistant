@@ -20,8 +20,7 @@ class App extends Component {
     date: '',
     containerNumber: '',
     sealNumber: '',
-    // TODO: change "container" to "content"
-    content: [],
+    containerContent: [],
     view: 1,
     storedStacks: {},
     response: null
@@ -100,23 +99,23 @@ class App extends Component {
   }
 
   render() {
-    const { container, view, response, storedStacks } = this.state
+    const { containerContent, view, response, storedStacks } = this.state
     console.log(storedStacks)
       return (    
         <div id="App">         
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} />
-          {this.displayView(view, container)} 
+          {this.displayView(view, containerContent)} 
         </div>
       );
     
   }
   addToContainer = (stack) => {
     console.log('ADDING TO CONTAINER: ', stack)
-    const newContent = [...this.state.content]
+    const newContent = [...this.state.containerContent]
     newContent.push(stack)
     this.setState({
-      content: newContent
+      containerContent: newContent
     }, () => {
       this.saveProgress()
     })

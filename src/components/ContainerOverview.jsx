@@ -7,9 +7,9 @@ import ContainerPreview from "./ContainerPreview";
          * Add estimated weight of container
 */
 const ContainerOverview = ({ containerDetails, update, finish }) => {
-  const { content } = containerDetails;
-  console.log("content: ", content);
-  const flatContainer = content.flat(1);
+  const { containerContent } = containerDetails;
+  console.log("content: ", containerContent);
+  const flatContainer = containerContent.flat(1);
 
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
     if (!tallyObj[bale]) {
@@ -64,7 +64,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
             );
           })}
         </table>
-        <ContainerPreview container={content} />
+        <ContainerPreview container={containerContent} />
       </div>
     </div>
   );
