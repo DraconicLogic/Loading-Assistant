@@ -89,7 +89,6 @@ class App extends Component {
       case 2:
         view = <ContainerOverview 
         containerDetails={this.state} 
-        overview={this.toggleContainerOverview} 
         update={this.updateContainerAndSeal}/>
         break;
       default:
@@ -129,13 +128,6 @@ class App extends Component {
     this.setState({
       response: {recallid, content, date},
       storedStacks: newStoredStacks
-    })
-  }
-
-  toggleContainerOverview = () => {
-    const { containerOverview } = this.state
-    this.setState({
-      containerOverview: !containerOverview
     })
   }
 

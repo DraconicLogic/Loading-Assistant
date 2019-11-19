@@ -6,7 +6,7 @@ import ContainerPreview from "./ContainerPreview";
    TODO: * Plan layout for page
          * Add estimated weight of container
 */
-const ContainerOverview = ({ containerDetails, overview, update }) => {
+const ContainerOverview = ({ containerDetails, update }) => {
   const { container } = containerDetails;
   console.log("Container: ", container);
   const flatContainer = container.flat(1);
