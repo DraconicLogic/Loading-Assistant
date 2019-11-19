@@ -119,15 +119,14 @@ class App extends Component {
   }
 
   addToDB = async (item) => {
-    const {storedStacks} = this.state
-    console.log('runn')
-    const response = await api.saveStackToDB(item)
-    const updatedStoredStacks = {...storedStacks,}
-    updatedStoredStacks[response.data.recallid] = response.data.content
-    console.log(response)
+    const {recallid, content, date} = await api.saveStackToDB(item)
+    console.log("RETURNED STACK FROM DB", recallid, content, date)
+    const newStoredStacks = {...this.state.storedStacks}
+    newStoredStacks[recallid] = content
+
     this.setState({
-      response: response.data,
-      storedStacks: updatedStoredStacks
+      response: {recallid, content, date},
+      storedStacks: newStoredStacks
     })
   }
 

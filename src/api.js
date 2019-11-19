@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {getDate} from './utils.js'
 const nnennaAPI = 'http://localhost:4000/api'
 
 export function saveStackToDB(stack){
@@ -11,7 +10,7 @@ export function saveStackToDB(stack){
   return axios.post(url,stack)
   .then((savedStack) => {
     console.log(savedStack)
-    return savedStack
+    return savedStack.data
   })
   .catch((error) => console.error(error))
 }
