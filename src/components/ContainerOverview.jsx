@@ -6,10 +6,10 @@ import ContainerPreview from "./ContainerPreview";
    TODO: * Plan layout for page
          * Add estimated weight of container
 */
-const ContainerOverview = ({ containerDetails, update }) => {
-  const { container } = containerDetails;
-  console.log("Container: ", container);
-  const flatContainer = container.flat(1);
+const ContainerOverview = ({ containerDetails, update, finish }) => {
+  const { content } = containerDetails;
+  console.log("content: ", content);
+  const flatContainer = content.flat(1);
 
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
     if (!tallyObj[bale]) {
@@ -47,6 +47,9 @@ const ContainerOverview = ({ containerDetails, update }) => {
         <p>Small Bales: {smallBales.length}</p>
         <p>Big Bales: {bigBales.length}</p>
         <p>Total Bales: {flatContainer.length}</p>
+        <button onClick={() => finish(containerDetails)}>
+          <h3>FINISH</h3>
+        </button>
       </div>
       <div className="App__view">
         <table>
@@ -61,7 +64,7 @@ const ContainerOverview = ({ containerDetails, update }) => {
             );
           })}
         </table>
-        <ContainerPreview container={container} />
+        <ContainerPreview container={content} />
       </div>
     </div>
   );

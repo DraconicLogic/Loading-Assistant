@@ -21,7 +21,7 @@ class App extends Component {
     containerNumber: '',
     sealNumber: '',
     // TODO: change "container" to "content"
-    container: [],
+    content: [],
     view: 1,
     storedStacks: {},
     response: null
@@ -54,7 +54,7 @@ class App extends Component {
   }
 
   finishContainer = (container) => {
-    // this.addToDB
+    this.addContainerToDB(container)
   }
 
   downloadStacks = () => {
@@ -89,7 +89,9 @@ class App extends Component {
       case 2:
         view = <ContainerOverview 
         containerDetails={this.state} 
-        update={this.updateContainerAndSeal}/>
+        update={this.updateContainerAndSeal}
+        finish={this.finishContainer}
+        />
         break;
       default:
         view = <h1>500 - Something's gone horribly wrong</h1>
@@ -129,6 +131,11 @@ class App extends Component {
       response: {recallid, content, date},
       storedStacks: newStoredStacks
     })
+  }
+
+  addContainerToDB = async (container) => {
+    const response = await api.saveContainerToDB(container) 
+    console.log(response)
   }
 
   saveProgress = () => {

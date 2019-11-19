@@ -24,3 +24,14 @@ export function getStacks(){
     })
     .catch((error) => console.error(error))
 }
+
+export function saveContainerToDB(container){
+  console.log("PAYLOAD TO SEND TO API: ",container)
+  const url = `${nnennaAPI}/containers`
+  return axios.post(url)
+  .then((savedContainer) => {
+    console.log(savedContainer)
+    return savedContainer.data
+  })
+  .catch((error) => console.error(error))
+}
