@@ -3,15 +3,12 @@ import {getDate} from './utils.js'
 const nnennaAPI = 'http://localhost:4000/api'
 
 export function saveStackToDB(stack){
-  const stackObj = {
-    content: stack,
-    date: getDate()
-  }
-  console.log("PAYLOAD TO SEND TO API: ",stackObj)
+ 
+  console.log("PAYLOAD TO SEND TO API: ",stack)
   const url = `${nnennaAPI}/stacks`
   console.log('SENDING POST REQUEST', url)
   
-  return axios.post(url,stackObj)
+  return axios.post(url,stack)
   .then((savedStack) => {
     console.log(savedStack)
     return savedStack
@@ -24,6 +21,7 @@ export function getStacks(){
   return axios.get(url)
     .then((stacks) => {
       console.log(stacks)
-      return stacks
+      return stacks.data
     })
+    .catch((error) => console.error(error))
 }

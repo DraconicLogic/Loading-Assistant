@@ -7,6 +7,7 @@ import ContainerPreview from "./ContainerPreview.jsx";
 import * as utils from "../utils.js";
 import StackSize from "./StackSize.jsx";
 import ProductListTab from "./ProductListTab.jsx";
+import { generateUniqueCode } from "../recallidGenerator.js";
 
 // import { withStyles } from '@material-ui/core/styles';
 // import AppBar from '@material-ui/core/AppBar';
@@ -161,8 +162,14 @@ class ProductList extends Component {
 
   handleAddToDB = () => {
     const { currentStack } = this.state;
-    const { addToDB } = this.props;
-    addToDB(currentStack);
+    const { addToDB, storedStacks } = this.props;
+    const stackObj = {
+      recallid: generateUniqueCode(storedStacks),
+      content: currentStack,
+      date: utils.getDate()
+    };
+    addToDB(stackObj);
+    this.clearStack();
   };
 }
 

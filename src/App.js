@@ -23,11 +23,11 @@ class App extends Component {
     // TODO: change "container" to "content"
     container: [],
     view: 1,
-    storedStacks: [],
+    storedStacks: {},
     response: null
   }
 
-  componentDidMount () {
+  async componentDidMount () {
     if (!localStorage.getItem(utils.getDate())) {
       const date = utils.getDate()
       this.setState({
@@ -37,6 +37,16 @@ class App extends Component {
       const currentContainer = JSON.parse(localStorage.getItem(utils.getDate())) 
       this.setState(currentContainer)
     }
+    const stacks = await api.getStacks()
+    
+    const storedStacks = stacks.reduce((stackObject, stack) => {
+      stackObject[stack.recallid] = stack.content
+      return stackObject
+    },{})
+    
+    this.setState({
+      storedStacks
+    })
   }
 
   checkForLoadingSession = () => {
@@ -70,6 +80,7 @@ class App extends Component {
         add={this.addToContainer} 
         container={container} 
         addToDB={this.addToDB}
+        storedStacks={this.state.storedStacks}
         />
         break;
       case 2:
@@ -85,7 +96,8 @@ class App extends Component {
   }
 
   render() {
-    const { container, view, response } = this.state
+    const { container, view, response, storedStacks } = this.state
+    console.log(storedStacks)
       return (    
         <div id="App">         
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
@@ -107,12 +119,15 @@ class App extends Component {
   }
 
   addToDB = async (item) => {
+    const {storedStacks} = this.state
     console.log('runn')
     const response = await api.saveStackToDB(item)
-    
+    const updatedStoredStacks = {...storedStacks,}
+    updatedStoredStacks[response.data.recallid] = response.data.content
     console.log(response)
     this.setState({
-      response: response.data
+      response: response.data,
+      storedStacks: updatedStoredStacks
     })
   }
 

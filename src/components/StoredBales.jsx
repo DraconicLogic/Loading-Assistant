@@ -61,7 +61,7 @@ const StoredBales = ({ stacks, add }) => {
     startFocus();
   };
 
-  const retrieveStack = ({ firstDigit, secondDigit, thirdDigit }) => {
+  const retrieveStack = ({ firstDigit, secondDigit, thirdDigit }, stacks) => {
     const formattedCode = firstDigit + secondDigit + thirdDigit;
     if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
@@ -99,7 +99,10 @@ const StoredBales = ({ stacks, add }) => {
           />
         </form>
         <div>
-          <button id="retrive-stack" onClick={() => retrieveStack(code)}>
+          <button
+            id="retrive-stack"
+            onClick={() => retrieveStack(code, stacks)}
+          >
             Retreive Stack
           </button>
           <button onClick={() => clearFields()}>CLEAR FIELDS</button>
