@@ -65,8 +65,8 @@ const StoredBales = ({ stacks, add }) => {
     const formattedCode = firstDigit + secondDigit + thirdDigit;
     if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
-      delete stacks[formattedCode];
-
+      // TODO: Implement function to remove stack from storedStack and eventually in the database
+      // delete stacks[formattedCode];
     } else {
       alert(
         `The stack: ${formattedCode} does not appear to be in the database`

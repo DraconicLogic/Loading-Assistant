@@ -112,10 +112,11 @@ class App extends Component {
     
   }
   addToContainer = (stack) => {
-    const newContainer = [...this.state.container]
-    newContainer.push(stack)
+    console.log('ADDING TO CONTAINER: ', stack)
+    const newContent = [...this.state.content]
+    newContent.push(stack)
     this.setState({
-      container: newContainer
+      content: newContent
     }, () => {
       this.saveProgress()
     })
