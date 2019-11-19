@@ -53,8 +53,8 @@ class App extends Component {
     
   }
 
-  finishContainer = () => {
-
+  finishContainer = (container) => {
+    // this.addToDB
   }
 
   downloadStacks = () => {
@@ -82,7 +82,7 @@ class App extends Component {
         view = <ProductList 
         add={this.addToContainer} 
         container={container} 
-        addToDB={this.addToDB}
+        addStackToDB={this.addStackToDB}
         storedStacks={this.state.storedStacks}
         />
         break;
@@ -119,8 +119,8 @@ class App extends Component {
     })
   }
 
-  addToDB = async (item) => {
-    const {recallid, content, date} = await api.saveStackToDB(item)
+  addStackToDB = async (stack) => {
+    const {recallid, content, date} = await api.saveStackToDB(stack)
     console.log("RETURNED STACK FROM DB", recallid, content, date)
     const newStoredStacks = {...this.state.storedStacks}
     newStoredStacks[recallid] = content

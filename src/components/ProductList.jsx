@@ -162,13 +162,13 @@ class ProductList extends Component {
 
   handleAddToDB = () => {
     const { currentStack } = this.state;
-    const { addToDB, storedStacks } = this.props;
+    const { addStackToDB, storedStacks } = this.props;
     const stackObj = {
       recallid: generateUniqueCode(storedStacks),
       content: currentStack,
       date: utils.getDate()
     };
-    addToDB(stackObj);
+    addStackToDB(stackObj);
     this.clearStack();
   };
 }
