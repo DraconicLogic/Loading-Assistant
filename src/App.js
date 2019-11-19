@@ -23,7 +23,8 @@ class App extends Component {
     containerContent: [],
     view: 1,
     storedStacks: {},
-    response: null
+    response: null,
+    usedCodes: []
   }
 
   async componentDidMount () {
@@ -75,7 +76,11 @@ class App extends Component {
     let view;
     switch (viewIndex) {
       case 0:
-        view = <StoredBales stacks={this.state.storedStacks} add={this.addToContainer}/>
+        view = <StoredBales 
+        stacks={this.state.storedStacks} 
+        add={this.addToContainer}
+        saveUsedCode={this.saveUsedCode}
+        />
         break;
       case 1:
         view = <ProductList 
@@ -134,8 +139,10 @@ class App extends Component {
   }
 
   addContainerToDB = async (container) => {
-    const response = await api.saveContainerToDB(container) 
-    console.log(response)
+    const { response, storedStacks, view, ...rest} = container
+    console.log(rest)
+    const returned = await api.saveContainerToDB(rest) 
+    console.log(returned )
   }
 
   saveProgress = () => {
@@ -146,6 +153,14 @@ class App extends Component {
   closeModal = () => {
     this.setState({
       response: null
+    })
+  }
+
+  saveUsedCode = (code) => {
+    const usedCodesCopy = [...this.state.usedCodes]
+    usedCodesCopy.push(code)
+    this.setState({
+      usedCodes: usedCodesCopy
     })
   }
 

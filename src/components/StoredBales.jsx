@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StackEditor from "./StackEditor";
 
-const StoredBales = ({ stacks, add }) => {
+const StoredBales = ({ stacks, add, saveUsedCode }) => {
   const [currentStack, setStack] = useState(Array(12));
   const [code, setCode] = useState({
     firstDigit: "",
@@ -65,8 +65,7 @@ const StoredBales = ({ stacks, add }) => {
     const formattedCode = firstDigit + secondDigit + thirdDigit;
     if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
-      // TODO: Implement function to remove stack from storedStack and eventually in the database
-      // delete stacks[formattedCode];
+      saveUsedCode(formattedCode);
     } else {
       alert(
         `The stack: ${formattedCode} does not appear to be in the database`

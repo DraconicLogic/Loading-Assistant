@@ -28,7 +28,7 @@ export function getStacks(){
 export function saveContainerToDB(container){
   console.log("PAYLOAD TO SEND TO API: ",container)
   const url = `${nnennaAPI}/containers`
-  return axios.post(url)
+  return axios.post(url, container)
   .then((savedContainer) => {
     console.log(savedContainer)
     return savedContainer.data
