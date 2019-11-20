@@ -7,9 +7,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/styles";
 
-const theme = {
-  background: "1D8549"
-};
+// const theme = {background: "1D8549"};
 
 function TabPanel(props) {
   console.log("TabPanel Props: ", props);

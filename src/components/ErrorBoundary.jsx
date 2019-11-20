@@ -1,26 +1,20 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 
 class ErrorBoundary extends Component {
   state = {
     err: null,
     info: null
-  }
-
+  };
 
   componentDidCatch(err, info) {
     this.setState({
       err,
       info
-    })
+    });
   }
   render() {
-    const {err, info} = this.state
-    return (
-      <Fragment>
-        {err ? err : this.props.children}
-      </Fragment>
-      
-    );
+    const { err } = this.state;
+    return <Fragment>{err ? err : this.props.children}</Fragment>;
   }
 }
 

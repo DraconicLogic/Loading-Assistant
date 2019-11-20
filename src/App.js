@@ -5,16 +5,13 @@ import ContainerOverview from './components/ContainerOverview.jsx';
 import ProductListTab from "./components/ProductListTab.jsx";
 import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
-import { ThemeProvider } from '@material-ui/styles'
-// import storedStacks from './stacks.json'
 import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
-// import testData from './testData.json'
 
-const theme = {
-  background: '1D8549'
-}
 
+// TODO: Apply theme colours for APp here at the top level
+// const theme = {background: '1D8549'}
+// ----------------------------------------------------------
 class App extends Component {
   state = {
     date: '',

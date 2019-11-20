@@ -1,18 +1,10 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import products from "../products/products.json";
 import ProductButton from "./ProductButton.jsx";
 import StackEditor from "./StackEditor.jsx";
-// import Tab from "./Tab.jsx";
-import ContainerPreview from "./ContainerPreview.jsx";
 import * as utils from "../utils.js";
 import StackSize from "./StackSize.jsx";
-import ProductListTab from "./ProductListTab.jsx";
 import { generateUniqueCode } from "../recallidGenerator.js";
-
-// import { withStyles } from '@material-ui/core/styles';
-// import AppBar from '@material-ui/core/AppBar';
-
-// import Typography from '@material-ui/core/Typography';
 
 class ProductList extends Component {
   state = {
@@ -25,17 +17,14 @@ class ProductList extends Component {
   };
 
   render() {
-    const { container, overview } = this.props;
     const {
       selected,
       stackPosition,
       currentStack,
-      productSize,
-      previewVisable,
-      workingStack
+      previewVisable
     } = this.state;
     const productCodes = Object.keys(products);
-    // eslint-disable-next-line
+
     const bales = productCodes.sort();
 
     return (
