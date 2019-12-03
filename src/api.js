@@ -1,5 +1,5 @@
 import axios from 'axios'
-const nnennaAPI = 'http://localhost:4000/api'
+const nnennaAPI = 'https://nnenna-textiles-api.appspot.com/api'
 
 export function saveStackToDB(stack){
  

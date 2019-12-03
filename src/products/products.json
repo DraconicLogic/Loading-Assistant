@@ -320,8 +320,8 @@
     "units": "PCS",
     "size": 400
   },
-  "ALS": {
-    "code": "ALS",
+  "LSHO": {
+    "code": "LSHO",
     "item": "Adult Long Short",
     "baleSize": "small",
     "price": 70.00,
@@ -384,8 +384,8 @@
     "units": "KG",
     "size": 55
   },
-  "SU": {
-    "code": "SU",
+  "SCHUNI": {
+    "code": "SCHUNI",
     "item": "School Uniform",
     "baleSize": "small",
     "price": 35.00,
@@ -456,8 +456,8 @@
     "units": "KG",
     "size": 55
   },
-  "PU": {
-    "code": "PU",
+  "PINUP": {
+    "code": "PINUP",
     "item": "Pin Ups",
     "baleSize": "small",
     "price": 70.00,
@@ -520,8 +520,8 @@
     "units": "KG",
     "size": 55
   },
-  "PD": {
-    "code": "PD",
+  "PARTYDRESS": {
+    "code": "PARTYDRESS",
     "item": "Party Dress",
     "baleSize": "small",
     "price": 70.00,
@@ -608,8 +608,8 @@
     "units": "KG",
     "size": 55
   },
-  "LLJ": {
-    "code": "LLJ",
+  "LJK": {
+    "code": "LJK",
     "item": "Ladies Light Jacket",
     "baleSize": "small",
     "price": 35.00,

@@ -34,6 +34,7 @@ class App extends Component {
       const currentContainer = JSON.parse(localStorage.getItem(utils.getDate())) 
       this.setState(currentContainer)
     }
+
     const stacks = await api.getStacks()
     
     const storedStacks = stacks.reduce((stackObject, stack) => {
@@ -46,16 +47,10 @@ class App extends Component {
     })
   }
 
-  checkForLoadingSession = () => {
-    
-  }
+  checkForLoadingSession = () => {}
 
   finishContainer = (container) => {
     this.addContainerToDB(container)
-  }
-
-  downloadStacks = () => {
-    //download saved stacks an put into state
   }
 
   handleViews = (event) => {
@@ -104,7 +99,8 @@ class App extends Component {
     const { containerContent, view, response, storedStacks } = this.state
     console.log(storedStacks)
       return (    
-        <div id="App">         
+        <div id="App">
+                   
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} />
           {this.displayView(view, containerContent)} 
@@ -115,7 +111,7 @@ class App extends Component {
   addToContainer = (stack) => {
     console.log('ADDING TO CONTAINER: ', stack)
     const newContent = [...this.state.containerContent]
-    newContent.push(stack)
+    newContent.push({content: stack})
     this.setState({
       containerContent: newContent
     }, () => {
