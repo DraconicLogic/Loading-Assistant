@@ -37,14 +37,17 @@ class App extends Component {
 
     const stacks = await api.getStacks()
     
-    const storedStacks = stacks.reduce((stackObject, stack) => {
-      stackObject[stack.recallid] = stack.content
-      return stackObject
-    },{})
+    if (stacks.length > 0) {
+      const storedStacks = stacks.reduce((stackObject, stack) => {
+        stackObject[stack.recallid] = stack.content
+        return stackObject
+      },{})
+      this.setState({
+        storedStacks
+      })
+      
+    }
     
-    this.setState({
-      storedStacks
-    })
   }
 
   checkForLoadingSession = () => {}
@@ -100,7 +103,7 @@ class App extends Component {
     console.log(storedStacks)
       return (    
         <div id="App">
-                   
+
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} />
           {this.displayView(view, containerContent)} 
