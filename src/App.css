@@ -143,6 +143,10 @@ MuiAppBar-colorPrimary-8 {
 .code-input {
 }
 
+#splash {
+  background-color: 1d8549;
+}
+
 #stack-section {
   grid-row: 2;
   border: solid;

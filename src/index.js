@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import SplashScreen from  './components/SplashScreen.jsx'
 
 
 ReactDOM.render(
-
+<SplashScreen>
   <App />
+
+</SplashScreen>
 
   , document.getElementById('root'));
 
