@@ -9,7 +9,13 @@ import ContainerPreview from "./ContainerPreview";
 const ContainerOverview = ({ containerDetails, update, finish }) => {
   const { containerContent } = containerDetails;
   console.log("content: ", containerContent);
-  const flatContainer = containerContent.flat(1);
+  const flatContainer = containerContent
+    .reduce((flattened, stackObj) => {
+      flattened.push(stackObj.content);
+      return flattened;
+    }, [])
+    .flat(1);
+
   console.log(flatContainer);
 
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
