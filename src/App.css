@@ -144,7 +144,8 @@ MuiAppBar-colorPrimary-8 {
 }
 
 #splash {
-  background-color: 1d8549;
+  background-color: rgb(29, 133, 73);
+  height: 100vh;
 }
 
 #stack-section {

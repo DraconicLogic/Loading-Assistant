@@ -13,40 +13,20 @@ import ResponseModal from './components/ResponseModal.jsx';
 // const theme = {background: '1D8549'}
 // ----------------------------------------------------------
 class App extends Component {
-  state = {
+  state = this.props.savedContainer || {
     date: '',
     containerNumber: '',
     sealNumber: '',
     containerContent: [],
     view: 1,
-    storedStacks: {},
+    storedStacks: this.props.storedStacks,
     response: null,
     usedCodes: []
   }
 
   async componentDidMount () {
-    if (!localStorage.getItem(utils.getDate())) {
-      const date = utils.getDate()
-      this.setState({
-        date
-      })
-    } else {
-      const currentContainer = JSON.parse(localStorage.getItem(utils.getDate())) 
-      this.setState(currentContainer)
-    }
-
-    const stacks = await api.getStacks()
     
-    if (stacks.length > 0) {
-      const storedStacks = stacks.reduce((stackObject, stack) => {
-        stackObject[stack.recallid] = stack.content
-        return stackObject
-      },{})
-      this.setState({
-        storedStacks
-      })
-      
-    }
+   
     
   }
 
@@ -100,6 +80,7 @@ class App extends Component {
 
   render() {
     const { containerContent, view, response, storedStacks } = this.state
+    console.log(this.state)
     console.log(storedStacks)
       return (    
         <div id="App">
