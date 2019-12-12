@@ -148,6 +148,17 @@ MuiAppBar-colorPrimary-8 {
   height: 100vh;
 }
 
+#status-bar {
+  display: block;
+
+  border: solid;
+}
+
+.status-bar__item {
+  margin-left: 5em;
+  margin-right: 5em;
+}
+
 #stack-section {
   grid-row: 2;
   border: solid;

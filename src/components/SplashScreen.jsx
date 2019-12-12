@@ -61,7 +61,11 @@ const SplashScreen = props => {
         break;
       case 1:
         view = (
-          <App storedStacks={storedStacks} savedContainer={savedContainer} />
+          <App
+            storedStacks={storedStacks}
+            savedContainer={savedContainer}
+            date={date}
+          />
         );
         break;
       default:

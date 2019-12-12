@@ -2,10 +2,7 @@ import React from "react";
 import ContainerSealForm from "./ContainerSealForm";
 import products from "../products/products.json";
 import ContainerPreview from "./ContainerPreview";
-/*
-   TODO: * Plan layout for page
-         * Add estimated weight of container
-*/
+
 const ContainerOverview = ({ containerDetails, update, finish }) => {
   const { containerContent } = containerDetails;
   console.log("content: ", containerContent);

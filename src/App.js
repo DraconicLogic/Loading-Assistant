@@ -7,6 +7,7 @@ import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
 import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
+import StatusBar from './components/StatusBar.jsx';
 
 
 // TODO: Apply theme colours for APp here at the top level
@@ -14,7 +15,7 @@ import ResponseModal from './components/ResponseModal.jsx';
 // ----------------------------------------------------------
 class App extends Component {
   state = this.props.savedContainer || {
-    date: '',
+    date: this.props.date || '',
     containerNumber: '',
     sealNumber: '',
     containerContent: [],
@@ -79,7 +80,7 @@ class App extends Component {
   }
 
   render() {
-    const { containerContent, view, response, storedStacks } = this.state
+    const { containerContent, view, response, storedStacks, date } = this.state
     console.log(this.state)
     console.log(storedStacks)
       return (    
@@ -88,6 +89,7 @@ class App extends Component {
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} />
           {this.displayView(view, containerContent)} 
+          <StatusBar content={containerContent} date={date}/>
         </div>
       );
     
