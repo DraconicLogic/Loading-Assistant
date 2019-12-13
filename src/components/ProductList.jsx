@@ -9,12 +9,23 @@ import { generateUniqueCode } from "../recallidGenerator.js";
 class ProductList extends Component {
   state = {
     selected: "",
-    stackPosition: null,
+    stackPosition: 0,
     currentStack: Array(12),
 
     previewVisable: false,
     workingStack: null
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    // Initial stackPosition doesn't act as intended
+    const { currentStack, stackPosition } = this.state;
+    if (stackPosition !== prevState.stackPosition) {
+      const emptyPosition = utils.findEmptyPosition(currentStack);
+      this.setState({
+        stackPosition: emptyPosition
+      });
+    }
+  }
 
   render() {
     const {
