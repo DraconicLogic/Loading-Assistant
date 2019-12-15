@@ -146,6 +146,7 @@ MuiAppBar-colorPrimary-8 {
 #splash {
   background-color: rgb(29, 133, 73);
   height: 100vh;
+  align-content: center;
 }
 
 #status-bar {

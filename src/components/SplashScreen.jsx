@@ -37,7 +37,7 @@ const SplashScreen = props => {
         view = (
           <div id="splash">
             <h2>Nnenna Textiles</h2>
-            <h1>Loading Assistant</h1>
+            <h1>Container Loading Assistant</h1>
 
             <button onClick={startApp} value="new">
               Start New Container
@@ -52,10 +52,13 @@ const SplashScreen = props => {
             <p hidden={savedContainer ? false : true}>
               There seems to be Container loading in progress.
             </p>
-            <p hidden={storedStacks ? false : true}>
-              {storedStacks ? Object.keys(storedStacks).length : null} Stacks
-              Retrieved
-            </p>
+            <div hidden={storedStacks ? false : true}>
+              <h2>Loading...</h2>
+              <p>
+                {storedStacks ? Object.keys(storedStacks).length : null} Stacks
+                Retrieved
+              </p>
+            </div>
           </div>
         );
         break;
