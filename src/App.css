@@ -195,6 +195,7 @@ MuiAppBar-colorPrimary-8 {
 
 .stack-editor__bale--selected {
   border: solid blue;
+  background-color: cadetblue;
 }
 
 #stack-editor__bale-1 {

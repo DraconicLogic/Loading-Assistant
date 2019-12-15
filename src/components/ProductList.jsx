@@ -18,13 +18,6 @@ class ProductList extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // Initial stackPosition doesn't act as intended
-    const { currentStack, stackPosition } = this.state;
-    if (stackPosition !== prevState.stackPosition) {
-      const emptyPosition = utils.findEmptyPosition(currentStack);
-      this.setState({
-        stackPosition: emptyPosition
-      });
-    }
   }
 
   render() {
@@ -44,7 +37,7 @@ class ProductList extends Component {
           {bales.map(bale => {
             return (
               <ProductButton
-                selector={this.selectFromList}
+                add={this.addToStack}
                 product={bale}
                 selected={selected}
                 key={bale}
@@ -74,36 +67,11 @@ class ProductList extends Component {
     );
   }
 
-  selectFromList = event => {
-    const { value } = event.target;
-    const { selected, stackPosition, currentStack } = this.state;
-    if (value === selected) {
-      const emptyPosition = utils.findEmptyPosition(currentStack);
-      this.addToStack(value, emptyPosition);
-    } else if (stackPosition) {
-      this.addToStack(value, stackPosition);
-    } else {
-      this.setState({
-        selected: value
-      });
-    }
-  };
-
   markPosition = marker => {
-    const { stackPosition, selected } = this.state;
-    if (selected) {
-      //This block adds a bale to the stack if a product button is already clicked
-      this.addToStack(selected, marker);
-      this.setState({
-        stackPosition: null
-      });
-    } else {
-      // the if statment below removes the marker if the same stack position is clicked again
-      if (stackPosition === marker) marker = null;
-      this.setState({
-        stackPosition: marker
-      });
-    }
+    // const { stackPosition } = this.state;
+    this.setState({
+      stackPosition: marker
+    });
   };
 
   displayProducts = size => {
@@ -112,18 +80,27 @@ class ProductList extends Component {
     });
   };
 
-  addToStack = (baleCode, position) => {
-    const { currentStack } = this.state;
+  addToStack = baleCode => {
+    const { currentStack, stackPosition } = this.state;
 
     if (currentStack.length <= 12) {
       const newStack = [...currentStack];
-      newStack[position] = baleCode;
-      this.setState({
-        currentStack: newStack,
-        selected: "",
-        stackPosition: null
-      });
+      newStack[stackPosition] = baleCode;
+      this.setState(
+        {
+          currentStack: newStack
+        },
+        () => this.highlightNextPosition()
+      );
     }
+  };
+
+  highlightNextPosition = () => {
+    const { currentStack } = this.state;
+    const emptyPosition = utils.findEmptyPosition(currentStack);
+    this.setState({
+      stackPosition: emptyPosition
+    });
   };
 
   handleAddContainer = () => {
