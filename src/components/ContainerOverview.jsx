@@ -40,36 +40,25 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
   });
 
   return (
-    <div>
-      <div>
-        <ContainerSealForm
-          update={update}
-          containerDetails={containerDetails}
-        />
-        <p>Estimated Weight: {containerWeight}</p>
-        <p>BRA: {braCount.length}</p>
-        <p>Small Bales: {smallBales.length}</p>
-        <p>Big Bales: {bigBales.length}</p>
-        <p>Total Bales: {flatContainer.length}</p>
-        <button onClick={() => finish(containerDetails)}>
-          <h3>FINISH</h3>
-        </button>
+    <div id="overview" className="App__view">
+      <ContainerSealForm
+        update={update}
+        finish={finish}
+        containerDetails={containerDetails}
+      />
+
+      <div id="overview__bale-count">
+        {baleCountArray.map((bale, index) => {
+          return (
+            <p key={index}>
+              <span>{bale[0]}: </span>
+              <span> </span>
+              <span>{bale[1]}</span>
+            </p>
+          );
+        })}
       </div>
-      <div className="App__view">
-        <table>
-          {baleCountArray.map((bale, index) => {
-            return (
-              <tbody>
-                <tr key={index}>
-                  <td>{bale[0]}</td>
-                  <td>{bale[1]}</td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
-        <ContainerPreview container={containerContent} />
-      </div>
+      <ContainerPreview container={containerContent} />
     </div>
   );
 };

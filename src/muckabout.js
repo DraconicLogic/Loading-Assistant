@@ -1,3 +1,5 @@
+/*
+
 const products = require('./products/products.json')
 const fs = require('fs')
 
@@ -54,3 +56,8 @@ console.log(sortedBales[35])
 //   // bale.start
 // })
 
+*/
+
+let array = [1,2,3,4,5,6,7,8,9]
+array = []
+console.log(array)

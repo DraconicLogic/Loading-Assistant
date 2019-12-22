@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Icon from "@material-ui/core/Icon/";
 
 class StackEditor extends Component {
   render() {

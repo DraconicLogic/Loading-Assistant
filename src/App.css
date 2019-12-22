@@ -16,7 +16,7 @@ body {
   grid-template-rows: 70% 30%;
 
   grid-template-rows: auto auto;
-  height: 93vh;
+  height: 87vh;
   /* height: 90%; */
 }
 
@@ -30,7 +30,7 @@ body {
 
 #container-seal-section {
   border: solid;
-  height: 2em;
+  height: 10vh;
 }
 
 input::-webkit-outer-spin-button,
@@ -41,12 +41,35 @@ input::-webkit-inner-spin-button {
 
 #container-preview {
   display: grid;
+  grid-template-columns: 2cm auto 2cm;
+  grid-template-rows: 1cm auto;
+}
+
+#container-preview__row-header {
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.container-preview__left-button {
+  grid-column: 1;
+  border: solid;
+}
+.container-preview__right-button {
+  grid-column: 3;
+  border: solid;
+}
+
+.container-preview__row {
+  grid-column: 2;
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
   row-gap: solid;
   height: 35vh;
   max-height: 35vh;
   border: solid;
+  bottom: 0;
   /* float: bottom; */
 
   bottom: 0;
@@ -55,17 +78,13 @@ input::-webkit-inner-spin-button {
   white-space: nowrap;
 }
 
-#container-preview > span {
+.container-preview__row > span {
   display: inline-block;
   /* float: left; */
   /* margin-left: 1px;
   margin-right: 1px; */
   margin-top: 20px;
   padding: 5px;
-}
-
-.container-preview__stack--selected {
-  background-color: greenyellow;
 }
 
 /* TODO: check if this selector is doing anything */
@@ -79,6 +98,12 @@ MuiAppBar {
 MuiAppBar-colorPrimary-8 {
   color: #fff;
   background-color: #1d8549;
+}
+
+#overview__bale-count {
+  overflow: scroll;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 #product-list {
@@ -151,7 +176,8 @@ MuiAppBar-colorPrimary-8 {
 
 #status-bar {
   display: block;
-
+  display: flex;
+  justify-content: space-evenly;
   border: solid;
 }
 
@@ -166,22 +192,33 @@ MuiAppBar-colorPrimary-8 {
   height: 30vh;
   max-height: 30vh;
   display: grid;
-  grid-template-columns: auto 2cm;
-  grid-template-rows: 20px auto;
+  grid-template-columns: 2cm auto 2cm;
+  grid-template-rows: auto 20px;
+}
+
+#stack-section__size {
+  grid-row: 2;
+  grid-column: 2;
 }
 
 #stack-tab {
   grid-row: 1;
 }
 
-#stack-options {
-  grid-row: 2;
-  grid-column: 2;
+#stack-options-1 {
+  grid-row: 1;
+  grid-column: 1;
+  border: solid;
+}
+
+#stack-options-2 {
+  grid-row: 1;
+  grid-column: 3;
   border: solid;
 }
 
 .stack-editor {
-  grid-row: 2;
+  grid-row: 1;
   /* border: solid; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);

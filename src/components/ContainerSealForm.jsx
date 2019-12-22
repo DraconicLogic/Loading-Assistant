@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const ContainerSealForm = ({ update, containerDetails }) => {
+const ContainerSealForm = ({ update, finish, containerDetails }) => {
   const { containerNumber, sealNumber } = containerDetails;
   const [container, setContainerNumber] = useState("");
   const [seal, setSealNumber] = useState("");
@@ -47,6 +47,9 @@ const ContainerSealForm = ({ update, containerDetails }) => {
 
       <button onClick={handleSubmit}>
         {checkContainerSealNum() ? "Edit" : "Save"}
+      </button>
+      <button onClick={() => finish(containerDetails)}>
+        <h3>FINISH</h3>
       </button>
     </div>
   );

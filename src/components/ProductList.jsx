@@ -10,10 +10,7 @@ class ProductList extends Component {
   state = {
     selected: "",
     stackPosition: 0,
-    currentStack: Array(12),
-
-    previewVisable: false,
-    workingStack: null
+    currentStack: Array(12)
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -21,12 +18,7 @@ class ProductList extends Component {
   }
 
   render() {
-    const {
-      selected,
-      stackPosition,
-      currentStack,
-      previewVisable
-    } = this.state;
+    const { selected, stackPosition, currentStack } = this.state;
     const productCodes = Object.keys(products);
 
     const bales = productCodes.sort();
@@ -54,13 +46,12 @@ class ProductList extends Component {
             mark={this.markPosition}
             context="editor"
           />
-          <div id="stack-options">
+          <div id="stack-options-1">
             <button onClick={this.handleAddToDB}>Add to database</button>
+          </div>
+          <div id="stack-options-2">
             <button onClick={this.handleAddContainer}>Add to container</button>
-            <button onClick={this.clearStack}>Clear Stack</button>
-            <button onClick={this.togglePreview}>
-              {previewVisable ? "Hide Preview" : "Show Preview"}
-            </button>
+            <button onClick={this.clearStack}>Clear</button>
           </div>
         </div>
       </div>
@@ -113,27 +104,14 @@ class ProductList extends Component {
   clearStack = () => {
     const { currentStack } = this.state;
     this.setState({
-      currentStack: Array(currentStack.length)
-    });
-  };
-
-  togglePreview = () => {
-    const { previewVisable } = this.state;
-    this.setState({
-      previewVisable: !previewVisable
+      currentStack: Array(currentStack.length),
+      stackPosition: 0
     });
   };
 
   toggleStackSize = size => {
     this.setState({
       currentStack: Array(size)
-    });
-  };
-
-  selectStack = stack => {
-    console.log(stack);
-    this.setState({
-      workingStack: stack
     });
   };
 
