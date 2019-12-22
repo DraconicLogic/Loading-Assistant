@@ -41,7 +41,7 @@ input::-webkit-inner-spin-button {
 
 #container-preview {
   display: grid;
-  grid-template-columns: 2cm auto 2cm;
+  grid-template-columns: 1cm auto 1cm;
   grid-template-rows: 1cm auto;
 }
 
@@ -79,11 +79,12 @@ input::-webkit-inner-spin-button {
 }
 
 .container-preview__row > span {
-  display: inline-block;
+  /* display: inline-block; */
   /* float: left; */
   /* margin-left: 1px;
   margin-right: 1px; */
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  height: 15vh;
   padding: 5px;
 }
 

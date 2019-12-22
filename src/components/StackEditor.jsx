@@ -5,8 +5,8 @@ class StackEditor extends Component {
   render() {
     const { stack, position, context } = this.props;
     const stackStyle = {
-      height: "70%",
-      width: "70%"
+      height: "100%",
+      width: "100%"
     };
 
     const fillStack = [];
@@ -21,6 +21,7 @@ class StackEditor extends Component {
         {fillStack.map((bale, index) => {
           return (
             <div
+              style={context === "preview" ? stackStyle : null}
               className={
                 position === index
                   ? "stack-editor__bale--selected"
