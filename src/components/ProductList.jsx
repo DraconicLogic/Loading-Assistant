@@ -97,8 +97,20 @@ class ProductList extends Component {
   handleAddContainer = () => {
     const { add } = this.props;
     const { currentStack } = this.state;
-    add(currentStack);
-    this.clearStack();
+
+    let isStackFilled = true;
+    for (let i = 0; i < currentStack.length; i++) {
+      if (currentStack[i] === undefined) {
+        isStackFilled = false;
+      }
+    }
+
+    if (isStackFilled) {
+      add(currentStack);
+      this.clearStack();
+    } else {
+      alert("Please fill in the stack");
+    }
   };
 
   clearStack = () => {

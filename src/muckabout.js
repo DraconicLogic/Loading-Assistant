@@ -58,6 +58,8 @@ console.log(sortedBales[35])
 
 */
 
-let array = [1,2,3,4,5,6,7,8,9]
-array = []
-console.log(array)
+let array = Array(3)
+array[1] = 3
+for (let i = 0; i < array.length; i++) {
+  console.log(array[i])
+}
