@@ -5,7 +5,7 @@ import StackEditor from "./StackEditor";
 const ContainerPreview = ({ container }) => {
   const [currentRow, setCurrentRow] = useState(0);
   const context = "preview";
-
+  console.log(container);
   const rows = [];
   let workingRow = [];
 
@@ -15,8 +15,10 @@ const ContainerPreview = ({ container }) => {
     } else if (workingRow.length === 6) {
       rows.push(workingRow);
       workingRow = [];
+      workingRow.push(container[i].content);
     }
   }
+  console.log(rows);
   if (workingRow.length > 0) rows.push(workingRow);
 
   const handleNavigation = event => {
@@ -40,13 +42,15 @@ const ContainerPreview = ({ container }) => {
         {"<"}
       </button>
       <div className="container-preview__row">
-        {rows[currentRow].map((stack, index) => {
-          return (
-            <span className="container-preview__stack" key={index}>
-              <StackEditor stack={stack} context={context} />
-            </span>
-          );
-        })}
+        {rows.length > 0
+          ? rows[currentRow].map((stack, index) => {
+              return (
+                <span className="container-preview__stack" key={index}>
+                  <StackEditor stack={stack} context={context} />
+                </span>
+              );
+            })
+          : null}
       </div>
       <button
         id="container-preview__right-button"

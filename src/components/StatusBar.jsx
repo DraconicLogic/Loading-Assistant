@@ -2,14 +2,13 @@ import React from "react";
 import products from "../products/products.json";
 
 const StatusBar = ({ content, date }) => {
-  console.log(content);
   const flattenedContent = content
     .reduce((flattened, stackObj) => {
       flattened.push(stackObj.content);
       return flattened;
     }, [])
     .flat(1);
-
+  console.log(flattenedContent);
   const rowNumber = Math.floor(content.length / 6);
 
   const totalBales = flattenedContent.length;

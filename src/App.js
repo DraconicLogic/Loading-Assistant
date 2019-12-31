@@ -8,6 +8,7 @@ import StoredBales from './components/StoredBales.jsx';
 import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
 import StatusBar from './components/StatusBar.jsx';
+import sendEmailToBoss from './email.js';
 
 
 // TODO: Apply theme colours for APp here at the top level
@@ -35,6 +36,7 @@ class App extends Component {
 
   finishContainer = (container) => {
     this.addContainerToDB(container)
+    sendEmailToBoss(container)
   }
 
   handleViews = (event) => {

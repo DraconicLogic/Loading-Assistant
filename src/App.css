@@ -176,15 +176,15 @@ MuiAppBar-colorPrimary-8 {
 }
 
 #status-bar {
-  display: block;
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   border: solid;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .status-bar__item {
-  margin-left: 5em;
-  margin-right: 5em;
 }
 
 #stack-section {

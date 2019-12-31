@@ -29,9 +29,19 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
     }
   };
 
+  const handleFinish = containerDetails => {
+    if (container && seal) {
+      finish(containerDetails);
+    } else {
+      alert(
+        "Please fill in BOTH Container Number and Seal Number and save them before Finishing the container"
+      );
+    }
+  };
+
   const renderInput = name => {
     if (checkContainerSealNum()) {
-      return <p>{name === "container" ? containerNumber : sealNumber}</p>;
+      return <span>{name === "container" ? containerNumber : sealNumber}</span>;
     } else {
       return <input type="text" name={name} onChange={handleForm}></input>;
     }
@@ -39,16 +49,13 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
   // Fix styling when input field is changed to p tag
   return (
     <div id="container-seal-section">
-      <label htmlFor="container">Container Number</label>
+      <label htmlFor="container">Container Number: </label>{" "}
       {renderInput("container")}
-
-      <label htmlFor="seal">Seal Number</label>
-      {renderInput("seal")}
-
+      <label htmlFor="seal">Seal Number: </label> {renderInput("seal")}
       <button onClick={handleSubmit}>
         {checkContainerSealNum() ? "Edit" : "Save"}
       </button>
-      <button onClick={() => finish(containerDetails)}>
+      <button onClick={() => handleFinish(containerDetails)}>
         <h3>FINISH</h3>
       </button>
     </div>
