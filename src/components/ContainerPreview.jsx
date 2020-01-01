@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-
 import StackEditor from "./StackEditor";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 const ContainerPreview = ({ container }) => {
   const [currentRow, setCurrentRow] = useState(0);
@@ -38,8 +39,9 @@ const ContainerPreview = ({ container }) => {
         id="container-preview__left-button"
         value="left"
         onClick={handleNavigation}
+        disabled={currentRow === 0}
       >
-        {"<"}
+        <ArrowBackIosIcon />
       </button>
       <div className="container-preview__row">
         {rows.length > 0
@@ -56,8 +58,9 @@ const ContainerPreview = ({ container }) => {
         id="container-preview__right-button"
         value="right"
         onClick={handleNavigation}
+        disabled={currentRow + 1 === rows.length}
       >
-        {">"}
+        <ArrowForwardIosIcon />
       </button>
     </div>
   );

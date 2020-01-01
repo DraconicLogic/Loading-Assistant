@@ -29,7 +29,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
   const containerWeight = flatContainer.reduce((netWeight, bale) => {
     return (netWeight += products[bale].size);
   }, 0);
-  
+
   const baleCountArray = Object.entries(baleCount);
 
   const smallBales = flatContainer.filter(bale => {

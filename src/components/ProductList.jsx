@@ -5,10 +5,12 @@ import StackEditor from "./StackEditor.jsx";
 import * as utils from "../utils.js";
 import StackSize from "./StackSize.jsx";
 import { generateUniqueCode } from "../recallidGenerator.js";
+import CancelIcon from "@material-ui/icons/Cancel";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
+import SaveSharpIcon from "@material-ui/icons/SaveSharp";
 
 class ProductList extends Component {
   state = {
-    selected: "",
     stackPosition: 0,
     currentStack: Array(12)
   };
@@ -18,7 +20,7 @@ class ProductList extends Component {
   }
 
   render() {
-    const { selected, stackPosition, currentStack } = this.state;
+    const { stackPosition, currentStack } = this.state;
     const productCodes = Object.keys(products);
 
     const bales = productCodes.sort();
@@ -28,30 +30,38 @@ class ProductList extends Component {
         <div id="product-list__buttons">
           {bales.map(bale => {
             return (
-              <ProductButton
-                add={this.addToStack}
-                product={bale}
-                selected={selected}
-                key={bale}
-              />
+              <ProductButton add={this.addToStack} product={bale} key={bale} />
             );
           })}
         </div>
         <div id="stack-section">
           <StackSize size={this.toggleStackSize} />
+          <span id="cancel-button">
+            <CancelIcon />
+          </span>
+
           <StackEditor
-            bale={selected}
             stack={currentStack}
             position={stackPosition}
             mark={this.markPosition}
             context="editor"
           />
-          <div id="stack-options-1">
-            <button onClick={this.handleAddToDB}>Add to database</button>
+          <div id="stack-options--1">
+            <button
+              className="stack-options__button"
+              onClick={this.handleAddToDB}
+            >
+              <SaveSharpIcon>Save for Later</SaveSharpIcon>
+            </button>
           </div>
-          <div id="stack-options-2">
-            <button onClick={this.handleAddContainer}>Add to container</button>
-            <button onClick={this.clearStack}>Clear</button>
+          <div id="stack-options--2">
+            <button
+              className="stack-options__button"
+              onClick={this.handleAddContainer}
+            >
+              <LocalShippingIcon />
+            </button>
+            {/* <button onClick={this.clearStack}>Clear</button> */}
           </div>
         </div>
       </div>
@@ -130,13 +140,23 @@ class ProductList extends Component {
   handleAddToDB = () => {
     const { currentStack } = this.state;
     const { addStackToDB, storedStacks } = this.props;
-    const stackObj = {
-      recallid: generateUniqueCode(storedStacks),
-      content: currentStack,
-      date: utils.getDate()
-    };
-    addStackToDB(stackObj);
-    this.clearStack();
+    let isStackFilled = true;
+    for (let i = 0; i < currentStack.length; i++) {
+      if (currentStack[i] === undefined) {
+        isStackFilled = false;
+      }
+    }
+    if (isStackFilled) {
+      const stackObj = {
+        recallid: generateUniqueCode(storedStacks),
+        content: currentStack,
+        date: utils.getDate()
+      };
+      addStackToDB(stackObj);
+      this.clearStack();
+    } else {
+      alert("Please fill in the stack");
+    }
   };
 }
 

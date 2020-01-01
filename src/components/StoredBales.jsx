@@ -112,10 +112,11 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
 
       <div id="stack-section">
         <StackEditor stack={currentStack} />
-        <div id="stack-options-1">
+        <div id="stack-options--2">
           <button onClick={handleAddToContainer}>Add to container</button>
           <button onClick={() => clearStack()}>Clear Stack</button>
         </div>
+        <div id="stack-options--1"></div>
       </div>
     </div>
   );

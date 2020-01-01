@@ -20,6 +20,11 @@ body {
   /* height: 90%; */
 }
 
+#cancel-button {
+  position: relative;
+  grid-column: 3;
+}
+
 .code-input {
   height: 50px;
   width: 50px;
@@ -101,6 +106,13 @@ MuiAppBar-colorPrimary-8 {
   background-color: #1d8549;
 }
 
+.MuiSvgIcon-root-80 {
+  top: 0;
+  right: 0;
+  float: right;
+  height: 1000px;
+}
+
 #overview__bale-count {
   overflow: scroll;
   display: grid;
@@ -131,15 +143,16 @@ MuiAppBar-colorPrimary-8 {
   font-weight: bold;
   font-size: large;
   border: solid;
+  border-radius: 10px;
   height: 50px;
 }
 
-#product-button--selected {
+/* #product-button--selected {
   background-color: lightskyblue;
   margin: 2px;
   font-weight: bolder;
   font-size: large;
-}
+} */
 
 #recallid-input {
   display: block;
@@ -193,7 +206,7 @@ MuiAppBar-colorPrimary-8 {
   height: 30vh;
   max-height: 30vh;
   display: grid;
-  grid-template-columns: 2cm auto 2cm;
+  grid-template-columns: 1.5cm auto 1.5cm;
   grid-template-rows: auto 20px;
 }
 
@@ -206,16 +219,21 @@ MuiAppBar-colorPrimary-8 {
   grid-row: 1;
 }
 
-#stack-options-1 {
+#stack-options--1 {
   grid-row: 1;
   grid-column: 1;
   border: solid;
 }
 
-#stack-options-2 {
+#stack-options--2 {
   grid-row: 1;
   grid-column: 3;
   border: solid;
+}
+
+.stack-options__button {
+  height: 100%;
+  width: 100%;
 }
 
 .stack-editor {
@@ -234,6 +252,19 @@ MuiAppBar-colorPrimary-8 {
 .stack-editor__bale--selected {
   border: solid blue;
   background-color: cadetblue;
+  animation-name: bale--selected;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes bale--selected {
+  from {
+    background-color: cyan;
+  }
+  to {
+    background-color: cadetblue;
+  }
 }
 
 #stack-editor__bale-1 {

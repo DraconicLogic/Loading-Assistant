@@ -9,6 +9,11 @@ class StackEditor extends Component {
       width: "100%"
     };
 
+    const editorStyle = {
+      "font-size": "150%",
+      "font-weight": "bolder"
+    };
+
     const fillStack = [];
     for (let i = 0; i < stack.length; i++) {
       fillStack.push("");
@@ -21,7 +26,7 @@ class StackEditor extends Component {
         {fillStack.map((bale, index) => {
           return (
             <div
-              style={context === "preview" ? stackStyle : null}
+              style={context === "preview" ? stackStyle : editorStyle}
               className={
                 position === index
                   ? "stack-editor__bale--selected"
