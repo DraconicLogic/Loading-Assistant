@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import * as api from "../api.js";
 import App from "../App.js";
 import * as utils from "../utils.js";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const SplashScreen = props => {
   const [storedStacks, setStoredStacks] = useState(null);
   const [view, setView] = useState(0);
   const [date, setDate] = useState("");
   const [savedContainer, setSavedContainer] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem(utils.getDate())) {
@@ -52,8 +54,9 @@ const SplashScreen = props => {
             <p hidden={savedContainer ? false : true}>
               There seems to be Container loading in progress.
             </p>
-            <div hidden={storedStacks ? false : true}>
-              <h2>Loading...</h2>
+            <div hidden={!loading}>
+              <CircularProgress />
+
               <p>
                 {storedStacks ? Object.keys(storedStacks).length : null} Stacks
                 Retrieved
@@ -78,6 +81,7 @@ const SplashScreen = props => {
   };
 
   const startApp = async event => {
+    setLoading(true);
     console.log(event.target.value);
     const { value } = event.target;
 

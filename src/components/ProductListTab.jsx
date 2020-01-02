@@ -6,6 +6,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import { ThemeProvider } from "@material-ui/styles";
+import Button from "@material-ui/core/Button";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
 
 // const theme = {background: "1D8549"};
 
@@ -48,9 +51,10 @@ const useStyles = makeStyles(theme => {
   };
 });
 
-export default function ProductListTab({ changeView }) {
+export default function ProductListTab({ changeView, toggleMenu }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  
 
   const theme = {
     background: "#1D8549"
@@ -60,6 +64,8 @@ export default function ProductListTab({ changeView }) {
     setValue(newValue);
   };
 
+ 
+
   React.useEffect(() => {
     changeView(value);
   }, [value]);
@@ -67,16 +73,28 @@ export default function ProductListTab({ changeView }) {
   return (
     <div className={classes.root}>
       <ThemeProvider theme={theme}>
-        <AppBar position="static">
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-          >
-            <Tab label="STORED" {...a11yProps(0)} />
-            <Tab label="PRODUCT LIST" {...a11yProps(1)} />
-            <Tab label="OVERVIEW" {...a11yProps(2)} />
-          </Tabs>
+        <AppBar
+          position="static"
+          style={{
+            root: {
+              diplay: "inline"
+            }
+          }}
+        >
+          <Toolbar>
+            <Button onClick={toggleMenu} variant="outlined">
+              <MenuIcon />
+            </Button>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="simple tabs example"
+            >
+              <Tab label="STORED" {...a11yProps(0)} />
+              <Tab label="PRODUCT LIST" {...a11yProps(1)} />
+              <Tab label="OVERVIEW" {...a11yProps(2)} />
+            </Tabs>
+          </Toolbar>
         </AppBar>
       </ThemeProvider>
       {/* <TabPanel value={value} index={0}>

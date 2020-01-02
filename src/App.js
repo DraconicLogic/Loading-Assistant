@@ -9,6 +9,7 @@ import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
 import StatusBar from './components/StatusBar.jsx';
 import sendEmailToBoss from './email.js';
+import Drawer from '@material-ui/core/Drawer';
 
 
 // TODO: Apply theme colours for APp here at the top level
@@ -23,7 +24,8 @@ class App extends Component {
     view: 1,
     storedStacks: this.props.storedStacks,
     response: null,
-    usedCodes: []
+    usedCodes: [],
+    menuStatus: false
   }
 
   async componentDidMount () {
@@ -82,14 +84,14 @@ class App extends Component {
   }
 
   render() {
-    const { containerContent, view, response, storedStacks, date } = this.state
+    const { containerContent, view, response, storedStacks, date, menuStatus } = this.state
     console.log(this.state)
     console.log(storedStacks)
       return (    
         <div id="App">
-
+          <Drawer open={menuStatus}/>
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
-          <ProductListTab changeView={this.changeView} />
+          <ProductListTab changeView={this.changeView} toggleMenu={this.toggleMenu} />
           {this.displayView(view, containerContent)} 
           <StatusBar content={containerContent} date={date}/>
         </div>
@@ -151,6 +153,13 @@ class App extends Component {
     this.setState({
       containerNumber,
       sealNumber
+    })
+  }
+
+  toggleMenu = () => {
+    const {menuStatus} = this.state
+    this.setState({
+      menuStatus: !menuStatus
     })
   }
 
