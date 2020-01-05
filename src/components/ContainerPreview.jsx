@@ -58,7 +58,7 @@ const ContainerPreview = ({ container }) => {
         id="container-preview__right-button"
         value="right"
         onClick={handleNavigation}
-        disabled={currentRow + 1 === rows.length}
+        disabled={rows.length === 0 || currentRow + 1 === rows.length}
       >
         <ArrowForwardIosIcon />
       </button>

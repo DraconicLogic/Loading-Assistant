@@ -10,6 +10,10 @@ import ResponseModal from './components/ResponseModal.jsx';
 import StatusBar from './components/StatusBar.jsx';
 import sendEmailToBoss from './email.js';
 import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import { ListItem, ListItemText } from '@material-ui/core';
+import CancelIcon from "@material-ui/icons/Cancel";
+import PeekModal from './components/PeekModal.jsx';
 
 
 // TODO: Apply theme colours for APp here at the top level
@@ -25,7 +29,8 @@ class App extends Component {
     storedStacks: this.props.storedStacks,
     response: null,
     usedCodes: [],
-    menuStatus: false
+    menuStatus: false,
+    peekStatus: false
   }
 
   async componentDidMount () {
@@ -84,12 +89,20 @@ class App extends Component {
   }
 
   render() {
-    const { containerContent, view, response, storedStacks, date, menuStatus } = this.state
+    const { containerContent, view, response, storedStacks, date, menuStatus, peekStatus } = this.state
     console.log(this.state)
     console.log(storedStacks)
       return (    
         <div id="App">
-          <Drawer open={menuStatus}/>
+          <Drawer open={menuStatus}>
+            <CancelIcon onClick={this.toggleMenu}/>
+            <List>
+              <ListItem button onClick={this.togglePeek}>
+                <ListItemText primary={"Check Imported Stacks"}/>
+              </ListItem>
+            </List>
+          </Drawer>
+          {peekStatus && <PeekModal storedStacks={storedStacks} togglePeek={this.togglePeek}/>}
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} toggleMenu={this.toggleMenu} />
           {this.displayView(view, containerContent)} 
@@ -160,6 +173,13 @@ class App extends Component {
     const {menuStatus} = this.state
     this.setState({
       menuStatus: !menuStatus
+    })
+  }
+
+  togglePeek = () => {
+    const { peekStatus } = this.state
+    this.setState({
+      peekStatus: !peekStatus
     })
   }
 
