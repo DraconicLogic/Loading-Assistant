@@ -30,7 +30,7 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
   };
 
   const handleFinish = containerDetails => {
-    if (container && seal) {
+    if (containerNumber && sealNumber) {
       finish(containerDetails);
     } else {
       alert(

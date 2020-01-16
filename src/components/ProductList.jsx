@@ -15,10 +15,6 @@ class ProductList extends Component {
     currentStack: Array(12)
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    // Initial stackPosition doesn't act as intended
-  }
-
   render() {
     const { stackPosition, currentStack } = this.state;
     const productCodes = Object.keys(products);
@@ -37,7 +33,7 @@ class ProductList extends Component {
         <div id="stack-section">
           <StackSize size={this.toggleStackSize} />
           <span id="cancel-button">
-            <CancelIcon />
+            <CancelIcon onClick={() => this.clearStack()} />
           </span>
 
           <StackEditor
@@ -61,7 +57,6 @@ class ProductList extends Component {
             >
               <LocalShippingIcon />
             </button>
-            {/* <button onClick={this.clearStack}>Clear</button> */}
           </div>
         </div>
       </div>
@@ -69,15 +64,8 @@ class ProductList extends Component {
   }
 
   markPosition = marker => {
-    // const { stackPosition } = this.state;
     this.setState({
       stackPosition: marker
-    });
-  };
-
-  displayProducts = size => {
-    this.setState({
-      productSize: size
     });
   };
 

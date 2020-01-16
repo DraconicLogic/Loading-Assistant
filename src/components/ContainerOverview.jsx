@@ -46,6 +46,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
         update={update}
         finish={finish}
         containerDetails={containerDetails}
+        containerWeight={containerWeight}
       />
 
       <div id="overview__bale-count">

@@ -23,6 +23,7 @@ body {
 #cancel-button {
   position: relative;
   grid-column: 3;
+  float: right;
 }
 
 .code-input {

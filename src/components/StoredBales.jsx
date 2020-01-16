@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StackEditor from "./StackEditor";
+import CancelIcon from "@material-ui/icons/Cancel";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
 const StoredBales = ({ stacks, add, saveUsedCode }) => {
   const [currentStack, setStack] = useState(Array(12));
@@ -113,10 +115,17 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
       <div id="stack-section">
         <StackEditor stack={currentStack} />
         <div id="stack-options--2">
-          <button onClick={handleAddToContainer}>Add to container</button>
-          <button onClick={() => clearStack()}>Clear Stack</button>
+          <button
+            className="stack-options__button"
+            onClick={handleAddToContainer}
+          >
+            <LocalShippingIcon />
+          </button>
         </div>
         <div id="stack-options--1"></div>
+        <span id="cancel-button">
+          <CancelIcon onClick={() => clearStack()} />
+        </span>
       </div>
     </div>
   );

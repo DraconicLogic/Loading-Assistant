@@ -33,14 +33,6 @@ class App extends Component {
     peekStatus: false
   }
 
-  async componentDidMount () {
-    
-   
-    
-  }
-
-  checkForLoadingSession = () => {}
-
   finishContainer = (container) => {
     this.addContainerToDB(container)
     sendEmailToBoss(container)
@@ -97,7 +89,10 @@ class App extends Component {
           <Drawer open={menuStatus}>
             <CancelIcon onClick={this.toggleMenu}/>
             <List>
-              <ListItem button onClick={this.togglePeek}>
+              <ListItem button onClick={() => {
+                this.togglePeek()
+                this.toggleMenu()
+              }} >
                 <ListItemText primary={"Check Imported Stacks"}/>
               </ListItem>
             </List>
@@ -180,6 +175,8 @@ class App extends Component {
     const { peekStatus } = this.state
     this.setState({
       peekStatus: !peekStatus
+      
+
     })
   }
 
