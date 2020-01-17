@@ -236,6 +236,12 @@ MuiAppBar-colorPrimary-8 {
   grid-column: 2;
 }
 
+.stack-section__size__button {
+  margin-left: 1em;
+  margin-right: 1em;
+  font-weight: bolder;
+}
+
 #stack-tab {
   grid-row: 1;
 }
