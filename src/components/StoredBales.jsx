@@ -84,20 +84,20 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
           <input
             id="firstDigit"
             className="code-input"
-            type="text"
+            type="tel"
             maxLength="1"
           />
 
           <input
             id="secondDigit"
             className="code-input"
-            type="text"
+            type="tel"
             maxLength="1"
           />
           <input
             id="thirdDigit"
             className="code-input"
-            type="text"
+            type="tel"
             maxLength="1"
           />
         </form>
