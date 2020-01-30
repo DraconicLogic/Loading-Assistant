@@ -333,8 +333,8 @@
     "item": "Men Suits",
     "baleSize": "small",
     "price": 70,
-    "units": "PCS",
-    "size": 50
+    "units": "KG",
+    "size": 45
   },
   "WHAT": {
     "code": "WHAT",

@@ -81,6 +81,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(process)
     const { containerContent, view, response, storedStacks, date, menuStatus, peekStatus } = this.state
     console.log(this.state)
     console.log(storedStacks)
