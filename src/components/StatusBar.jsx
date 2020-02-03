@@ -17,11 +17,15 @@ const StatusBar = ({ content, date }) => {
     return (weight += products[item].size);
   }, 0);
 
+  const overWeightStyle = {
+    "color": "red"
+  }
+
   return (
     <div id="status-bar">
       <span className="status-bar__item">Row: {rowNumber + 1}</span>
       <span className="status-bar__item">Bales: {totalBales}</span>
-      <span className="status-bar__item">Weight: {netWeight}kg</span>
+      <span className="status-bar__item" style={netWeight > 26000 ? overWeightStyle : null}>Weight: {netWeight}kg</span>
       <span className="status-bar__item">Date: {date}</span>
     </div>
   );
