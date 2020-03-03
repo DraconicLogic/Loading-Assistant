@@ -14,6 +14,7 @@ import List from '@material-ui/core/List';
 import { ListItem, ListItemText } from '@material-ui/core';
 import CancelIcon from "@material-ui/icons/Cancel";
 import PeekModal from './components/PeekModal.jsx';
+import LoadingModal from './components/LoadingModal.jsx';
 
 
 // TODO: Apply theme colours for APp here at the top level
@@ -98,6 +99,7 @@ class App extends Component {
               </ListItem>
             </List>
           </Drawer>
+          <LoadingModal />
           {peekStatus && <PeekModal storedStacks={storedStacks} togglePeek={this.togglePeek}/>}
           {!!response && <ResponseModal response={response} close={this.closeModal} />}
           <ProductListTab changeView={this.changeView} toggleMenu={this.toggleMenu} />
@@ -119,6 +121,7 @@ class App extends Component {
   }
 
   addStackToDB = async (stack) => {
+    document.getElementById('loading-modal').style.display = 'initial'
     const {recallid, content, date} = await api.saveStackToDB(stack)
     console.log("RETURNED STACK FROM DB", recallid, content, date)
     const newStoredStacks = {...this.state.storedStacks}
@@ -127,7 +130,7 @@ class App extends Component {
     this.setState({
       response: {recallid, content, date},
       storedStacks: newStoredStacks
-    })
+    }, () => document.getElementById('loading-modal').style.display = 'none')
   }
 
   addContainerToDB = async (container) => {

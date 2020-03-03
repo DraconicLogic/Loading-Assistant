@@ -35,7 +35,7 @@ const ResponseModal = ({ response, close }) => {
       <div id="response-modal__content">
         Here is the ID for the stack. Please make sure you write it clearly on
         the bale
-        <h1>{response.recallid}</h1>
+        <h1>{response.recallid ? response.recallid : null}</h1>
         <span onClick={handleClose}>
           <h1>X</h1>
         </span>
