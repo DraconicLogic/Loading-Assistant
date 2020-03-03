@@ -2,18 +2,25 @@ import React, { useState, useEffect } from "react";
 import StackEditor from "./StackEditor";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
+import findEmptyPosition from "../utils.js";
 
 const StoredBales = ({ stacks, add, saveUsedCode }) => {
   const [currentStack, setStack] = useState(Array(12));
+  // rename to Stack ID
   const [code, setCode] = useState({
     firstDigit: "",
     secondDigit: "",
     thirdDigit: ""
   });
+  const [isStackEmpty, setIsStackEmpty] = useState(true);
 
   useEffect(() => {
     startFocus();
   }, []);
+
+  useEffect(() => {
+    checkID(code);
+  }, [code]);
 
   const handleInput = event => {
     const { value, id } = event.target;
@@ -24,7 +31,13 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     newCode[id] = value;
 
     setCode(newCode);
-    moveFocus(id);
+    if (id !== "thirdDigit") moveFocus(id);
+  };
+
+  const checkID = code => {
+    if (!!code.firstDigit && !!code.secondDigit && !!code.thirdDigit) {
+      retrieveStack(code, stacks);
+    }
   };
 
   const startFocus = () => {
@@ -33,6 +46,11 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
 
   const clearFields = () => {
     document.getElementById("recallid-input").reset();
+    setCode({
+      firstDigit: "",
+      secondDigit: "",
+      thirdDigit: ""
+    });
   };
 
   const moveFocus = id => {
@@ -44,9 +62,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
       case "secondDigit":
         nextElement = "thirdDigit";
         break;
-      case "thirdDigit":
-        nextElement = "retrive-stack";
-        break;
+
       default:
     }
     document.getElementById(nextElement).focus();
@@ -54,10 +70,12 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
 
   const clearStack = () => {
     setStack(Array(12));
+    setIsStackEmpty(true);
   };
 
   const handleAddToContainer = () => {
     add(currentStack);
+    setIsStackEmpty(true);
     clearStack();
     clearFields();
     startFocus();
@@ -68,6 +86,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
       saveUsedCode(formattedCode);
+      setIsStackEmpty(false);
     } else {
       alert(
         `The stack: ${formattedCode} does not appear to be in the database`
@@ -79,7 +98,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
   return (
     <div id="stored-bales" className="App__view">
       <div>
-        <h3>Please enter 3 digit code on Stack</h3>
+        <h3>Please enter 3 digit Stack ID</h3>
         <form onChange={handleInput} id="recallid-input">
           <input
             id="firstDigit"
@@ -102,13 +121,12 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
           />
         </form>
         <div>
-          <button
-            id="retrive-stack"
-            onClick={() => retrieveStack(code, stacks)}
-          >
-            Retreive Stack
-          </button>
-          <button onClick={() => clearFields()}>CLEAR FIELDS</button>
+          <CancelIcon
+            onClick={() => {
+              clearFields();
+              clearStack();
+            }}
+          />
         </div>
       </div>
 
@@ -118,6 +136,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
           <button
             className="stack-options__button"
             onClick={handleAddToContainer}
+            disabled={isStackEmpty}
           >
             <LocalShippingIcon />
           </button>
