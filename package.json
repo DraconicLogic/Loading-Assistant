@@ -8,15 +8,16 @@
     "@material-ui/styles": "^4.5.0",
     "axios": "^0.19.0",
     "emailjs-com": "^2.4.1",
+    "env-cmd": "^10.1.0",
     "react": "^16.10.2",
     "react-confirm-alert": "^2.4.1",
     "react-dom": "^16.10.2",
     "react-scripts": "^2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd .env.development react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "env-cmd .env.development react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -29,6 +30,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@testing-library/react": "^9.4.0"
+    "@testing-library/react": "^9.4.0",
+    "custom-env": "^2.0.1"
   }
 }
