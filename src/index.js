@@ -6,6 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import SplashScreen from  './components/SplashScreen.jsx'
 
 
+
 ReactDOM.render(
 <SplashScreen>
   <App />

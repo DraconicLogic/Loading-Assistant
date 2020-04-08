@@ -12,7 +12,7 @@ import SaveSharpIcon from "@material-ui/icons/SaveSharp";
 class ProductList extends Component {
   state = {
     stackPosition: 0,
-    currentStack: Array(12)
+    currentStack: Array(12),
   };
 
   render() {
@@ -24,7 +24,7 @@ class ProductList extends Component {
     return (
       <div id="product-list" className="App__view">
         <div id="product-list__buttons">
-          {bales.map(bale => {
+          {bales.map((bale) => {
             return (
               <ProductButton add={this.addToStack} product={bale} key={bale} />
             );
@@ -63,13 +63,13 @@ class ProductList extends Component {
     );
   }
 
-  markPosition = marker => {
+  markPosition = (marker) => {
     this.setState({
-      stackPosition: marker
+      stackPosition: marker,
     });
   };
 
-  addToStack = baleCode => {
+  addToStack = (baleCode) => {
     const { currentStack, stackPosition } = this.state;
 
     if (currentStack.length <= 12) {
@@ -77,7 +77,7 @@ class ProductList extends Component {
       newStack[stackPosition] = baleCode;
       this.setState(
         {
-          currentStack: newStack
+          currentStack: newStack,
         },
         () => this.highlightNextPosition()
       );
@@ -88,7 +88,7 @@ class ProductList extends Component {
     const { currentStack } = this.state;
     const emptyPosition = utils.findEmptyPosition(currentStack);
     this.setState({
-      stackPosition: emptyPosition
+      stackPosition: emptyPosition,
     });
   };
 
@@ -115,13 +115,13 @@ class ProductList extends Component {
     const { currentStack } = this.state;
     this.setState({
       currentStack: Array(currentStack.length),
-      stackPosition: 0
+      stackPosition: 0,
     });
   };
 
-  toggleStackSize = size => {
+  toggleStackSize = (size) => {
     this.setState({
-      currentStack: Array(size)
+      currentStack: Array(size),
     });
   };
 
@@ -136,9 +136,9 @@ class ProductList extends Component {
     }
     if (isStackFilled) {
       const stackObj = {
-        recallid: generateUniqueCode(storedStacks),
+        stackId: generateUniqueCode(storedStacks),
         content: currentStack,
-        date: utils.getDate()
+        date: utils.getDate(),
       };
       addStackToDB(stackObj);
       this.clearStack();

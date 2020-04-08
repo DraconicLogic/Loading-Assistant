@@ -122,13 +122,13 @@ class App extends Component {
 
   addStackToDB = async (stack) => {
     document.getElementById('loading-modal').style.display = 'initial'
-    const {recallid, content, date} = await api.saveStackToDB(stack)
-    console.log("RETURNED STACK FROM DB", recallid, content, date)
+    const {stackId, content, date} = await api.saveStackToDB(stack)
+    console.log("RETURNED STACK FROM DB", stackId, content, date)
     const newStoredStacks = {...this.state.storedStacks}
-    newStoredStacks[recallid] = content
+    newStoredStacks[stackId] = content
 
     this.setState({
-      response: {recallid, content, date},
+      response: {stackId, content, date},
       storedStacks: newStoredStacks
     }, () => document.getElementById('loading-modal').style.display = 'none')
   }

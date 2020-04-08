@@ -15,7 +15,7 @@
     "react-scripts": "^2.1.8"
   },
   "scripts": {
-    "start": "env-cmd .env.development react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "env-cmd .env.development react-scripts test",
     "eject": "react-scripts eject"
