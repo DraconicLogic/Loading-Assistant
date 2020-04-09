@@ -12,17 +12,17 @@ const ContainerPreview = ({ container }) => {
 
   for (let i = 0; i < container.length; i++) {
     if (workingRow.length < 6) {
-      workingRow.push(container[i].content);
+      workingRow.push(container[i].stackContent);
     } else if (workingRow.length === 6) {
       rows.push(workingRow);
       workingRow = [];
-      workingRow.push(container[i].content);
+      workingRow.push(container[i].stackContent);
     }
   }
   console.log(rows);
   if (workingRow.length > 0) rows.push(workingRow);
 
-  const handleNavigation = event => {
+  const handleNavigation = (event) => {
     const { value } = event.target;
     if (value === "left") {
       if (currentRow !== 0) setCurrentRow(currentRow - 1);

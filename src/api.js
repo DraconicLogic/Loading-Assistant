@@ -22,10 +22,10 @@ export function getStacks(){
     .catch((error) => console.error(error))
 }
 
-export function saveContainerToDB(container){
-  console.log("PAYLOAD TO SEND TO API: ",container)
+export function saveContainerToDB(newContainer){
+  console.log("PAYLOAD TO SEND TO API: ",newContainer)
   const url = `${REACT_APP_API_URL}/containers`
-  return axios.post(url, container)
+  return axios.post(url, {newContainer})
   .then((savedContainer) => {
     console.log(savedContainer)
     return savedContainer.data

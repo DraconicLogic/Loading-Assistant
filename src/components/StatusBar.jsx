@@ -4,7 +4,7 @@ import products from "../products/products.json";
 const StatusBar = ({ content, date }) => {
   const flattenedContent = content
     .reduce((flattened, stackObj) => {
-      flattened.push(stackObj.content);
+      flattened.push(stackObj.stackContent);
       return flattened;
     }, [])
     .flat(1);
@@ -18,14 +18,19 @@ const StatusBar = ({ content, date }) => {
   }, 0);
 
   const overWeightStyle = {
-    "color": "red"
-  }
+    color: "red",
+  };
 
   return (
     <div id="status-bar">
       <span className="status-bar__item">Row: {rowNumber + 1}</span>
       <span className="status-bar__item">Bales: {totalBales}</span>
-      <span className="status-bar__item" style={netWeight > 26000 ? overWeightStyle : null}>Weight: {netWeight}kg</span>
+      <span
+        className="status-bar__item"
+        style={netWeight > 26000 ? overWeightStyle : null}
+      >
+        Weight: {netWeight}kg
+      </span>
       <span className="status-bar__item">Date: {date}</span>
     </div>
   );

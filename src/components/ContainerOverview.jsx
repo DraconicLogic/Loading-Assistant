@@ -8,7 +8,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
   console.log("content: ", containerContent);
   const flatContainer = containerContent
     .reduce((flattened, stackObj) => {
-      flattened.push(stackObj.content);
+      flattened.push(stackObj.stackContent);
       return flattened;
     }, [])
     .flat(1);
@@ -24,7 +24,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
     return tallyObj;
   }, {});
 
-  const braCount = flatContainer.filter(bale => bale === "BRA");
+  const braCount = flatContainer.filter((bale) => bale === "BRA");
 
   const containerWeight = flatContainer.reduce((netWeight, bale) => {
     return (netWeight += products[bale].size);
@@ -32,11 +32,11 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
 
   const baleCountArray = Object.entries(baleCount);
 
-  const smallBales = flatContainer.filter(bale => {
+  const smallBales = flatContainer.filter((bale) => {
     return products[bale].baleSize === "small";
   });
 
-  const bigBales = flatContainer.filter(bale => {
+  const bigBales = flatContainer.filter((bale) => {
     return products[bale].baleSize === "big";
   });
 
