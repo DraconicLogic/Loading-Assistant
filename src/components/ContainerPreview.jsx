@@ -46,7 +46,11 @@ const ContainerPreview = ({ container }) => {
         {rows.length > 0
           ? rows[currentRow].map((stack, index) => {
               return (
-                <span className="container-preview__stack" key={index}>
+                <span
+                  className="container-preview__stack"
+                  key={index}
+                  id={`container-preview__stack-${index + 1}`}
+                >
                   <StackEditor stack={stack} context="preview" />
                 </span>
               );

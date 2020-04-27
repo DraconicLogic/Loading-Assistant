@@ -95,6 +95,36 @@ input::-webkit-inner-spin-button {
   padding: 5px;
 }
 
+#container-preview__stack-1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#container-preview__stack-2 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#container-preview__stack-3 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#container-preview__stack-4 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#container-preview__stack-5 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#container-preview__stack-6 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
 #loading-modal {
   position: fixed;
   /* Stay in place */
