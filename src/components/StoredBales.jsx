@@ -45,7 +45,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
   };
 
   const clearFields = () => {
-    document.getElementById("recallid-input").reset();
+    document.getElementById("stackId-input").reset();
     setCode({
       firstDigit: "",
       secondDigit: "",
@@ -101,7 +101,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
         <h3>Please enter 3 digit Stack ID</h3>
         <form
           onChange={handleInput}
-          id="recallid-input"
+          id="stackId-input"
           data-testid="stackID-input"
         >
           <input

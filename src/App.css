@@ -167,6 +167,7 @@ MuiAppBar-colorPrimary-8 {
   padding: 20px;
   border: solid;
   width: 80%;
+  text-align: left;
   /* Could be more or less, depending on screen size */
 }
 
@@ -205,7 +206,7 @@ MuiAppBar-colorPrimary-8 {
   font-size: large;
 } */
 
-#recallid-input {
+#stackId-input {
   display: block;
   margin: 5em;
 }

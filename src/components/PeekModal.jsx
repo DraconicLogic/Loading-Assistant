@@ -2,16 +2,31 @@ import React from "react";
 import CancelIcon from "@material-ui/icons/Cancel";
 
 const PeekModal = ({ storedStacks, togglePeek }) => {
-  const handleClose = event => {
+  const handleClose = (event) => {
     togglePeek();
   };
-
+  console.log(storedStacks);
   return (
     <div id="peek-modal">
       <div id="peek-modal__content">
-        <CancelIcon onClick={handleClose} />
-        {Object.entries(storedStacks).map(savedStack => {
-          return <p>{savedStack[0]}</p>;
+        <span style={{ float: "right" }}>
+          <CancelIcon onClick={handleClose} />
+        </span>
+        {Object.entries(storedStacks).map((savedStack) => {
+          console.log(savedStack);
+          return (
+            <p>
+              <span style={{ "font-weight": "bold" }}>{savedStack[0]}</span> :{" "}
+              {savedStack[1].map((product) => {
+                return (
+                  <span>
+                    {product}
+                    {", "}
+                  </span>
+                );
+              })}
+            </p>
+          );
         })}
       </div>
     </div>

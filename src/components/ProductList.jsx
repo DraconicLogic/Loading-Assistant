@@ -4,7 +4,7 @@ import ProductButton from "./ProductButton.jsx";
 import StackEditor from "./StackEditor.jsx";
 import * as utils from "../utils.js";
 import StackSize from "./StackSize.jsx";
-import { generateUniqueCode } from "../recallidGenerator.js";
+import { generateUniqueCode } from "../stackIDGenerator.js";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import SaveSharpIcon from "@material-ui/icons/SaveSharp";
