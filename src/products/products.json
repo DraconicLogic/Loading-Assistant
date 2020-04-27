@@ -190,7 +190,7 @@
     "baleSize": "small",
     "price": 70,
     "units": "KG",
-    "size": 741
+    "size": 300
   },
   "OSH": {
     "code": "OSH",
@@ -558,6 +558,6 @@
     "baleSize": "small",
     "price": 20.8,
     "units": "KG",
-    "size": 3120
+    "size": 330
   }
 }
