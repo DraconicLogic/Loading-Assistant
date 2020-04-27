@@ -5,7 +5,6 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 const ContainerPreview = ({ container }) => {
   const [currentRow, setCurrentRow] = useState(0);
-  const context = "preview";
   console.log(container);
   const rows = [];
   let workingRow = [];
@@ -48,7 +47,7 @@ const ContainerPreview = ({ container }) => {
           ? rows[currentRow].map((stack, index) => {
               return (
                 <span className="container-preview__stack" key={index}>
-                  <StackEditor stack={stack} context={context} />
+                  <StackEditor stack={stack} context="preview" />
                 </span>
               );
             })

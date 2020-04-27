@@ -1,6 +1,7 @@
 import React from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import StackEditor from "./StackEditor";
 
 const ResponseModal = ({ response, close }) => {
   console.log(response);
@@ -33,12 +34,15 @@ const ResponseModal = ({ response, close }) => {
   return (
     <div id="response-modal">
       <div id="response-modal__content">
-        Here is the ID for the stack. Please make sure you write it clearly on
-        the bale
-        <h1>{response.stackId ? response.stackId : null}</h1>
-        <span onClick={handleClose}>
+        <span id="response-modal__close" onClick={handleClose}>
           <h1>X</h1>
         </span>
+        <p>
+          Here is the ID for the stack. Please make sure you write it clearly on
+          the bale
+        </p>
+        <h1>{response.stackId ? response.stackId : null}</h1>
+        <StackEditor stack={response.content} context="preview" />
       </div>
     </div>
   );

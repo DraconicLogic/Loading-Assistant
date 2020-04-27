@@ -239,6 +239,10 @@ MuiAppBar-colorPrimary-8 {
   /* Could be more or less, depending on screen size */
 }
 
+#response-modal__close {
+  float: right;
+}
+
 .code-input {}
 
 .spinner {
