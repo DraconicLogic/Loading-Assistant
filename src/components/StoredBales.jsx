@@ -10,7 +10,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
   const [code, setCode] = useState({
     firstDigit: "",
     secondDigit: "",
-    thirdDigit: ""
+    thirdDigit: "",
   });
   const [isStackEmpty, setIsStackEmpty] = useState(true);
 
@@ -22,7 +22,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     checkID(code);
   }, [code]);
 
-  const handleInput = event => {
+  const handleInput = (event) => {
     const { value, id } = event.target;
     const newCode = { ...code };
 
@@ -34,7 +34,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     if (id !== "thirdDigit") moveFocus(id);
   };
 
-  const checkID = code => {
+  const checkID = (code) => {
     if (!!code.firstDigit && !!code.secondDigit && !!code.thirdDigit) {
       retrieveStack(code, stacks);
     }
@@ -49,11 +49,11 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     setCode({
       firstDigit: "",
       secondDigit: "",
-      thirdDigit: ""
+      thirdDigit: "",
     });
   };
 
-  const moveFocus = id => {
+  const moveFocus = (id) => {
     let nextElement;
     switch (id) {
       case "firstDigit":
@@ -99,12 +99,17 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     <div id="stored-bales" className="App__view">
       <div>
         <h3>Please enter 3 digit Stack ID</h3>
-        <form onChange={handleInput} id="recallid-input">
+        <form
+          onChange={handleInput}
+          id="recallid-input"
+          data-testid="stackID-input"
+        >
           <input
             id="firstDigit"
             className="code-input"
             type="tel"
             maxLength="1"
+            data-testid="stackID_1"
           />
 
           <input
@@ -112,12 +117,14 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
             className="code-input"
             type="tel"
             maxLength="1"
+            data-testid="stackID_2"
           />
           <input
             id="thirdDigit"
             className="code-input"
             type="tel"
             maxLength="1"
+            data-testid="stackID_3"
           />
         </form>
         <div>
@@ -137,6 +144,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
             className="stack-options__button"
             onClick={handleAddToContainer}
             disabled={isStackEmpty}
+            data-testid="add-to-container"
           >
             <LocalShippingIcon />
           </button>

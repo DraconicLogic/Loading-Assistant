@@ -63,7 +63,6 @@ class App extends Component {
       case 1:
         view = <ProductList 
         add={this.addToContainer} 
-        container={container} 
         addStackToDB={this.addStackToDB}
         storedStacks={this.state.storedStacks}
         />
@@ -82,10 +81,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(process)
     const { containerContent, view, response, storedStacks, date, menuStatus, peekStatus } = this.state
-    console.log(this.state)
-    console.log(storedStacks)
       return (    
         <div id="App">
           <Drawer open={menuStatus}>

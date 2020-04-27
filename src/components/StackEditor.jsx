@@ -6,12 +6,12 @@ class StackEditor extends Component {
     const { stack, position, context } = this.props;
     const stackStyle = {
       height: "100%",
-      width: "100%"
+      width: "100%",
     };
 
     const editorStyle = {
       "font-size": "150%",
-      "font-weight": "bolder"
+      "font-weight": "bolder",
     };
 
     const fillStack = [];
@@ -22,6 +22,7 @@ class StackEditor extends Component {
       <div
         className="stack-editor"
         style={context === "preview" ? stackStyle : null}
+        data-testid="stack"
       >
         {fillStack.map((bale, index) => {
           return (
@@ -35,6 +36,7 @@ class StackEditor extends Component {
               id={`stack-editor__bale-${index + 1}`}
               onClick={() => this.handleClick(index)}
               key={index}
+              data-testid={`stack-slot_${index + 1}`}
             >
               {stack[index] ? stack[index] : null}
             </div>
@@ -44,7 +46,7 @@ class StackEditor extends Component {
     );
   }
 
-  handleClick = stackPosition => {
+  handleClick = (stackPosition) => {
     const { context, mark } = this.props;
     if (context === "editor") mark(stackPosition);
   };

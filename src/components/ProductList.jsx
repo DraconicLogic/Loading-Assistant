@@ -46,6 +46,7 @@ class ProductList extends Component {
             <button
               className="stack-options__button"
               onClick={this.handleAddToDB}
+              data-testid="save-to-DB"
             >
               <SaveSharpIcon>Save for Later</SaveSharpIcon>
             </button>
