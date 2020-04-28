@@ -2,6 +2,7 @@ import React from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import StackEditor from "./StackEditor";
+import PropTypes from "prop-types";
 
 const ResponseModal = ({ response, close }) => {
   console.log(response);
@@ -46,6 +47,15 @@ const ResponseModal = ({ response, close }) => {
       </div>
     </div>
   );
+};
+
+ResponseModal.propTypes = {
+  response: PropTypes.shape({
+    stackId: PropTypes.string.isRequired,
+    content: PropTypes.array.isRequired,
+    date: PropTypes.string,
+  }),
+  close: PropTypes.func,
 };
 
 export default ResponseModal;

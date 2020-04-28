@@ -8,6 +8,7 @@ import { generateUniqueCode } from "../stackIDGenerator.js";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import SaveSharpIcon from "@material-ui/icons/SaveSharp";
+import PropTypes from "prop-types";
 
 class ProductList extends Component {
   state = {
@@ -94,7 +95,7 @@ class ProductList extends Component {
   };
 
   handleAddContainer = () => {
-    const { add } = this.props;
+    const { addToContainer } = this.props;
     const { currentStack } = this.state;
 
     let isStackFilled = true;
@@ -105,7 +106,7 @@ class ProductList extends Component {
     }
 
     if (isStackFilled) {
-      add(currentStack);
+      addToContainer(currentStack);
       this.clearStack();
     } else {
       alert("Please fill in the stack");
@@ -148,5 +149,11 @@ class ProductList extends Component {
     }
   };
 }
+
+ProductList.propTypes = {
+  storedStacks: PropTypes.object.isRequired,
+  addStackToDB: PropTypes.func,
+  addToContainer: PropTypes.func,
+};
 
 export default ProductList;

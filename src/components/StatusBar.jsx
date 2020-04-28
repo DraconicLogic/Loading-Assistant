@@ -1,5 +1,6 @@
 import React from "react";
 import products from "../products/products.json";
+import PropTypes from "prop-types";
 
 const StatusBar = ({ content, date }) => {
   const flattenedContent = content
@@ -34,6 +35,11 @@ const StatusBar = ({ content, date }) => {
       <span className="status-bar__item">Date: {date}</span>
     </div>
   );
+};
+
+StatusBar.propTypes = {
+  content: PropTypes.arrayOf(PropTypes.object),
+  date: PropTypes.string,
 };
 
 export default StatusBar;

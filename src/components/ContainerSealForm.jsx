@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 const ContainerSealForm = ({ update, finish, containerDetails }) => {
   const { containerNumber, sealNumber } = containerDetails;
   const [container, setContainerNumber] = useState("");
   const [seal, setSealNumber] = useState("");
 
-  const handleForm = event => {
+  const handleForm = (event) => {
     const { value, name } = event.target;
     if (name === "container") setContainerNumber(value);
     if (name === "seal") setSealNumber(value);
@@ -21,7 +22,7 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
     if (container && seal) {
       const details = {
         containerNumber: checkContainerSealNum() ? "" : container,
-        sealNumber: checkContainerSealNum() ? "" : seal
+        sealNumber: checkContainerSealNum() ? "" : seal,
       };
       update(details);
     } else {
@@ -29,7 +30,7 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
     }
   };
 
-  const handleFinish = containerDetails => {
+  const handleFinish = (containerDetails) => {
     if (containerNumber && sealNumber) {
       finish(containerDetails);
     } else {
@@ -39,7 +40,7 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
     }
   };
 
-  const renderInput = name => {
+  const renderInput = (name) => {
     if (checkContainerSealNum()) {
       return <span>{name === "container" ? containerNumber : sealNumber}</span>;
     } else {
@@ -60,6 +61,15 @@ const ContainerSealForm = ({ update, finish, containerDetails }) => {
       </button>
     </div>
   );
+};
+
+ContainerSealForm.propTypes = {
+  containerDetails: PropTypes.shape({
+    containerNumber: PropTypes.string.isRequired,
+    sealNumber: PropTypes.string.isRequired,
+  }),
+  update: PropTypes.func,
+  finish: PropTypes.func,
 };
 
 export default ContainerSealForm;

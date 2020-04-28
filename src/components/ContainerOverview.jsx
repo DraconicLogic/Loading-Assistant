@@ -2,6 +2,7 @@ import React from "react";
 import ContainerSealForm from "./ContainerSealForm";
 import products from "../products/products.json";
 import ContainerPreview from "./ContainerPreview";
+import PropTypes from "prop-types";
 
 const ContainerOverview = ({ containerDetails, update, finish }) => {
   const { containerContent } = containerDetails;
@@ -24,7 +25,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
     return tallyObj;
   }, {});
 
-  const braCount = flatContainer.filter((bale) => bale === "BRA");
+  // const braCount = flatContainer.filter((bale) => bale === "BRA");
 
   const containerWeight = flatContainer.reduce((netWeight, bale) => {
     return (netWeight += products[bale].size);
@@ -32,13 +33,13 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
 
   const baleCountArray = Object.entries(baleCount);
 
-  const smallBales = flatContainer.filter((bale) => {
-    return products[bale].baleSize === "small";
-  });
+  // const smallBales = flatContainer.filter((bale) => {
+  //   return products[bale].baleSize === "small";
+  // });
 
-  const bigBales = flatContainer.filter((bale) => {
-    return products[bale].baleSize === "big";
-  });
+  // const bigBales = flatContainer.filter((bale) => {
+  //   return products[bale].baleSize === "big";
+  // });
 
   return (
     <div id="overview" className="App__view">
@@ -63,6 +64,14 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
       <ContainerPreview container={containerContent} />
     </div>
   );
+};
+
+ContainerOverview.propTypes = {
+  containerDetails: PropTypes.shape({
+    containerContent: PropTypes.arrayOf(PropTypes.object).isRequired,
+  }),
+  update: PropTypes.func.isRequired,
+  finish: PropTypes.func.isRequired,
 };
 
 export default ContainerOverview;

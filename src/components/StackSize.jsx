@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const StackSize = ({ size }) => {
   return (
@@ -20,6 +21,10 @@ const StackSize = ({ size }) => {
       </button>
     </div>
   );
+};
+
+StackSize.propTypes = {
+  size: PropTypes.func.isRequired,
 };
 
 export default StackSize;

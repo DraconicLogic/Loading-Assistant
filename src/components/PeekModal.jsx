@@ -1,5 +1,6 @@
 import React from "react";
 import CancelIcon from "@material-ui/icons/Cancel";
+import PropTypes from "prop-types";
 
 const PeekModal = ({ storedStacks, togglePeek }) => {
   const handleClose = (event) => {
@@ -31,6 +32,11 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
       </div>
     </div>
   );
+};
+
+PeekModal.propTypes = {
+  storedStack: PropTypes.object,
+  togglePeek: PropTypes.func,
 };
 
 export default PeekModal;

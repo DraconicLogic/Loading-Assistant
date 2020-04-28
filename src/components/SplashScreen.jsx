@@ -8,7 +8,7 @@ console.log("PROCESS.ENV: ", process.env);
 console.log("GLOBAL VAR: ", process.env.REACT_APP_API_URL);
 console.log("ENV: ", process.env.NODE_ENV);
 
-const SplashScreen = (props) => {
+const SplashScreen = () => {
   const [storedStacks, setStoredStacks] = useState(null);
   const [view, setView] = useState(0);
   const [date, setDate] = useState("");

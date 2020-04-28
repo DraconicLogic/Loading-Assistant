@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import StackEditor from "./StackEditor";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
-import findEmptyPosition from "../utils.js";
+import PropTypes from "prop-types";
 
 const StoredBales = ({ stacks, add, saveUsedCode }) => {
   const [currentStack, setStack] = useState(Array(12));
@@ -156,6 +156,12 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
       </div>
     </div>
   );
+};
+
+StoredBales.propTypes = {
+  stacks: PropTypes.object.isRequired,
+  add: PropTypes.func,
+  saveUsedCode: PropTypes.func,
 };
 
 export default StoredBales;

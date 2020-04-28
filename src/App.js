@@ -3,7 +3,6 @@ import ProductList from './components/ProductList.jsx'
 import './App.css';
 import ContainerOverview from './components/ContainerOverview.jsx';
 import ProductListTab from "./components/ProductListTab.jsx";
-import * as utils from './utils.js'
 import StoredBales from './components/StoredBales.jsx';
 import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
@@ -15,6 +14,7 @@ import { ListItem, ListItemText } from '@material-ui/core';
 import CancelIcon from "@material-ui/icons/Cancel";
 import PeekModal from './components/PeekModal.jsx';
 import LoadingModal from './components/LoadingModal.jsx';
+import PropTypes from 'prop-types'
 
 
 // TODO: Apply theme colours for APp here at the top level
@@ -62,7 +62,7 @@ class App extends Component {
         break;
       case 1:
         view = <ProductList 
-        add={this.addToContainer} 
+        addToContainer={this.addToContainer} 
         addStackToDB={this.addStackToDB}
         storedStacks={this.state.storedStacks}
         />
@@ -180,6 +180,12 @@ class App extends Component {
     })
   }
 
+}
+
+App.propTypes = {
+  storedStacks: PropTypes.object,
+  savedContainer: PropTypes.object,
+  date: PropTypes.string
 }
 
 export default App;

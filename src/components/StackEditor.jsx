@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Icon from "@material-ui/core/Icon/";
+import PropTypes from "prop-types";
 
 class StackEditor extends Component {
   render() {
@@ -10,8 +10,8 @@ class StackEditor extends Component {
     };
 
     const editorStyle = {
-      "font-size": "150%",
-      "font-weight": "bolder",
+      fontSize: "150%",
+      fontWeight: "bolder",
     };
 
     const fillStack = [];
@@ -51,6 +51,13 @@ class StackEditor extends Component {
     if (context === "editor") mark(stackPosition);
   };
 }
+
+StackEditor.propTypes = {
+  stack: PropTypes.array.isRequired,
+  position: PropTypes.number,
+  context: PropTypes.string,
+  mark: PropTypes.func,
+};
 
 export default StackEditor;
 

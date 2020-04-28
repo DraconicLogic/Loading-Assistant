@@ -32,39 +32,36 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => {
   return {
     root: {
-      flexGrow: 1
+      flexGrow: 1,
       // backgroundColor: theme.palette.background.paper
-    }
+    },
   };
 });
 
 export default function ProductListTab({ changeView, toggleMenu }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-  
 
   const theme = {
-    background: "#1D8549"
+    background: "#1D8549",
   };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
- 
 
   React.useEffect(() => {
     changeView(value);
@@ -77,8 +74,8 @@ export default function ProductListTab({ changeView, toggleMenu }) {
           position="static"
           style={{
             root: {
-              diplay: "inline"
-            }
+              diplay: "inline",
+            },
           }}
         >
           <Toolbar>
@@ -109,3 +106,8 @@ export default function ProductListTab({ changeView, toggleMenu }) {
     </div>
   );
 }
+
+ProductListTab.propTypes = {
+  changeView: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func,
+};

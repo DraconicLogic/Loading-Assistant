@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import StackEditor from "./StackEditor";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import PropTypes from "prop-types";
 
 const ContainerPreview = ({ container }) => {
   const [currentRow, setCurrentRow] = useState(0);
@@ -67,6 +68,10 @@ const ContainerPreview = ({ container }) => {
       </button>
     </div>
   );
+};
+
+ContainerPreview.propTypes = {
+  container: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ContainerPreview;
