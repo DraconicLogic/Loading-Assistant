@@ -68,7 +68,11 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
 
 ContainerOverview.propTypes = {
   containerDetails: PropTypes.shape({
-    containerContent: PropTypes.arrayOf(PropTypes.object).isRequired,
+    containerContent: PropTypes.arrayOf(
+      PropTypes.shape({
+        stackContent: PropTypes.arrayOf(PropTypes.string),
+      })
+    ).isRequired,
   }),
   update: PropTypes.func.isRequired,
   finish: PropTypes.func.isRequired,

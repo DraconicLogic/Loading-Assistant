@@ -7,13 +7,21 @@ const testStacks = {
   '456': ["BPT", "BPT", "BPT"]
 }
 
+const testContainerContent = [
+  {"stackContent":["AC","AC","AC","AC","AC","AC","AC","AC","AC","AC","AC","AC"]},{"stackContent":["FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT","FT MAT"]},
+  {"stackContent":["ATS","ATS","ATS","ATS","ATS","ATS","ATS","ATS","ATS","ATS","ATS","ATS"]},
+  {"stackContent":["NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR","NYHHR"]}
+]
+
 afterEach(cleanup)
 
-test.skip('Product selected are added to the stack editor', () => {
+test('Product selected are added to the stack editor', () => {
   const {getByText,getByTestId, debug} = render(
     <ContainerOverview 
-      containerDetails={{}} 
-      addStackToDB={() => console.log('ADD STACK TO DB')}
+      containerDetails={{
+        containerContent:testContainerContent
+      }} 
+      update={() => console.log('UPDATE CONTAINER AND SEAL NUMBERS')}
       finish={() => console.log('FINISH CONTAINER')}
     />
   )

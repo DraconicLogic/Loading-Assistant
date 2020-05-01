@@ -9,7 +9,7 @@ const testStacks = {
 
 afterEach(cleanup)
 
-test.only('Product selected are added to the stack editor', () => {
+test('Product selected are added to the stack editor', () => {
   const {getByText,getByTestId, debug} = render(
     <ProductList 
       add={() => console.log('ADD TO CONTAINER')} 
@@ -48,13 +48,17 @@ test('Save stack to database', () => {
     fireEvent.click(product)
     i--
   }
-  debug()
+  // debug()
   fireEvent.click(saveButton)
 
   expect(addToDB).toHaveBeenCalled()
-  expect(addToDB).toHaveBeenCalledWith({
+  expect(addToDB).toHaveBeenCalledWith(expect.objectContaining({
     "content": ["ATS", "ATS", "ATS", "ATS", "ATS", "ATS", "ATS", "ATS", "ATS", "ATS", "ATS", "ATS"]
-  })
+  }))
+
+  
+    
+  
 })
 
 test('Overwrite product in the stack editor', () => {
