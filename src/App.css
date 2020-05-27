@@ -236,10 +236,7 @@ MuiAppBar-colorPrimary-8 {
   font-size: large;
 } */
 
-#stackId-input {
-  display: block;
-  margin: 5em;
-}
+
 
 #response-modal {
   position: fixed;
@@ -273,8 +270,6 @@ MuiAppBar-colorPrimary-8 {
 #response-modal__close {
   float: right;
 }
-
-.code-input {}
 
 .spinner {
   position: absolute;
@@ -440,4 +435,40 @@ MuiAppBar-colorPrimary-8 {
   height: fit-content;
   display: block;
   overflow: auto;
+}
+
+#stored-bales__top {
+  display: grid;
+  grid-template-columns: 5fr auto;
+
+}
+
+#stackId-input {
+  display: block;
+  margin: 5em;
+  grid-column: 1;
+}
+
+#stackid-history {
+  border: solid;
+  grid-column: 2;
+  padding: 0;
+  overflow: scroll;
+  max-height: max-content;
+  height: 40vh;
+
+
+
+
+}
+
+#stackid-history>li {
+  font-size: 200%;
+  font-weight: bolder;
+  list-style: none;
+}
+
+#stackid-history__0 {
+  border: solid red;
+  /* background-color: seagreen; */
 }

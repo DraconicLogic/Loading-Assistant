@@ -3,8 +3,9 @@ import StackEditor from "./StackEditor";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import PropTypes from "prop-types";
+import StackIDHistory from "./StackIDHistory";
 
-const StoredBales = ({ stacks, add, saveUsedCode }) => {
+const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
   const [currentStack, setStack] = useState(Array(12));
   // rename to Stack ID
   const [code, setCode] = useState({
@@ -73,7 +74,9 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
     setIsStackEmpty(true);
   };
 
-  const handleAddToContainer = () => {
+  const handleAddToContainer = ({ firstDigit, secondDigit, thirdDigit }) => {
+    const formattedCode = firstDigit + secondDigit + thirdDigit;
+    saveUsedCode(formattedCode);
     add(currentStack);
     setIsStackEmpty(true);
     clearStack();
@@ -82,10 +85,12 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
   };
 
   const retrieveStack = ({ firstDigit, secondDigit, thirdDigit }, stacks) => {
+    const usedCodesSet = new Set(usedCodes);
     const formattedCode = firstDigit + secondDigit + thirdDigit;
-    if (stacks[formattedCode]) {
+    if (usedCodesSet.has(formattedCode)) {
+      alert(`Stack ${formattedCode} has already being loaded`);
+    } else if (stacks[formattedCode]) {
       setStack(stacks[formattedCode]);
-      saveUsedCode(formattedCode);
       setIsStackEmpty(false);
     } else {
       alert(
@@ -97,13 +102,13 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
 
   return (
     <div id="stored-bales" className="App__view">
-      <div>
-        <h3>Please enter 3 digit Stack ID</h3>
+      <div id="stored-bales__top">
         <form
-          onChange={handleInput}
+          onInput={handleInput}
           id="stackId-input"
           data-testid="stackID-input"
         >
+          <h3>Please enter 3 digit Stack ID</h3>
           <input
             id="firstDigit"
             className="code-input"
@@ -126,15 +131,16 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
             maxLength="1"
             data-testid="stackID_3"
           />
+          <span style={{ marginLeft: "10px" }}>
+            <CancelIcon
+              onClick={() => {
+                clearFields();
+                clearStack();
+              }}
+            />
+          </span>
         </form>
-        <div>
-          <CancelIcon
-            onClick={() => {
-              clearFields();
-              clearStack();
-            }}
-          />
-        </div>
+        <StackIDHistory usedCodes={usedCodes} />
       </div>
 
       <div id="stack-section">
@@ -142,7 +148,7 @@ const StoredBales = ({ stacks, add, saveUsedCode }) => {
         <div id="stack-options--2">
           <button
             className="stack-options__button"
-            onClick={handleAddToContainer}
+            onClick={() => handleAddToContainer(code)}
             disabled={isStackEmpty}
             data-testid="add-to-container"
           >

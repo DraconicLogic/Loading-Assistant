@@ -58,6 +58,7 @@ class App extends Component {
         stacks={this.state.storedStacks} 
         add={this.addToContainer}
         saveUsedCode={this.saveUsedCode}
+        usedCodes={this.state.usedCodes}
         />
         break;
       case 1:
