@@ -456,10 +456,6 @@ MuiAppBar-colorPrimary-8 {
   overflow: scroll;
   max-height: max-content;
   height: 40vh;
-
-
-
-
 }
 
 #stackid-history>li {
@@ -470,5 +466,4 @@ MuiAppBar-colorPrimary-8 {
 
 #stackid-history__0 {
   border: solid red;
-  /* background-color: seagreen; */
 }
