@@ -10,7 +10,7 @@ import StatusBar from './components/StatusBar.jsx';
 import sendEmailToBoss from './email.js';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import { ListItem, ListItemText } from '@material-ui/core';
+import { ListItem, ListItemText, Snackbar } from '@material-ui/core';
 import CancelIcon from "@material-ui/icons/Cancel";
 import PeekModal from './components/PeekModal.jsx';
 import LoadingModal from './components/LoadingModal.jsx';
@@ -31,7 +31,8 @@ class App extends Component {
     response: null,
     usedCodes: [],
     menuStatus: false,
-    peekStatus: false
+    peekStatus: false,
+    noticeStatus: false
   }
 
   finishContainer = (container) => {
@@ -47,6 +48,13 @@ class App extends Component {
   changeView = (view) => {
     this.setState({
       view
+    })
+  }
+
+  toggleNotice = (newNoticeStatus) => {
+
+    this.setState({
+      noticeStatus: newNoticeStatus
     })
   }
 
@@ -82,7 +90,7 @@ class App extends Component {
   }
 
   render() {
-    const { containerContent, view, response, storedStacks, date, menuStatus, peekStatus } = this.state
+    const { containerContent, view, response, storedStacks, date, menuStatus, peekStatus, noticeStatus } = this.state
       return (    
         <div id="App">
           <Drawer open={menuStatus}>
@@ -102,6 +110,14 @@ class App extends Component {
           <ProductListTab changeView={this.changeView} toggleMenu={this.toggleMenu} />
           {this.displayView(view, containerContent)} 
           <StatusBar content={containerContent} date={date}/>
+          <Snackbar 
+            open={noticeStatus}
+            autoHideDuration={10000}
+            message="Container Completed - Email Sent"
+            onClose={() => this.toggleNotice(!noticeStatus)}
+          />
+
+          
         </div>
       );
     
@@ -131,9 +147,11 @@ class App extends Component {
   }
 
   addContainerToDB = async (container) => {
+    const { noticeStatus } = this.state
     const { response, storedStacks, view, ...rest} = container
     console.log(rest)
     const returned = await api.saveContainerToDB(rest) 
+    this.toggleNotice(!noticeStatus)
     console.log(returned )
   }
 
