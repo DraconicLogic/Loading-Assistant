@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import products from "../products/products.json";
+import products from "../../products/products.json";
 import PropTypes from "prop-types";
 import { Popover } from "@material-ui/core";
 

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import products from "../products/products.json";
+import products from "../../products/products.json";
 import ProductButton from "./ProductButton.jsx";
-import StackEditor from "./StackEditor.jsx";
-import * as utils from "../utils.js";
+import StackEditor from "../StackEditor.jsx";
+import * as utils from "../../utils.js";
 import StackSize from "./StackSize.jsx";
-import { generateUniqueCode } from "../stackIDGenerator.js";
+import { generateUniqueCode } from "../../stackIDGenerator.js";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import SaveSharpIcon from "@material-ui/icons/SaveSharp";

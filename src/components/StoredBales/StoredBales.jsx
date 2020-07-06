@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StackEditor from "./StackEditor";
+import StackEditor from "../StackEditor";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import PropTypes from "prop-types";

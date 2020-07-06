@@ -1,6 +1,6 @@
 import React from "react";
 import ContainerSealForm from "./ContainerSealForm";
-import products from "../products/products.json";
+import products from "../../products/products.json";
 import ContainerPreview from "./ContainerPreview";
 import PropTypes from "prop-types";
 

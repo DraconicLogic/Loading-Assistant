@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import * as api from "../api.js";
-import App from "../App.js";
-import * as utils from "../utils.js";
+import * as api from "../../api.js";
+import App from "../../App.js";
+import * as utils from "../../utils.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 console.log("PROCESS.ENV: ", process.env);

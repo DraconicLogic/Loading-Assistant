@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import StackEditor from "./StackEditor";
+import StackEditor from "../StackEditor";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import PropTypes from "prop-types";
