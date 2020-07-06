@@ -7,7 +7,6 @@ import StoredBales from './components/StoredBales.jsx';
 import * as api from "./api.js"
 import ResponseModal from './components/ResponseModal.jsx';
 import StatusBar from './components/StatusBar.jsx';
-import sendEmailToBoss from './email.js';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import { ListItem, ListItemText, Snackbar } from '@material-ui/core';
@@ -37,7 +36,7 @@ class App extends Component {
 
   finishContainer = (container) => {
     this.addContainerToDB(container)
-    sendEmailToBoss(container)
+    
   }
 
   handleViews = (event) => {
