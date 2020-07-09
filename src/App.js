@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ProductList from './components/ProductList/ProductList.jsx'
+import ProductList from './components/ProductList/ProductList/ProductList.jsx'
 import './App.css';
-import ContainerOverview from './components/ContainerOverview/ContainerOverview.jsx';
+import ContainerOverview from './components/ContainerOverview/ContainerOverview/ContainerOverview.jsx';
 import ProductListTab from "./components/AppTab/AppTab.jsx";
-import StoredBales from './components/StoredBales/StoredBales.jsx';
+import StoredBales from './components/StoredBales/StoredBales/StoredBales.jsx';
 import * as api from "./api.js"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
@@ -55,12 +55,34 @@ class App extends Component {
   addToContainer = (stack) => {
     console.log('ADDING TO CONTAINER: ', stack)
     const newContent = [...this.state.containerContent]
-    newContent.push({stackContent: stack})
+    newContent.push(stack)
     this.setState({
       containerContent: newContent
     }, () => {
       this.saveProgress()
     })
+  }
+
+  removeFromContainer = (deleteId) => {
+    const {containerContent, usedCodes} = this.state
+    const newContent = [...containerContent]
+    const newCodes = new Set([...usedCodes])
+
+    newCodes.delete(deleteId)
+    
+    
+    const stackIndex = newContent.findIndex((stack) => {
+      return stack.stackId === deleteId;
+    });
+    
+    newContent.splice(stackIndex, 1)
+    
+      this.setState({
+        containerContent: newContent,
+        usedCodes: newCodes
+      })
+
+    
   }
 
   addStackToDB = async (stack) => {
@@ -154,6 +176,7 @@ class App extends Component {
         containerDetails={this.state} 
         update={this.updateContainerAndSeal}
         finish={this.addContainerToDB}
+        remove={this.removeFromContainer}
         />
         break;
       default:

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import products from "../../products/products.json";
-import ProductButton from "./ProductButton.jsx";
-import StackEditor from "../StackEditor.jsx";
-import * as utils from "../../utils.js";
-import StackSize from "./StackSize.jsx";
-import { generateUniqueCode } from "../../stackIDGenerator.js";
+import products from "../../../products/products.json";
+import ProductButton from "../ProductButton.jsx";
+import StackEditor from "../../StackEditor.jsx";
+import * as utils from "../../../utils.js";
+import StackSize from "../StackSize.jsx";
+import { generateUniqueCode } from "../../../stackIDGenerator.js";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import SaveSharpIcon from "@material-ui/icons/SaveSharp";
@@ -95,7 +95,7 @@ class ProductList extends Component {
   };
 
   handleAddContainer = () => {
-    const { addToContainer } = this.props;
+    const { addToContainer, storedStacks } = this.props;
     const { currentStack } = this.state;
 
     let isStackFilled = true;
@@ -106,7 +106,12 @@ class ProductList extends Component {
     }
 
     if (isStackFilled) {
-      addToContainer(currentStack);
+      const newStack = {
+        stackId: generateUniqueCode(storedStacks),
+        stackContent: currentStack,
+      };
+
+      addToContainer(newStack);
       this.clearStack();
     } else {
       alert("Please fill in the stack");

@@ -1,10 +1,10 @@
 import React from "react";
-import ContainerSealForm from "./ContainerSealForm";
-import products from "../../products/products.json";
-import ContainerPreview from "./ContainerPreview";
+import ContainerSealForm from "../ContainerSealForm/ContainerSealForm";
+import products from "../../../products/products.json";
+import ContainerPreview from "../ContainerPreview/ContainerPreview";
 import PropTypes from "prop-types";
 
-const ContainerOverview = ({ containerDetails, update, finish }) => {
+const ContainerOverview = ({ containerDetails, update, finish, remove }) => {
   const { containerContent } = containerDetails;
   console.log("content: ", containerContent);
   const flatContainer = containerContent
@@ -61,7 +61,7 @@ const ContainerOverview = ({ containerDetails, update, finish }) => {
           );
         })}
       </div>
-      <ContainerPreview container={containerContent} />
+      <ContainerPreview container={containerContent} remove={remove} />
     </div>
   );
 };

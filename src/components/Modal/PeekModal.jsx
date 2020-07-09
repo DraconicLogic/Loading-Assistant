@@ -13,10 +13,10 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
         <span style={{ float: "right" }}>
           <CancelIcon onClick={handleClose} />
         </span>
-        {Object.entries(storedStacks).map((savedStack) => {
+        {Object.entries(storedStacks).map((savedStack, index) => {
           console.log(savedStack);
           return (
-            <p>
+            <p key={index}>
               <span style={{ "font-weight": "bold" }}>{savedStack[0]}</span> :{" "}
               {savedStack[1].map((product) => {
                 return (

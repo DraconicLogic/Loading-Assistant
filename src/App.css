@@ -96,6 +96,25 @@ input::-webkit-inner-spin-button {
   padding: 5px;
 }
 
+.container-preview__stack--selected {
+  border: solid blue;
+  background-color: cadetblue;
+  animation-name: stack--selected;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes stack--selected {
+  from {
+    background-color: cyan;
+  }
+
+  to {
+    background-color: cadetblue;
+  }
+}
+
 #container-preview__stack-1 {
   grid-column: 1;
   grid-row: 1;

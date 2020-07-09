@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import StackEditor from "../StackEditor";
+import StackEditor from "../../StackEditor";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import PropTypes from "prop-types";
-import StackIDHistory from "./StackIDHistory";
+import StackIDHistory from "../StackIDHistory/StackIDHistory";
 
 const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
   const [currentStack, setStack] = useState(Array(12));
@@ -76,8 +76,12 @@ const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
 
   const handleAddToContainer = ({ firstDigit, secondDigit, thirdDigit }) => {
     const formattedCode = firstDigit + secondDigit + thirdDigit;
+    const newStack = {
+      stackId: formattedCode,
+      stackContent: currentStack,
+    };
     saveUsedCode(formattedCode);
-    add(currentStack);
+    add(newStack);
     setIsStackEmpty(true);
     clearStack();
     clearFields();
