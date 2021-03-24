@@ -86,7 +86,7 @@ input::-webkit-inner-spin-button {
   white-space: nowrap;
 }
 
-.container-preview__row>span {
+.container-preview__row > span {
   /* display: inline-block; */
   /* float: left; */
   /* margin-left: 1px;
@@ -256,8 +256,6 @@ MuiAppBar-colorPrimary-8 {
   font-size: large;
 } */
 
-
-
 #response-modal {
   position: fixed;
   /* Stay in place */
@@ -308,14 +306,14 @@ MuiAppBar-colorPrimary-8 {
 
 #status-bar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   border: solid;
-  position: fixed;
   bottom: 0;
   width: 100%;
+  grid-template-columns: repeat(4, auto);
 }
 
-.status-bar__item {}
+.status-bar__item {
+}
 
 #stack-section {
   grid-row: 2;
@@ -460,7 +458,6 @@ MuiAppBar-colorPrimary-8 {
 #stored-bales__top {
   display: grid;
   grid-template-columns: 5fr auto;
-
 }
 
 #stackId-input {
@@ -478,7 +475,7 @@ MuiAppBar-colorPrimary-8 {
   height: 40vh;
 }
 
-#stackid-history>li {
+#stackid-history > li {
   font-size: 200%;
   font-weight: bolder;
   list-style: none;
