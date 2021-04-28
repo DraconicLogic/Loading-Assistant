@@ -559,5 +559,13 @@
     "price": 20.8,
     "units": "KG",
     "size": 330
+  },
+  "SPORT": {
+    "code": "SPORT",
+    "item": "Sports and Gym Wear",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
   }
 }
