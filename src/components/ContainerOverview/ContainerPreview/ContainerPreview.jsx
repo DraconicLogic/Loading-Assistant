@@ -22,7 +22,6 @@ const ContainerPreview = ({ container, remove }) => {
 
 
   const createRows = (container) => {
-    console.log('creating rows')
     const rows = [];
     let workingRow = [];
 
@@ -36,7 +35,6 @@ const ContainerPreview = ({ container, remove }) => {
       }
     }
     if (workingRow.length > 0) rows.push(workingRow);
-    console.log("rows created: ", rows)
     return rows;
   };
 
