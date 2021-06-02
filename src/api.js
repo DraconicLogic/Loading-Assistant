@@ -6,7 +6,6 @@ export function saveStackToDB(newStack){
   const url = `${REACT_APP_API_URL}/stacks`
   return axios.post(url,{newStack})
   .then((savedStack) => {
-    console.log(savedStack)
     return savedStack.data.createdStack
   })
   .catch((error) => console.error(error))
@@ -14,21 +13,34 @@ export function saveStackToDB(newStack){
 
 export function getStacks(){
   const url = `${REACT_APP_API_URL}/stacks`
-  return axios.get(url)
+  const requestConfig = {
+    headers: {"Access-Control-Allow-Origin": "http://localhost:3000"},
+  }
+  return axios.get(url, requestConfig)
     .then((stacks) => {
-      console.log(stacks)
       return stacks.data.stacks
     })
     .catch((error) => console.error(error))
 }
 
 export function saveContainerToDB(newContainer){
-  console.log("PAYLOAD TO SEND TO API: ",newContainer)
   const url = `${REACT_APP_API_URL}/containers`
   return axios.post(url, {newContainer})
   .then((savedContainer) => {
-    console.log(savedContainer)
     return savedContainer.data
   })
   .catch((error) => console.error(error))
+}
+
+export function cleanupStackIDs(usedCodes){
+   const url = `${REACT_APP_API_URL}/stacks`
+   const requestConfig = {
+     headers: {"Access-Control-Allow-Origin": "http://localhost:3000"},
+     data: {usedCodes}
+   }
+   return axios.delete(url, requestConfig)
+    .then((deleteReport) => {
+      return deleteReport
+    })
+    .catch((error) => console.error(error))
 }

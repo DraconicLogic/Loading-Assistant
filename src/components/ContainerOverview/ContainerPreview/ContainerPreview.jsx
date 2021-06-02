@@ -6,18 +6,23 @@ import PropTypes from "prop-types";
 import CancelIcon from "@material-ui/icons/Cancel";
 
 const ContainerPreview = ({ container, remove }) => {
-  console.log("CONTAINER", container);
+
+  const [rows, setRows] = useState([[]]);
   const [currentRow, setCurrentRow] = useState(0);
-  const [rows, setRows] = useState([]);
+  const [selectedStack, setSelectedStack] = useState(null);
+  
   useEffect(() => {
     setRows(createRows(container));
-    if (rows.length > 0) setCurrentRow(rows.length - 1);
-  }, [container]);
-  const [selectedStack, setSelectedStack] = useState(null);
+  }, [])
 
-  console.log(container);
+  useEffect(() => {
+    setCurrentRow((rows.length) - 1);
+  }, [rows])
+
+
 
   const createRows = (container) => {
+    console.log('creating rows')
     const rows = [];
     let workingRow = [];
 
@@ -30,8 +35,8 @@ const ContainerPreview = ({ container, remove }) => {
         workingRow.push(container[i]);
       }
     }
-    console.log(rows);
     if (workingRow.length > 0) rows.push(workingRow);
+    console.log("rows created: ", rows)
     return rows;
   };
 

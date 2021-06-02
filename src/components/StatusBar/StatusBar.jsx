@@ -12,7 +12,6 @@ const StatusBar = ({ content, date }) => {
       return flattened;
     }, [])
     .flat(1);
-  console.log(flattenedContent);
   const rowNumber = Math.floor(content.length / 6);
 
   const totalBales = flattenedContent.length;

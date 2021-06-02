@@ -4,10 +4,6 @@ import App from "../../App.js";
 import * as utils from "../../utils.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-console.log("PROCESS.ENV: ", process.env);
-console.log("GLOBAL VAR: ", process.env.REACT_APP_API_URL);
-console.log("ENV: ", process.env.NODE_ENV);
-
 const SplashScreen = () => {
   const [storedStacks, setStoredStacks] = useState(null);
   const [view, setView] = useState(0);
@@ -86,7 +82,6 @@ const SplashScreen = () => {
 
   const startApp = async (event) => {
     setLoading(true);
-    console.log(event.target.value);
     const { value } = event.target;
 
     if (value === "new") setSavedContainer(null);
@@ -94,7 +89,6 @@ const SplashScreen = () => {
     let newStoredStacks = {};
 
     const stacks = await api.getStacks();
-    console.log(stacks);
     if (stacks.length > 0) {
       newStoredStacks = stacks.reduce((stackObject, stack) => {
         stackObject[stack.stackId] = stack.content;

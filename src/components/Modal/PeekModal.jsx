@@ -6,7 +6,6 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
   const handleClose = (event) => {
     togglePeek();
   };
-  console.log(storedStacks);
   return (
     <div id="peek-modal">
       <div id="peek-modal__content">
@@ -14,7 +13,6 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
           <CancelIcon onClick={handleClose} />
         </span>
         {Object.entries(storedStacks).map((savedStack, index) => {
-          console.log(savedStack);
           return (
             <p key={index}>
               <span style={{ "font-weight": "bold" }}>{savedStack[0]}</span> :{" "}

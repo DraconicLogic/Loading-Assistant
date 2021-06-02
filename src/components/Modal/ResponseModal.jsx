@@ -5,7 +5,6 @@ import StackEditor from "../StackEditor";
 import PropTypes from "prop-types";
 
 const ResponseModal = ({ response, close }) => {
-  console.log(response);
 
   const handleClose = () => {
     const options = {

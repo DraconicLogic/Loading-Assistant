@@ -25,7 +25,7 @@ class App extends Component {
     containerNumber: '',
     sealNumber: '',
     containerContent: [],
-    view: 1,
+    view: 0,
     storedStacks: this.props.storedStacks,
     response: null,
     usedCodes: [],
@@ -53,7 +53,6 @@ class App extends Component {
   }
 
   addToContainer = (stack) => {
-    console.log('ADDING TO CONTAINER: ', stack)
     const newContent = [...this.state.containerContent]
     newContent.push(stack)
     this.setState({
@@ -88,7 +87,7 @@ class App extends Component {
   addStackToDB = async (stack) => {
     document.getElementById('loading-modal').style.display = 'initial'
     const {stackId, content, date} = await api.saveStackToDB(stack)
-    console.log("RETURNED STACK FROM DB", stackId, content, date)
+
     const newStoredStacks = {...this.state.storedStacks}
     newStoredStacks[stackId] = content
 
@@ -102,11 +101,9 @@ class App extends Component {
     document.getElementById('loading-modal').style.display = 'initial'
     const { noticeStatus } = this.state
     const { response, storedStacks, view, ...rest} = container
-    console.log(rest)
     const returned = await api.saveContainerToDB(rest) 
     this.toggleNotice(!noticeStatus)
     document.getElementById('loading-modal').style.display = 'none'
-    console.log(returned )
   }
 
   saveProgress = () => {
@@ -130,7 +127,6 @@ class App extends Component {
 
 
   updateContainerAndSeal = ({containerNumber, sealNumber}) => {
-    console.log('APP__UPDATE CONTAINER')
     this.setState({
       containerNumber,
       sealNumber
@@ -157,20 +153,20 @@ class App extends Component {
     let view;
     switch (viewIndex) {
       case 0:
-        view = <StoredBales 
-        stacks={this.state.storedStacks} 
-        add={this.addToContainer}
-        saveUsedCode={this.saveUsedCode}
-        usedCodes={this.state.usedCodes}
-        />
-        break;
-      case 1:
         view = <ProductList 
         addToContainer={this.addToContainer} 
         addStackToDB={this.addStackToDB}
         storedStacks={this.state.storedStacks}
         />
         break;
+        case 1:
+          view = <StoredBales 
+          stacks={this.state.storedStacks} 
+          add={this.addToContainer}
+          saveUsedCode={this.saveUsedCode}
+          usedCodes={this.state.usedCodes}
+          />
+          break;
       case 2:
         view = <ContainerOverview 
         containerDetails={this.state} 

@@ -13,7 +13,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 // const theme = {background: "1D8549"};
 
 function TabPanel(props) {
-  console.log("TabPanel Props: ", props);
 
   const { children, value, index, ...other } = props;
 
@@ -87,8 +86,8 @@ export default function ProductListTab({ changeView, toggleMenu }) {
               onChange={handleChange}
               aria-label="simple tabs example"
             >
-              <Tab label="STORED" {...a11yProps(0)} />
-              <Tab label="PRODUCT LIST" {...a11yProps(1)} />
+              <Tab label="PRODUCT LIST" {...a11yProps(0)} />
+              <Tab label="STORED" {...a11yProps(1)} />
               <Tab label="OVERVIEW" {...a11yProps(2)} />
             </Tabs>
           </Toolbar>

@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 
 const ContainerOverview = ({ containerDetails, update, finish, remove }) => {
   const { containerContent } = containerDetails;
-  console.log("content: ", containerContent);
   const flatContainer = containerContent
     .reduce((flattened, stackObj) => {
       flattened.push(stackObj.stackContent);
@@ -14,7 +13,6 @@ const ContainerOverview = ({ containerDetails, update, finish, remove }) => {
     }, [])
     .flat(1);
 
-  console.log(flatContainer);
 
   const baleCount = flatContainer.reduce((tallyObj, bale) => {
     if (!tallyObj[bale]) {
