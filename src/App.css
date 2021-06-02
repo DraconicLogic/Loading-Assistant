@@ -38,7 +38,42 @@ body {
 #container-seal-section {
   border: solid;
   height: 10vh;
+  display: grid;
+  grid-template-columns: 40% 40% 40%;
+  grid-template-rows: 50% 50%;
 }
+
+
+#container-seal-section__container-label {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+#container-seal-section__seal-label {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#container-seal-section__container-input {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#container-seal-section__seal-input {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+#container-seal-section__save-button {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+#container-seal-section__finish-button {
+  grid-column: 3;
+  grid-row: 2;
+}
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
