@@ -13,7 +13,7 @@ const ContainerPreview = ({ container, remove }) => {
   
   useEffect(() => {
     setRows(createRows(container));
-  }, [])
+  }, [container])
 
   useEffect(() => {
     setCurrentRow((rows.length) - 1);

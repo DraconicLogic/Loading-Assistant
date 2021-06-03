@@ -12,8 +12,8 @@ const StatusBar = ({ content, date }) => {
       return flattened;
     }, [])
     .flat(1);
-  const rowNumber = Math.floor(content.length / 6);
 
+  const rowNumber = Math.floor(content.length / 6);
   const totalBales = flattenedContent.length;
 
   const netWeight = flattenedContent.reduce((weight, item) => {
@@ -24,19 +24,31 @@ const StatusBar = ({ content, date }) => {
     color: "red",
   };
 
+  const nearMaxWeightStyle = {
+    color: "orangered"
+  }
+
+  const numberInRow = (content.length) % 6
+  
   const toggleExtraInfo = () => {
     setExtraInfo(!extraInfo);
   };
 
   return (
     <div id="status-bar">
-      <span className="status-bar__item">Row: {rowNumber + 1}</span>
+      <span className="status-bar__item">Row: {rowNumber + 1}<br /> {numberInRow}/6 </span>
       <span className="status-bar__item">Bales: {totalBales}</span>
       <span
         onClick={toggleExtraInfo}
         className="status-bar__item"
         id="status-bar__weight"
-        style={netWeight > 26500 ? overWeightStyle : null}
+        style={
+          (netWeight > 26500)
+           ? overWeightStyle 
+           : (netWeight >= 26000 && netWeight <= 26500) 
+           ? nearMaxWeightStyle 
+           : null
+        }
       >
         Weight: {netWeight}kg
       </span>

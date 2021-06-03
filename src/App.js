@@ -66,22 +66,18 @@ class App extends Component {
     const {containerContent, usedCodes} = this.state
     const newContent = [...containerContent]
     const newCodes = new Set([...usedCodes])
-
     newCodes.delete(deleteId)
-    
-    
+
     const stackIndex = newContent.findIndex((stack) => {
       return stack.stackId === deleteId;
     });
-    
+
     newContent.splice(stackIndex, 1)
     
-      this.setState({
-        containerContent: newContent,
-        usedCodes: newCodes
-      })
-
-    
+    this.setState({
+      containerContent: newContent,
+      usedCodes: newCodes
+    })
   }
 
   addStackToDB = async (stack) => {
