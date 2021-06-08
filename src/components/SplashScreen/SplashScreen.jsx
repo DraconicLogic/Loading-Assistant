@@ -3,6 +3,8 @@ import * as api from "../../api.js";
 import App from "../../App.js";
 import * as utils from "../../utils.js";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import  logo from "../../assets/kinrich-logo-200.png"
+import  footer from "../../assets/kinrich-footer-250.png"
 
 const SplashScreen = () => {
   const [storedStacks, setStoredStacks] = useState(null);
@@ -25,10 +27,7 @@ const SplashScreen = () => {
 
   useEffect(() => {
     if (storedStacks) {
-      const timer = setTimeout(() => {
-        setView(1);
-      }, 5000);
-      return () => clearTimeout(timer);
+      setView(1);
     }
   }, [storedStacks]);
 
@@ -37,41 +36,57 @@ const SplashScreen = () => {
     switch (viewIndex) {
       case 0:
         view = (
-          <div id="splash">
-            <h2>Nnenna Textiles</h2>
-            <h1>Container Loading Assistant</h1>
-
-            <button onClick={startApp} value="new">
-              Start New Container
-            </button>
-            <button
-              disabled={savedContainer ? false : true}
-              onClick={startApp}
-              value="continue"
-            >
-              Continue Container
-            </button>
-            <p hidden={savedContainer ? false : true}>
-              There seems to be Container loading in progress.
-            </p>
-            <div hidden={!loading}>
-              <CircularProgress />
-
-              <p>
-                {storedStacks ? Object.keys(storedStacks).length : null} Stacks
-                Retrieved
-              </p>
+          <div id="splash" className={storedStacks ? "fade-out" : null}>
+            <div id="splash-center">
+              <img id="splash-center__kinrich-logo" src={logo} alt="Kinrich Logo" />
+              <h1 id="App-title">Loading Assistant</h1>
             </div>
+            <div id="splash-bottom">
+              <div id="splash-bottom__buttons">
+                <button onClick={startApp} value="new">
+                Start New Container
+              </button>
+              <button
+                disabled={savedContainer ? false : true}
+                onClick={startApp}
+                value="continue"
+              >
+                Continue Container
+              </button>
+
+              </div>
+              <div id='splash-bottom__information'>
+                  <p hidden={savedContainer ? false : true}>
+                There seems to be Container loading in progress.
+              </p>
+              <div hidden={!loading}>
+                <br />
+                <CircularProgress />
+
+                <p>
+                  {storedStacks ? Object.keys(storedStacks).length : null} Stacks
+                  Retrieved
+                </p>
+              </div>
+            
+            </div>
+            <span id="splash-bottom__version">Ver 2.0.0</span>
+            <img id="splash-bottom__kinrich-footer" src={footer} alt="Kinrich Logo Footer" />
+            </div>
+
+            
           </div>
         );
         break;
       case 1:
         view = (
-          <App
-            storedStacks={storedStacks}
-            savedContainer={savedContainer}
-            date={date}
-          />
+          <div className={viewIndex === 1 ? "fade-in" : null}>
+            <App
+              storedStacks={storedStacks}
+              savedContainer={savedContainer}
+              date={date}
+            />
+          </div>
         );
         break;
       default:

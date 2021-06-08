@@ -95,9 +95,19 @@ class App extends Component {
 
   addContainerToDB = async (container) => {
     document.getElementById('loading-modal').style.display = 'initial'
-    const { noticeStatus } = this.state
+    const { noticeStatus, usedCodes } = this.state
     const { response, storedStacks, view, ...rest} = container
-    const returned = await api.saveContainerToDB(rest) 
+    api.saveContainerToDB(rest)
+    .then(() => {
+      console.log("Saved Container")
+      api.cleanupStackIDs(usedCodes)
+      .then((deleteReport) => {
+        console.log("Stack IDs released -> ", deleteReport)
+      })
+      
+    })
+    .catch((error) => console.error(error))
+    
     this.toggleNotice(!noticeStatus)
     document.getElementById('loading-modal').style.display = 'none'
   }

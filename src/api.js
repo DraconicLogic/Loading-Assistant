@@ -1,6 +1,5 @@
 import axios from 'axios'
 const {REACT_APP_API_URL} = process.env
-// const nnennaAPI = 'https://nnenna-textiles-api.appspot.com/api'
 
 export function saveStackToDB(newStack){
   const url = `${REACT_APP_API_URL}/stacks`
@@ -35,7 +34,6 @@ export function saveContainerToDB(newContainer){
 export function cleanupStackIDs(usedCodes){
    const url = `${REACT_APP_API_URL}/stacks`
    const requestConfig = {
-     headers: {"Access-Control-Allow-Origin": "http://localhost:3000"},
      data: {usedCodes}
    }
    return axios.delete(url, requestConfig)
