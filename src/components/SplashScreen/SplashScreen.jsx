@@ -104,12 +104,16 @@ const SplashScreen = () => {
     let newStoredStacks = {};
 
     const stacks = await api.getStacks();
+
+    console.log("getStacks() ",stacks)
     if (stacks.length > 0) {
       newStoredStacks = stacks.reduce((stackObject, stack) => {
-        stackObject[stack.stackId] = stack.content;
+        const {content, date, stackId} = stack
+        stackObject[stack.stackId] = {content, date, stackId};
         return stackObject;
       }, {});
     }
+    console.log("Transform Stacks: ", newStoredStacks)
     setStoredStacks(newStoredStacks);
   };
 

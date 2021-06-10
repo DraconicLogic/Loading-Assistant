@@ -142,10 +142,11 @@ class ProductList extends Component {
       }
     }
     if (isStackFilled) {
+      const date = new Date().toISOString()
       const stackObj = {
         stackId: generateUniqueCode(storedStacks),
         content: currentStack,
-        date: utils.getDate(),
+        date
       };
       addStackToDB(stackObj);
       this.clearStack();

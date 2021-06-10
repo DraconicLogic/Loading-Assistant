@@ -217,10 +217,8 @@ MuiAppBar {
   height: 100px;
 }
 
-/* TODO: Find selector to get this working */
-MuiAppBar-colorPrimary-8 {
-  color: #fff;
-  background-color: #1d8549;
+.MuiToolbar-root-61 {
+  justify-content: space-between;
 }
 
 .MuiSvgIcon-root-80 {
@@ -247,7 +245,7 @@ MuiAppBar-colorPrimary-8 {
   /* Full width */
   height: 100%;
   /* Full height */
-  overflow: auto;
+  overflow: hidden;
   /* Enable scroll if needed */
   background-color: rgb(0, 0, 0);
   /* Fallback color */
@@ -257,14 +255,28 @@ MuiAppBar-colorPrimary-8 {
 
 #peek-modal__content {
   background-color: white;
-  margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
+  height: 95%;
   border: solid;
-  width: 80%;
-  text-align: left;
-  /* Could be more or less, depending on screen size */
+  width: 95%;
+  display: grid;
+  grid-template-rows: max-content auto;
+  margin: 5% auto; /* 15% from the top and centered */
 }
+
+#peek-modal__content__stacks {
+  grid-row: 2;
+  overflow: scroll;
+  text-align: left; 
+  padding: 20px;
+
+
+}
+
+.MuiAppBar-root-25 {
+  /* Selector for Appbar component in #peek-modal__content */
+  grid-row: 1;
+}
+
 
 #product-list {
   /* display: grid;
@@ -372,7 +384,7 @@ MuiAppBar-colorPrimary-8 {
 
 #splash-bottom__information {
   text-align: center;
-  min-height: 5em;
+  min-height: 5.5em;
 }
 
 #splash-bottom__kinrich-footer {
