@@ -25,3 +25,23 @@ export function accendingOrder (a, b) {
 export function descendingOrder (a, b) {
   return -(a[1].date.localeCompare(b[1].date))
 }
+
+export function convertStacksToStateFormat (stackArray) {
+  console.log('Stack Array: ', stackArray)
+  // stackArray should be an array of objects(stacks)
+
+  // turn array of objects into a object each stack keyed with 
+
+    return stackArray.reduce((stackObject, stack) => {
+      const {content, date, stackId} = stack
+      stackObject[stack.stackId] = {content, date, stackId};
+      return stackObject;
+    }, {});
+}
+
+export function convertStacksToStorageFormat (stateStacks) {
+  // state stacks should be one object. properties are objects keyed with stackId
+
+  // convert to array of objects
+  return Object.values(stateStacks)
+}

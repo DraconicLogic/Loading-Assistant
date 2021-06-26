@@ -57,6 +57,7 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
             </span>
           </Toolbar>
         </AppBar>
+        {Object.keys(storedStacks).length > 0 ?
         <div id="peek-modal__content__stacks">
           {displayStacks(storedStacks).map((savedStack, index) => {
                     return (
@@ -77,7 +78,10 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
                       </p>
                     );
                   })}
-        </div>
+        </div> 
+        :
+        null
+        }
         
       </div>
     </div>

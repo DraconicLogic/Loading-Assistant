@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import products from "../../products/products.json";
 import PropTypes from "prop-types";
+import SyncIcon from '@material-ui/icons/Sync';
+import DoneIcon from '@material-ui/icons/Done';
 import { Popover } from "@material-ui/core";
+import dayjs from "dayjs";
 
-const StatusBar = ({ content, date }) => {
+const StatusBar = ({ content, date, synced }) => {
   const [extraInfo, setExtraInfo] = useState(false);
 
   const flattenedContent = content
@@ -60,7 +63,8 @@ const StatusBar = ({ content, date }) => {
       >
         Space Remaining: {26500 - netWeight}kg
       </Popover>
-      <span className="status-bar__item">Date: {date}</span>
+      <span className="status-bar__item">{synced ? <DoneIcon /> : <SyncIcon />}</span>
+      <span className="status-bar__item">Date: {dayjs(date).format('DD/MM/YYYY')}</span>
     </div>
   );
 };

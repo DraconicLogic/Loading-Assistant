@@ -42,3 +42,16 @@ export function cleanupStackIDs(usedCodes){
     })
     .catch((error) => console.error(error))
 }
+
+export function getProducts() {
+  const url = `${REACT_APP_API_URL}/products`
+  const requestConfig = {
+    headers: {"Access-Control-Allow-Origin": "http://localhost:3000"},
+  }
+  return axios.get(url, requestConfig)
+    .then((products) => {
+      return products.data.products
+    })
+    .catch((error) => console.error(error))
+  
+}

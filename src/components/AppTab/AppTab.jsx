@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export default function ProductListTab({ changeView, toggleMenu }) {
+export default function ProductListTab({ setView, toggleMenu }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -63,7 +63,7 @@ export default function ProductListTab({ changeView, toggleMenu }) {
   };
 
   React.useEffect(() => {
-    changeView(value);
+    setView(value);
   }, [value]);
 
   return (
@@ -86,9 +86,9 @@ export default function ProductListTab({ changeView, toggleMenu }) {
               onChange={handleChange}
               aria-label="simple tabs example"
             >
-              <Tab label="PRODUCT LIST" {...a11yProps(0)} />
-              <Tab label="STORED" {...a11yProps(1)} />
-              <Tab label="OVERVIEW" {...a11yProps(2)} />
+              <Tab label="PRODUCT LIST" {...a11yProps(1)} />
+              <Tab label="STORED" {...a11yProps(2)} />
+              <Tab label="OVERVIEW" {...a11yProps(3)} />
             </Tabs>
           </Toolbar>
         </AppBar>
