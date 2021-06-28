@@ -15,6 +15,7 @@ import { ListItem, ListItemText, Snackbar } from '@material-ui/core';
 import CancelIcon from "@material-ui/icons/Cancel";
 import PeekModal from './components/Modal/PeekModal.jsx';
 import LoadingModal from './components/Modal/LoadingModal.jsx';
+import dayjs from "dayjs"
 import PropTypes from 'prop-types'
 
 function App () {
@@ -55,7 +56,7 @@ function App () {
 
   function saveContainerData () {
     const containers = JSON.parse(localStorage.getItem("containers")) || {}
-    containers[date] = {containerNumber, sealNumber,date, containerContent}
+    containers[dayjs(date).format('DD/MM/YYYY')] = {containerNumber, sealNumber,date, containerContent}
     localStorage.setItem("containers", JSON.stringify(containers))
   }
 
@@ -68,7 +69,7 @@ function App () {
       sealNumber
     }
     const savedStates = JSON.parse(localStorage.getItem('savedStates')) || {}
-    savedStates[currentState.date] = currentState
+    savedStates[dayjs(currentState.date).format('DD/MM/YYYY')] = currentState
     localStorage.setItem("saveStates", JSON.stringify(savedStates))
   }
 
@@ -147,7 +148,9 @@ function App () {
   }
 
   function cacheContainer () {
-    const currentContainer = {[date]: containerContent}
+    const currentContainer = {
+      [dayjs(date).format('DD/MM/YYYY')]: containerContent}
+
     localStorage.setItem("currentContainer", JSON.stringify(currentContainer))
   }
 
@@ -201,7 +204,7 @@ function App () {
         />
         break;
       default:
-        screen = <h1>500 - Something's gone horribly wrong</h1>
+        screen = <h1>500 - Something's gone horribly wrong. Contact Kingsley</h1>
     }
     return screen
   }
@@ -232,7 +235,7 @@ function App () {
           <Snackbar 
             open={noticeStatus}
             autoHideDuration={10000}
-            message="Container Completed - Email Sent"
+            message="Container Completed"
             onClose={() => toggleNotice(!noticeStatus)}
           />
           </div>
