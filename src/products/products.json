@@ -567,5 +567,13 @@
     "price": 35,
     "units": "KG",
     "size": 55
+  },
+  "TIE": {
+    "code": "TIE",
+    "item": "Neck Ties",
+    "baleSize": "small",
+    "price": 35,
+    "units": "KG",
+    "size": 55
   }
 }

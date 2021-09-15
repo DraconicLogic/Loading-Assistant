@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductList from './components/ProductList/ProductList/ProductList.jsx'
 import './App.css';
 import ContainerOverview from './components/ContainerOverview/ContainerOverview/ContainerOverview.jsx';
@@ -7,6 +7,7 @@ import StoredBales from './components/StoredBales/StoredBales/StoredBales.jsx';
 import SplashScreen from './components/SplashScreen/SplashScreen.jsx'
 import * as api from "./api.js"
 import * as utils from "./utils.js"
+import * as local from "./localStorage"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,7 +16,6 @@ import { ListItem, ListItemText, Snackbar } from '@material-ui/core';
 import CancelIcon from "@material-ui/icons/Cancel";
 import PeekModal from './components/Modal/PeekModal.jsx';
 import LoadingModal from './components/Modal/LoadingModal.jsx';
-import dayjs from "dayjs"
 import PropTypes from 'prop-types'
 
 function App () {
@@ -41,7 +41,7 @@ function App () {
   useEffect(cacheContainer, [containerContent])
   useEffect(saveState,[containerContent])
 
-  useEffect(saveContainerData, [containerComplete])
+  // useEffect(saveContainerData, [containerComplete])
 
   useEffect(saveStackData, [storedStacks])
 
@@ -50,13 +50,19 @@ function App () {
     setProducts(items)
   }
 
-  function saveStackData () {
-    localStorage.setItem("stacks", JSON.stringify(utils.convertStacksToStorageFormat(storedStacks)))
+  function saveStackData (newStack) {
+    
+    local.saveStackLocal(storedStacks)
+    api.saveStackToDB(newStack)
+    .then((stack) => {    
+       alert(`Stack ${stack.stackId} has been saved in the DB`)
+    })
+    alert(`Stack saved locally`)
   }
 
   function saveContainerData () {
     const containers = JSON.parse(localStorage.getItem("containers")) || {}
-    containers[dayjs(date).format('DD/MM/YYYY')] = {containerNumber, sealNumber,date, containerContent}
+    containers[date] = {containerNumber, sealNumber,date, containerContent}
     localStorage.setItem("containers", JSON.stringify(containers))
   }
 
@@ -69,7 +75,7 @@ function App () {
       sealNumber
     }
     const savedStates = JSON.parse(localStorage.getItem('savedStates')) || {}
-    savedStates[dayjs(currentState.date).format('DD/MM/YYYY')] = currentState
+    savedStates[currentState.date] = currentState
     localStorage.setItem("saveStates", JSON.stringify(savedStates))
   }
 
@@ -78,23 +84,12 @@ function App () {
   }
 
   function loadStackData () {
-    if (localStorage.getItem("stacks")) {
-      const localData = JSON.parse(localStorage.getItem("stacks"))
-      setStoredStacks(
-        utils.convertStacksToStateFormat(localData)
-      )
-
-    } else {
       api.getStacks()
-      .then((stacks) => {
-        if (stacks) {
-          setStoredStacks(
-            utils.convertStacksToStateFormat(stacks)
-          )
-        }
-      })
-      .catch((error) => console.error(error))
-    }
+        .then((stacks) => {
+          setStoredStacks(stacks)
+          alert("Stack Data retrieved from remote DB")
+        })
+        .catch((error) => {console.error(error)})
     return;
   }
 
@@ -120,21 +115,24 @@ function App () {
     setUsedCodes(newCodes)
   }
 
-  function addStackToDB (stack) {
+  function addStack (stack) {
     const {stackId, content, date} = stack
     const newStoredStacks = {...storedStacks}
     newStoredStacks[stackId] = {stackId, content, date}
     setResponse(stack)
     setStoredStacks(newStoredStacks)
+    saveStackData(stack)
+
   }
   
   function addContainerToDB  (container) {
     const { response, storedStacks, view, ...rest} = container
     setContainerComplete(true)
-
+    local.saveContainerLocal(rest)
+    alert("Container Saved locally")
     api.saveContainerToDB(rest)
     .then(() => {
-      console.log("Saved Container")
+      alert("Saved Container Remotely")
       api.cleanupStackIDs(usedCodes)
       .then((deleteReport) => {
         console.log("Stack IDs released -> ", deleteReport)
@@ -148,9 +146,7 @@ function App () {
   }
 
   function cacheContainer () {
-    const currentContainer = {
-      [dayjs(date).format('DD/MM/YYYY')]: containerContent}
-
+    const currentContainer = {[date]: containerContent}
     localStorage.setItem("currentContainer", JSON.stringify(currentContainer))
   }
 
@@ -183,7 +179,7 @@ function App () {
       case 0:
         screen = <ProductList 
         addToContainer={addToContainer} 
-        addStackToDB={addStackToDB}
+        addStack={addStack}
         storedStacks={storedStacks}
         />
         break;
@@ -204,7 +200,7 @@ function App () {
         />
         break;
       default:
-        screen = <h1>500 - Something's gone horribly wrong. Contact Kingsley</h1>
+        screen = <h1>500 - Something's gone horribly wrong</h1>
     }
     return screen
   }
@@ -223,7 +219,7 @@ function App () {
                 toggleMenu()
               }} >
                 <ListItemText primary={"Check Imported Stacks"}/>
-              </ListItem>
+              </ListItem>            
             </List>
           </Drawer>
           <LoadingModal />
@@ -235,7 +231,7 @@ function App () {
           <Snackbar 
             open={noticeStatus}
             autoHideDuration={10000}
-            message="Container Completed"
+            message="Container Completed - Email Sent"
             onClose={() => toggleNotice(!noticeStatus)}
           />
           </div>
