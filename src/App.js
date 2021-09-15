@@ -7,7 +7,6 @@ import StoredBales from './components/StoredBales/StoredBales/StoredBales.jsx';
 import SplashScreen from './components/SplashScreen/SplashScreen.jsx'
 import * as api from "./api.js"
 import * as utils from "./utils.js"
-import * as local from "./localStorage"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
 import Drawer from '@material-ui/core/Drawer';
@@ -52,7 +51,7 @@ function App () {
 
   function saveStackData (newStack) {
     
-    local.saveStackLocal(storedStacks)
+  
     api.saveStackToDB(newStack)
     .then((stack) => {    
        alert(`Stack ${stack.stackId} has been saved in the DB`)
@@ -128,7 +127,7 @@ function App () {
   function addContainerToDB  (container) {
     const { response, storedStacks, view, ...rest} = container
     setContainerComplete(true)
-    local.saveContainerLocal(rest)
+  
     alert("Container Saved locally")
     api.saveContainerToDB(rest)
     .then(() => {
