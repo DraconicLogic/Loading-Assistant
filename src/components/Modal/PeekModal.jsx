@@ -16,7 +16,7 @@ import {accendingOrder, descendingOrder} from "../../utils.js"
 //   }
 // })
 
-const PeekModal = ({ storedStacks, togglePeek }) => {
+const PeekModal = ({ savedStacks, togglePeek }) => {
   // const classes = useStyles();
   const [dateSortAccending, setDateSortAccending] = useState(false)
 
@@ -37,9 +37,9 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
   const displayStacks = (stacks) => {
     let sortedStacks;
     if (dateSortAccending) {
-      sortedStacks = sortByDate(storedStacks, accendingOrder)
+      sortedStacks = sortByDate(savedStacks, accendingOrder)
     } else {
-      sortedStacks = sortByDate(storedStacks, descendingOrder)
+      sortedStacks = sortByDate(savedStacks, descendingOrder)
     }
   
     return sortedStacks
@@ -57,9 +57,9 @@ const PeekModal = ({ storedStacks, togglePeek }) => {
             </span>
           </Toolbar>
         </AppBar>
-        {Object.keys(storedStacks).length > 0 ?
+        {Object.keys(savedStacks).length > 0 ?
         <div id="peek-modal__content__stacks">
-          {displayStacks(storedStacks).map((savedStack, index) => {
+          {displayStacks(savedStacks).map((savedStack, index) => {
                     return (
                       <p key={index}>
                         <span style={{

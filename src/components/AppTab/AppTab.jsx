@@ -107,6 +107,6 @@ export default function ProductListTab({ setView, toggleMenu }) {
 }
 
 ProductListTab.propTypes = {
-  changeView: PropTypes.func.isRequired,
+  setView: PropTypes.func.isRequired,
   toggleMenu: PropTypes.func,
 };

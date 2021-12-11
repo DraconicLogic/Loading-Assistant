@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from './components/ProductList/ProductList/ProductList.jsx'
+
 import './App.css';
-import ContainerOverview from './components/ContainerOverview/ContainerOverview/ContainerOverview.jsx';
+
 import ProductListTab from "./components/AppTab/AppTab.jsx";
-import StoredBales from './components/StoredBales/StoredBales/StoredBales.jsx';
+
 import SplashScreen from './components/SplashScreen/SplashScreen.jsx'
 import * as api from "./api.js"
-import * as utils from "./utils.js"
+import * as local from "./local.js"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import { ListItem, ListItemText, Snackbar } from '@material-ui/core';
-import CancelIcon from "@material-ui/icons/Cancel";
+
+
+
+import { Snackbar } from '@material-ui/core';
+
 import PeekModal from './components/Modal/PeekModal.jsx';
 import LoadingModal from './components/Modal/LoadingModal.jsx';
 import PropTypes from 'prop-types'
+import Menu from './components/Menu/Menu.jsx';
+import DisplayView from './components/DisplayView/DisplayView.jsx';
 
 function App () {
-  const [storedStacks, setStoredStacks] = useState({})
+  const [savedStacks, setSavedStacks] = useState({})
   const [date, setDate] = useState("")
   const [containerNumber, setContainerNumber] = useState("")
   const [sealNumber, setSealNumber] = useState("")
@@ -31,39 +34,63 @@ function App () {
   const [peekStatus, setPeekStatus] = useState(false)
   const [noticeStatus, setNoticeStatus] = useState(false)
   const [dataSynced, setDataSynced] = useState(null)
-  const [products, setProducts] =  useState({})
+  const [products, setProducts] =  useState(null)
    
-  useEffect(loadStackData, [])
-  useEffect(getDate,[])
-  useEffect(getProducts, [])
 
-  useEffect(cacheContainer, [containerContent])
-  useEffect(saveState,[containerContent])
+  useEffect(saveState)
 
-  // useEffect(saveContainerData, [containerComplete])
+  async function loadProducts(){
+    let items = await local.getProducts()
+    if(!items) {
+      items = await api.getProducts()
+      if(items) {
+        local.setProducts(items)
+      }
+    }
+    if(!items) {
+      alert("There was an issue while loading the application products. Please reset and try again")
+    } else {
+      console.log("Setting products:", items)
+      setProducts(items)
+    }
+  }
 
-  useEffect(saveStackData, [storedStacks])
+  async function syncCheck(LastEdited) {
+    setDataSynced(null)
+    // TODO: call api.getLastEdited() compare to localLastEditted
+    const localLast = local.getLastEdited()
 
-  function getProducts () {
-    const items = JSON.parse(localStorage.getItem("products")) || api.getProducts()
-    setProducts(items)
+    api.getLastEdited()
+      .then((date) => {
+        
+      })
+
+
+    const localLastEdited = local.getLastEdited()
+    
+
+
+    // if localLastEdited is latest push unsent to remote
   }
 
   function saveStackData (newStack) {
-    
-  
-    api.saveStackToDB(newStack)
+    local.saveStackLocal(newStack)
+    alert(`Stack ${newStack.stackId} saved locally`)
+
+    api.saveStackDB(newStack)
     .then((stack) => {    
        alert(`Stack ${stack.stackId} has been saved in the DB`)
+    }).catch((error) => {
+      console.log("Save Stack DB error(App.js level)")
+      console.error(error)
     })
-    alert(`Stack saved locally`)
   }
 
-  function saveContainerData () {
-    const containers = JSON.parse(localStorage.getItem("containers")) || {}
-    containers[date] = {containerNumber, sealNumber,date, containerContent}
-    localStorage.setItem("containers", JSON.stringify(containers))
-  }
+  // function saveContainerData () {
+  //   const containers = JSON.parse(localStorage.getItem("containers")) || {}
+  //   containers[date] = {containerNumber, sealNumber,date, containerContent}
+  //   localStorage.setItem("containers", JSON.stringify(containers))
+  // }
 
   function saveState () {
     const currentState = {
@@ -78,54 +105,67 @@ function App () {
     localStorage.setItem("saveStates", JSON.stringify(savedStates))
   }
 
-  function getDate () {
-    setDate(Date())
-  }
+  // async function loadStackData () {
+  //   // TODO: First retrieve data from local. Then check remoote to make sure local is up to date. If not then update
+  //   const localStacks = await local.getStacksLocal()
+  //   console.log(localStacks)
+  //   setSavedStacks(localStacks)
 
-  function loadStackData () {
-      api.getStacks()
-        .then((stacks) => {
-          setStoredStacks(stacks)
-          alert("Stack Data retrieved from remote DB")
-        })
-        .catch((error) => {console.error(error)})
-    return;
-  }
+    
+
+
+
+  //     api.getStacks()
+  //       .then((stacks) => {
+  //         setSavedStacks(stacks)
+  //         alert("Stack Data retrieved from remote DB")
+  //       })
+  //       .catch((error) => {console.error(error)})
+  //   return;
+  // }
 
   function toggleNotice (newNoticeStatus) {
     setNoticeStatus(newNoticeStatus)
   }
 
   function addToContainer (stack) {
-    const newContent = [...containerContent]
-    newContent.push(stack)
-    setContainerContent(newContent)
+    if (!containerComplete) {
+      const newContent = [...containerContent]
+      newContent.push(stack)
+      setContainerContent(newContent)
+    }
+    // if (containerComplete) then make alert. For why there no more adding stacks to container
   }
 
   function removeFromContainer (deleteId) {
-    const newContent = [...containerContent]
-    const newCodes = new Set([...usedCodes])
-    newCodes.delete(deleteId)
-    const stackIndex = newContent.findIndex((stack) => {
-      return stack.stackId === deleteId;
-    });
-    newContent.splice(stackIndex, 1)
-    setContainerContent(newContent)
-    setUsedCodes(newCodes)
+    if (!containerComplete) {
+      const newContent = [...containerContent]
+      const newCodes = new Set([...usedCodes])
+      newCodes.delete(deleteId)
+      const stackIndex = newContent.findIndex((stack) => {
+        return stack.stackId === deleteId;
+      });
+      newContent.splice(stackIndex, 1)
+      setContainerContent(newContent)
+      setUsedCodes(newCodes)
+    }
   }
 
   function addStack (stack) {
     const {stackId, content, date} = stack
-    const newStoredStacks = {...storedStacks}
-    newStoredStacks[stackId] = {stackId, content, date}
+    const newSavedStacks = {...savedStacks}
+    newSavedStacks[stackId] = {stackId, content, date}
     setResponse(stack)
-    setStoredStacks(newStoredStacks)
+    setSavedStacks(newSavedStacks)
     saveStackData(stack)
 
   }
   
   function addContainerToDB  (container) {
-    const { response, storedStacks, view, ...rest} = container
+    // need to add functionallity to remove stacks loaded from state and local storage. Remove from should be reviewed at this time.
+    
+    console.log("Saving Container:", container)
+    const { response, savedStacks, view, ...rest} = container
     setContainerComplete(true)
   
     alert("Container Saved locally")
@@ -142,11 +182,6 @@ function App () {
     
     toggleNotice(!noticeStatus)
     document.getElementById('loading-modal').style.display = 'none'
-  }
-
-  function cacheContainer () {
-    const currentContainer = {[date]: containerContent}
-    localStorage.setItem("currentContainer", JSON.stringify(currentContainer))
   }
 
   function closeModal () {
@@ -172,60 +207,41 @@ function App () {
     setPeekStatus(!peekStatus)
   }
 
-  function displayView (viewIndex, container) {
-    let screen;
-    switch (viewIndex) {
-      case 0:
-        screen = <ProductList 
-        addToContainer={addToContainer} 
-        addStack={addStack}
-        storedStacks={storedStacks}
-        />
-        break;
-        case 1:
-          screen = <StoredBales 
-          stacks={storedStacks} 
-          add={addToContainer}
-          saveUsedCode={saveUsedCode}
-          usedCodes={usedCodes}
-          />
-          break;
-      case 2:
-        screen = <ContainerOverview 
-        containerDetails={{containerContent, containerNumber, sealNumber}} 
-        update={updateContainerAndSeal}
-        finish={addContainerToDB}
-        remove={removeFromContainer}
-        />
-        break;
-      default:
-        screen = <h1>500 - Something's gone horribly wrong</h1>
-    }
-    return screen
-  }
-
       return (    
         <div id="App">
-          <SplashScreen setView={setView} 
-        view={view}
-        storedStacks={storedStacks}>
+          <SplashScreen 
+           savedStacks={savedStacks}
+           setters={{setSavedStacks, setDate, setProducts}}
+           >
           <div id="main" className="fade-in"> 
-             <Drawer open={menuStatus}>
-            <CancelIcon onClick={toggleMenu}/>
-            <List>
-              <ListItem button onClick={() => {
-                togglePeek()
-                toggleMenu()
-              }} >
-                <ListItemText primary={"Check Imported Stacks"}/>
-              </ListItem>            
-            </List>
-          </Drawer>
+
+             <Menu 
+             peekState={{peekStatus, setPeekStatus}}
+             menuState={{menuStatus, setMenuStatus}}
+             />
+
           <LoadingModal />
-          {peekStatus && <PeekModal storedStacks={storedStacks} togglePeek={togglePeek}/>}
+
+          {peekStatus && <PeekModal savedStacks={savedStacks} togglePeek={togglePeek}/>}
+          
           {!!response && <ResponseModal response={response} close={closeModal} />}
           <ProductListTab setView={setView} toggleMenu={toggleMenu} />
-          {displayView(view, containerContent)} 
+
+          <DisplayView 
+          view={view} 
+          addToContainer={addToContainer}
+          addStack={addStack}
+          savedStacks={savedStacks}
+          usedCodes={usedCodes}
+          saveUsedCode={saveUsedCode}
+          containerContent={containerContent}
+          containerNumber={containerNumber}
+          sealNumber={sealNumber}
+          updateContainerAndSeal={updateContainerAndSeal}
+          addContainerToDB={addContainerToDB}
+          removeFromContainer={removeFromContainer}
+          />
+
           <StatusBar content={containerContent} date={date} synced={dataSynced}/>
           <Snackbar 
             open={noticeStatus}
@@ -241,7 +257,7 @@ function App () {
 }
 
 App.propTypes = {
-  storedStacks: PropTypes.object,
+  savedStacks: PropTypes.object,
   savedContainer: PropTypes.object,
   date: PropTypes.string
 }

@@ -95,7 +95,7 @@ class ProductList extends Component {
   };
 
   handleAddContainer = () => {
-    const { addToContainer, storedStacks } = this.props;
+    const { addToContainer, savedStacks } = this.props;
     const { currentStack } = this.state;
 
     let isStackFilled = true;
@@ -107,7 +107,7 @@ class ProductList extends Component {
 
     if (isStackFilled) {
       const newStack = {
-        stackId: generateUniqueCode(storedStacks),
+        stackId: generateUniqueCode(savedStacks),
         stackContent: currentStack,
       };
 
@@ -134,7 +134,7 @@ class ProductList extends Component {
 
   handleAddToDB = () => {
     const { currentStack } = this.state;
-    const { addStackToDB, storedStacks } = this.props;
+    const { addStack, savedStacks } = this.props;
     let isStackFilled = true;
     for (let i = 0; i < currentStack.length; i++) {
       if (currentStack[i] === undefined) {
@@ -144,11 +144,11 @@ class ProductList extends Component {
     if (isStackFilled) {
       const date = new Date().toISOString()
       const stackObj = {
-        stackId: generateUniqueCode(storedStacks),
+        stackId: generateUniqueCode(savedStacks),
         content: currentStack,
         date
       };
-      addStackToDB(stackObj);
+      addStack(stackObj);
       this.clearStack();
     } else {
       alert("Please fill in the stack");
@@ -157,7 +157,7 @@ class ProductList extends Component {
 }
 
 ProductList.propTypes = {
-  storedStacks: PropTypes.object.isRequired,
+  savedStacks: PropTypes.object.isRequired,
   addStackToDB: PropTypes.func,
   addToContainer: PropTypes.func,
 };

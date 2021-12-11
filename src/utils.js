@@ -1,3 +1,6 @@
+import * as api from "./api.js"
+import * as local from "./local.js"
+
 export function findEmptyPosition (array) {
   let emptyPosition;
   for (let i = 0; i < array.length; i++) {
@@ -10,12 +13,7 @@ export function findEmptyPosition (array) {
 }
 
 export function getDate () {
-  const currentDate = new Date()
-  console.log("getDate() ", currentDate)
-  const day = currentDate.getDate()
-  const month = (currentDate.getMonth() + 1)
-  const year = currentDate.getFullYear()
-  return (`${day}-${month}-${year}`)
+  return new Date().toISOString()
 }
 
 export function accendingOrder (a, b) {
@@ -27,11 +25,7 @@ export function descendingOrder (a, b) {
 }
 
 export function convertStacksToStateFormat (stackArray) {
-  console.log('Stack Array: ', stackArray)
   // stackArray should be an array of objects(stacks)
-
-  // turn array of objects into a object each stack keyed with 
-
     return stackArray.reduce((stackObject, stack) => {
       const {content, date, stackId} = stack
       stackObject[stack.stackId] = {content, date, stackId};
@@ -44,4 +38,8 @@ export function convertStacksToStorageFormat (stateStacks) {
 
   // convert to array of objects
   return Object.values(stateStacks)
+}
+
+export async function syncCheck(){
+  
 }

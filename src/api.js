@@ -1,28 +1,33 @@
 import axios from 'axios'
+import * as utils from "./utils.js"
 const {REACT_APP_API_URL} = process.env
 
-export function saveStackToDB(newStack){
+export async function saveStackDB(newStack){
   const url = `${REACT_APP_API_URL}/stacks`
   return axios.post(url,{newStack})
   .then((savedStack) => {
     return savedStack.data.createdStack
   })
-  .catch((error) => console.error(error))
+  .catch((error) => {
+    console.log("Save Stack DB error")
+    console.error(error)})
 }
 
-export function getStacks(){
+export async function getStacks(){
   const url = `${REACT_APP_API_URL}/stacks`
   const requestConfig = {
     headers: {"Access-Control-Allow-Origin": "http://localhost:3000"},
   }
   return axios.get(url, requestConfig)
     .then((stacks) => {
-      return stacks.data.stacks
+      return utils.convertStacksToStateFormat(
+        stacks.data.stacks
+      )
     })
     .catch((error) => console.error(error))
 }
 
-export function saveContainerToDB(newContainer){
+export async function saveContainerToDB(newContainer){
   const url = `${REACT_APP_API_URL}/containers`
   return axios.post(url, {newContainer})
   .then((savedContainer) => {
@@ -31,7 +36,7 @@ export function saveContainerToDB(newContainer){
   .catch((error) => console.error(error))
 }
 
-export function cleanupStackIDs(usedCodes){
+export async function cleanupStackIDs(usedCodes){
    const url = `${REACT_APP_API_URL}/stacks`
    const requestConfig = {
      data: {usedCodes}
@@ -43,15 +48,21 @@ export function cleanupStackIDs(usedCodes){
     .catch((error) => console.error(error))
 }
 
-export function getProducts() {
+export async function getProducts() {
   const url = `${REACT_APP_API_URL}/products`
   const requestConfig = {
     headers: {"Access-Control-Allow-Origin": "http://localhost:3000"},
   }
-  return axios.get(url, requestConfig)
+  console.log("api.getProducts called")
+  return await axios.get(url, requestConfig)
     .then((products) => {
+      console.log("products from api: ", products)
       return products.data.products
     })
     .catch((error) => console.error(error))
   
+}
+
+export async function getLastEdited(){
+  // TODO: Request last edited date and return
 }

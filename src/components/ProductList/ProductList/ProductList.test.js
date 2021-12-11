@@ -14,7 +14,7 @@ test('Product selected are added to the stack editor', () => {
     <ProductList 
       add={() => console.log('ADD TO CONTAINER')} 
       addStackToDB={() => console.log('ADD STACK TO DB')}
-      storedStacks={testStacks}
+      savedStacks={testStacks}
     />
   )
   
@@ -37,7 +37,7 @@ test('Save stack to database', () => {
     <ProductList
     add={() => console.log('ADD TO CONTAINER')} 
     addStackToDB={addToDB}
-    storedStacks={testStacks}
+    savedStacks={testStacks}
     />
     )
   const product = getByText('ATS')
@@ -66,7 +66,7 @@ test('Overwrite product in the stack editor', () => {
     <ProductList
     add={() => console.log('ADD TO CONTAINER')} 
     addStackToDB={() => console.log('ADD TO DB')}
-    storedStacks={testStacks}
+    savedStacks={testStacks}
     />
   )
 
