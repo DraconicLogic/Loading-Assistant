@@ -12,14 +12,6 @@ export function getStacks(){
   )
 }
 
-export async function updateLastEdited(date){
-  localStorage.setItem("lastEdited", JSON.stringify(date))
-}
-
-export async function getLastEdited(){
-  return JSON.parse(localStorage.getItem("lastEdited"))
-}
-
 export function getProducts(){
   return JSON.parse(localStorage.getItem("products"))
 }

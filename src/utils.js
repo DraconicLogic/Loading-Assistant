@@ -40,6 +40,35 @@ export function convertStacksToStorageFormat (stateStacks) {
   return Object.values(stateStacks)
 }
 
-export async function syncCheck(){
-  
+export function getLatest(stacks){
+  return Object.values(stacks).reduce((latest, currentStack) => {
+    console.log("Latest: ", latest)
+    console.log("Current Stacks: ", currentStack)
+    if (currentStack.date > latest.date) {
+      latest = currentStack
+    }
+    return latest
+  })
 }
+
+export async function syncData(localStacks){
+  const remoteStacks = await api.getStacks()
+  if (Object.values(localStacks).length) {
+    const latestRemote = getLatest(remoteStacks)
+    const latestLocal = getLatest(localStacks)
+    switch (true) {
+      case (latestLocal > latestRemote):
+        console.log("Local is latest. Push to remote");
+        return 1;
+      case (latestRemote > latestLocal):
+        console.log("Remote is latest. Pull from remote");
+        return 2;
+      default: console.log("Both equal probably. Take no action")
+        return 3;
+    }
+  } else {
+    console.log("There's no Stacks in local. Pull from remote")
+    return 3
+  }
+}
+  

@@ -7,6 +7,7 @@ import ProductListTab from "./components/AppTab/AppTab.jsx";
 import SplashScreen from './components/SplashScreen/SplashScreen.jsx'
 import * as api from "./api.js"
 import * as local from "./local.js"
+import * as utils from "./utils.js"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
 
@@ -21,8 +22,8 @@ import Menu from './components/Menu/Menu.jsx';
 import DisplayView from './components/DisplayView/DisplayView.jsx';
 
 function App () {
-  const [savedStacks, setSavedStacks] = useState({})
   const [date, setDate] = useState("")
+  const [savedStacks, setSavedStacks] = useState({})
   const [containerNumber, setContainerNumber] = useState("")
   const [sealNumber, setSealNumber] = useState("")
   const [containerContent, setContainerContent] = useState([])
@@ -33,44 +34,20 @@ function App () {
   const [menuStatus, setMenuStatus] = useState(false)
   const [peekStatus, setPeekStatus] = useState(false)
   const [noticeStatus, setNoticeStatus] = useState(false)
-  const [dataSynced, setDataSynced] = useState(null)
+  const [dataSynced, setDataSynced] = useState(true)
   const [products, setProducts] =  useState(null)
    
 
   useEffect(saveState)
+  useEffect(sync, [date])
 
-  async function loadProducts(){
-    let items = await local.getProducts()
-    if(!items) {
-      items = await api.getProducts()
-      if(items) {
-        local.setProducts(items)
-      }
-    }
-    if(!items) {
-      alert("There was an issue while loading the application products. Please reset and try again")
-    } else {
-      console.log("Setting products:", items)
-      setProducts(items)
-    }
-  }
-
-  async function syncCheck(LastEdited) {
+  function sync() {
+    // TODO: need to finish implementing this function
     setDataSynced(null)
-    // TODO: call api.getLastEdited() compare to localLastEditted
-    const localLast = local.getLastEdited()
-
-    api.getLastEdited()
-      .then((date) => {
-        
-      })
-
-
-    const localLastEdited = local.getLastEdited()
-    
-
-
-    // if localLastEdited is latest push unsent to remote
+    switch(utils.syncData(savedStacks)) {
+      
+      default: setDataSynced(true)
+    }
   }
 
   function saveStackData (newStack) {
@@ -86,12 +63,6 @@ function App () {
     })
   }
 
-  // function saveContainerData () {
-  //   const containers = JSON.parse(localStorage.getItem("containers")) || {}
-  //   containers[date] = {containerNumber, sealNumber,date, containerContent}
-  //   localStorage.setItem("containers", JSON.stringify(containers))
-  // }
-
   function saveState () {
     const currentState = {
       date,
@@ -104,25 +75,6 @@ function App () {
     savedStates[currentState.date] = currentState
     localStorage.setItem("saveStates", JSON.stringify(savedStates))
   }
-
-  // async function loadStackData () {
-  //   // TODO: First retrieve data from local. Then check remoote to make sure local is up to date. If not then update
-  //   const localStacks = await local.getStacksLocal()
-  //   console.log(localStacks)
-  //   setSavedStacks(localStacks)
-
-    
-
-
-
-  //     api.getStacks()
-  //       .then((stacks) => {
-  //         setSavedStacks(stacks)
-  //         alert("Stack Data retrieved from remote DB")
-  //       })
-  //       .catch((error) => {console.error(error)})
-  //   return;
-  // }
 
   function toggleNotice (newNoticeStatus) {
     setNoticeStatus(newNoticeStatus)

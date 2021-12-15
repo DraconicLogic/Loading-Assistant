@@ -5,22 +5,23 @@ import * as local from "../../local.js";
 import logo from "../../assets/kinrich-logo-200.png";
 import footer from "../../assets/kinrich-footer-250.png";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { UsbOutlined } from "@material-ui/icons";
 
 const SplashScreen = (props) => {
 	const { setters, savedStacks } = props;
 	const { setSavedStacks, setDate, setProducts } = setters;
 
 	useEffect(() => {
-		async function startup() {
+		(async function startup() {
 			console.log("Running Startup...");
-			const date = await utils.getDate();
+			const date = utils.getDate();
 			const products = await loadProducts();
 			const stacks = await loadStackData();
 			setDate(date);
 			setProducts(products);
 			setSavedStacks(stacks);
-		}
-		startup();
+			// utils.syncData(stacks)
+		})();
 	}, [setDate, setProducts, setSavedStacks]);
 
 	const [started, setStarted] = useState(false);
@@ -43,15 +44,18 @@ const SplashScreen = (props) => {
 	}
 
 	function loadStackData() {
-		let stacks;
-		if (local.getStacks()) {
-			stacks = local.getStacks();
-		} else {
-			api.getStacks().then((stacksFromDB) => {
-				stacks = stacksFromDB;
-			});
-		}
-		return stacks ? stacks : {};
+		// let stacks;
+		// if (local.getStacks()) {
+		// 	stacks = local.getStacks();
+		// } else {
+		// 	api.getStacks().then((stacksFromDB) => {
+		// 		stacks = stacksFromDB;
+		// 	});
+		// }
+		// return stacks ? stacks : {};
+		const localStacks = local.getStacks();
+
+		return localStacks ? localStacks : {};
 	}
 
 	const display = (
