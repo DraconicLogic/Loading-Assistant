@@ -43,7 +43,7 @@ function App () {
   useEffect(() => {
     (async function sync() {    
       setDataSynced(null)
-      const syncObj = await data.syncCheck()
+      const syncObj = await data.syncCheck(savedStacks)
       syncObj.setter = setSavedStacks
     //  set up a check here to trigger popup to inform user of incoming sync if local data is behind.
       data.syncData(syncObj)
@@ -128,6 +128,8 @@ function App () {
     api.saveContainerToDB(rest)
     .then(() => {
       alert("Saved Container Remotely")
+      const deletedStacks = local.cleanupLocalStackIDs(usedCodes)
+      console.log("Stack Deleted: ", deletedStacks)
       api.cleanupStackIDs(usedCodes)
       .then((deleteReport) => {
         console.log("Stack IDs released -> ", deleteReport)
