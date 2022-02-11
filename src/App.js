@@ -10,7 +10,7 @@ import * as local from "./local.js"
 import * as utils from "./utils.js"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
-
+import * as data from './data.js'
 
 
 import { Snackbar } from '@material-ui/core';
@@ -23,6 +23,7 @@ import DisplayView from './components/DisplayView/DisplayView.jsx';
 
 function App () {
   const [date, setDate] = useState("")
+  const [initialStartup, setInitialStartup] = useState(false)
   const [savedStacks, setSavedStacks] = useState({})
   const [containerNumber, setContainerNumber] = useState("")
   const [sealNumber, setSealNumber] = useState("")
@@ -39,16 +40,19 @@ function App () {
    
 
   useEffect(saveState)
-  useEffect(sync, [date])
+  useEffect(() => {
+    (async function sync() {    
+      setDataSynced(null)
+      const syncObj = await data.syncCheck()
+      syncObj.setter = setSavedStacks
+    //  set up a check here to trigger popup to inform user of incoming sync if local data is behind.
+      data.syncData(syncObj)
 
-  function sync() {
-    // TODO: need to finish implementing this function
-    setDataSynced(null)
-    switch(utils.syncData(savedStacks)) {
-      
-      default: setDataSynced(true)
-    }
-  }
+
+    })()
+  }, [date])
+
+  
 
   function saveStackData (newStack) {
     local.saveStackLocal(newStack)

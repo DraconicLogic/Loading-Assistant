@@ -20,6 +20,7 @@ export async function getStacks(){
   }
   return axios.get(url, requestConfig)
     .then((stacks) => {
+      console.log("Stacks form remote DB: ",stacks)
       return utils.convertStacksToStateFormat(
         stacks.data.stacks
       )
@@ -61,8 +62,4 @@ export async function getProducts() {
     })
     .catch((error) => console.error(error))
   
-}
-
-export async function getLastEdited(){
-  // TODO: Request last edited date and return
 }

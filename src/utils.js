@@ -63,10 +63,14 @@ export async function syncData(localStacks){
       case (latestRemote > latestLocal):
         console.log("Remote is latest. Pull from remote");
         return 2;
-      default: console.log("Both equal probably. Take no action")
+      case (latestLocal === latestRemote):
+      console.log("Both equal probably. Take no action")
+      return 3
+      default: console.log("Somethings gone wrong.")
         return 3;
     }
   } else {
+    console.log("Local Stacks: ", localStacks)
     console.log("There's no Stacks in local. Pull from remote")
     return 3
   }

@@ -17,9 +17,9 @@ const SplashScreen = (props) => {
 			const date = utils.getDate();
 			const products = await loadProducts();
 			const stacks = await loadStackData();
-			setDate(date);
-			setProducts(products);
 			setSavedStacks(stacks);
+			setProducts(products);
+			setDate(date);
 			// utils.syncData(stacks)
 		})();
 	}, [setDate, setProducts, setSavedStacks]);
