@@ -1,4 +1,5 @@
 import * as api from "./api.js"
+import * as utils from "./utils.js"
 
 export async function syncCheck(localStacks){
   const localLastEdited = localStorage.getItem("lastEdited")
