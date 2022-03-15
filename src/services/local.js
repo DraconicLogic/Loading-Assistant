@@ -1,10 +1,13 @@
-import * as utils from "./utils.js"
+import * as utils from "../utils/utils.js"
 
 export async function saveStackLocal(newStack) {
-  const savedStacksLocal = JSON.parse(localStorage.getItem("stacks")) || []
+  const savedStacksLocal = JSON.parse(
+    localStorage.getItem("stacks")
+  ) || []
   savedStacksLocal.push(newStack)
   localStorage.setItem("stacks", JSON.stringify(savedStacksLocal))
   localStorage.setItem("lastEdited", newStack.date)
+  return;
 }
 
 export function getStacks(){
@@ -32,4 +35,23 @@ export async function cleanupLocalStackIDs(usedCodes){
   localStorage.setItem("stacks",JSON.stringify(cleanedStacks))
 
   return deletedStacks
+}
+
+export function getLastEdited(){
+  return localStorage.getItem("lastEdited")
+}
+
+export function setLastEdited(lastEdited){
+  localStorage.setItem("lastEdited", lastEdited)
+
+}
+
+export function overwriteStacks(newStacks){
+  console.log("Stacks to overwrite: ", newStacks)
+  const formattedStacks = JSON.stringify(
+    utils.convertStacksToStorageFormat(newStacks)
+  )
+  console.log("Formatted before storage: ", formattedStacks)
+  localStorage.setItem("stacks", formattedStacks)
+
 }

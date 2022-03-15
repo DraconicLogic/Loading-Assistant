@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
-
 import './App.css';
 
 import ProductListTab from "./components/AppTab/AppTab.jsx";
 
-import SplashScreen from './components/SplashScreen/SplashScreen.jsx'
-import * as api from "./api.js"
-import * as local from "./local.js"
-import * as utils from "./utils.js"
+import SplashScreen from './views/SplashScreen/SplashScreen.jsx'
+import * as api from "./services/api.js"
+import * as local from "./services/local.js"
+import * as loaders from "./utils/loaders.js"
+import * as data from "./services/data.js"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
-import * as data from './data.js'
-
 
 import { Snackbar } from '@material-ui/core';
 
@@ -23,7 +21,6 @@ import DisplayView from './components/DisplayView/DisplayView.jsx';
 
 function App () {
   const [date, setDate] = useState("")
-  const [initialStartup, setInitialStartup] = useState(false)
   const [savedStacks, setSavedStacks] = useState({})
   const [containerNumber, setContainerNumber] = useState("")
   const [sealNumber, setSealNumber] = useState("")
@@ -35,25 +32,31 @@ function App () {
   const [menuStatus, setMenuStatus] = useState(false)
   const [peekStatus, setPeekStatus] = useState(false)
   const [noticeStatus, setNoticeStatus] = useState(false)
-  const [dataSynced, setDataSynced] = useState(true)
-  const [products, setProducts] =  useState(null)
-   
+  const [dataSynced, setDataSynced] = useState(false)
+  const [initialStartup, setInitialStartup] = useState(false)
 
-  useEffect(saveState)
   useEffect(() => {
-    (async function sync() {    
-      setDataSynced(null)
-      const syncObj = await data.syncCheck(savedStacks)
-      syncObj.setter = setSavedStacks
-    //  set up a check here to trigger popup to inform user of incoming sync if local data is behind.
-      data.syncData(syncObj)
+		(async function startup() {
+			console.log("Running Startup...");
+      await loaders.initializeLocalStorage()
+			const date = loaders.loadDate();
+			const stacks = await loaders.loadStackData();
+			setSavedStacks(stacks);
+			setDate(date);
+      setInitialStartup(true)
+		})();
+	}, []); 
 
-
-    })()
-  }, [date])
-
+  useEffect(() => {
+    data.saveState({
+      date,
+      containerContent,
+      usedCodes,
+      containerNumber,
+      sealNumber
+    })
+  })
   
-
   function saveStackData (newStack) {
     local.saveStackLocal(newStack)
     alert(`Stack ${newStack.stackId} saved locally`)
@@ -65,19 +68,6 @@ function App () {
       console.log("Save Stack DB error(App.js level)")
       console.error(error)
     })
-  }
-
-  function saveState () {
-    const currentState = {
-      date,
-      containerContent,
-      usedCodes,
-      containerNumber,
-      sealNumber
-    }
-    const savedStates = JSON.parse(localStorage.getItem('savedStates')) || {}
-    savedStates[currentState.date] = currentState
-    localStorage.setItem("saveStates", JSON.stringify(savedStates))
   }
 
   function toggleNotice (newNoticeStatus) {
@@ -118,7 +108,7 @@ function App () {
   }
   
   function addContainerToDB  (container) {
-    // need to add functionallity to remove stacks loaded from state and local storage. Remove from should be reviewed at this time.
+    // need to add functionallity to remove stacks loaded from state and localStorage storage. Remove from should be reviewed at this time.
     
     console.log("Saving Container:", container)
     const { response, savedStacks, view, ...rest} = container
@@ -128,7 +118,7 @@ function App () {
     api.saveContainerToDB(rest)
     .then(() => {
       alert("Saved Container Remotely")
-      const deletedStacks = local.cleanupLocalStackIDs(usedCodes)
+      const deletedStacks = localStorage.cleanupLocalStackIDs(usedCodes)
       console.log("Stack Deleted: ", deletedStacks)
       api.cleanupStackIDs(usedCodes)
       .then((deleteReport) => {
@@ -169,7 +159,9 @@ function App () {
         <div id="App">
           <SplashScreen 
            savedStacks={savedStacks}
-           setters={{setSavedStacks, setDate, setProducts}}
+           initialStartup={initialStartup}
+           stacksSetter={setSavedStacks}
+           dataSyncedSetter={setDataSynced}
            >
           <div id="main" className="fade-in"> 
 

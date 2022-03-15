@@ -1,5 +1,4 @@
-import * as api from "./api.js"
-import * as local from "./local.js"
+import * as api from "../services/api.js"
 
 export function findEmptyPosition (array) {
   let emptyPosition;
@@ -28,7 +27,7 @@ export function convertStacksToStateFormat (stackArray) {
   // stackArray should be an array of objects(stacks)
     return stackArray.reduce((stackObject, stack) => {
       const {content, date, stackId} = stack
-      stackObject[stack.stackId] = {content, date, stackId};
+      stackObject[stack.stackId] = {stackId, date, content};
       return stackObject;
     }, {});
 }
