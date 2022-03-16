@@ -31,7 +31,7 @@ const ResponseModal = ({ response, close }) => {
 	};
 
 	return (
-		<div id="response-modal">
+		<div className="model">
 			<div id="response-modal__content">
 				<span id="response-modal__close" onClick={handleClose}>
 					<h1>X</h1>

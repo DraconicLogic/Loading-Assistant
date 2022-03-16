@@ -45,7 +45,7 @@ const PeekModal = ({ savedStacks, togglePeek }) => {
 	};
 
 	return (
-		<div id="peek-modal">
+		<div className="model">
 			<div id="peek-modal__content">
 				<AppBar position="sticky">
 					<Toolbar>
