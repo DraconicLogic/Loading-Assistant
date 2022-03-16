@@ -14,7 +14,6 @@ import StatusBar from './components/StatusBar/StatusBar.jsx';
 import { Snackbar } from '@material-ui/core';
 
 import PeekModal from './components/Modal/PeekModal.jsx';
-import LoadingModal from './components/Modal/LoadingModal.jsx';
 import PropTypes from 'prop-types'
 import Menu from './components/Menu/Menu.jsx';
 import DisplayView from './components/DisplayView/DisplayView.jsx';
@@ -34,6 +33,7 @@ function App () {
   const [noticeStatus, setNoticeStatus] = useState(false)
   const [dataSynced, setDataSynced] = useState(false)
   const [initialStartup, setInitialStartup] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
 		(async function startup() {
@@ -170,7 +170,7 @@ function App () {
              menuState={{menuStatus, setMenuStatus}}
              />
 
-          <LoadingModal />
+          
 
           {peekStatus && <PeekModal savedStacks={savedStacks} togglePeek={togglePeek}/>}
           
