@@ -7,6 +7,8 @@ export async function syncCheck(localStacks){
   console.log("localStacks: ", localStacks)
   const localLastEdited = local.getLastEdited()
   const remoteStacks = await api.getStacks()
+  //TODO: Guard clause here. If api call fails end function.
+  if (!remoteStacks) return;
   console.log("waiting for remote stacks: ", remoteStacks)
   console.log("waiting for localLastEditted:", localLastEdited)
   console.log("Compare Dates: ", remoteStacks.lastEdited === localLastEdited)
@@ -91,55 +93,46 @@ export function saveState(currentState){
   return;
 }
 
+export function syncMsg(syncCmd){
+  let message;
+  const transpiler = {
+    pull: "cloud",
+    push: "local",
+  };
+
+  switch (syncCmd) {
+    default:
+      message = "Data already synchronised";
+      break;
+    case "push":
+      message = `The ${transpiler[syncCmd]} data is ahead. Are you sure you want to ${syncCmd} data ?`;
+      break;
+    case "pull":
+      message = `The ${transpiler[syncCmd]} data is ahead. Are you sure you want to ${syncCmd} data ?`;
+      break;
+  }
+  return message;
+}
+
 // TODO: implement synchronise()
 
-// export async function synchronise({
-//   savedStacks, 
-//   setSavedStacks, 
-//   setDataSynced
-// }){
-//   /**
-//    * Setters: setSavedStacks, setDataSynced
-//    * Props: savedStacks, 
-//    */
+export async function synchronise(localStacks){
+  /**
+   * Get stacks from remote. If no
+   */
+  const remoteStacks = await api.getStacks()
+  if (!remoteStacks) {
+    // return error here
+    console.log("Need to return error here")
+    return;
+  }
+  const syncObj = await syncCheck(
+    {localStacks, remoteStacks}
+  )
 
-//    const syncObj = await syncCheck(savedStacks);
-//    syncObj.setter = setSavedStacks
-   
-//    const { syncCmd } = syncObj;
-//    /**
-//     * TODO: There needs to be another step here to compare lengths of the two stacks to ensure true syncronitity <- sp?
-//     */
-//    const transpiler = {
-//      pull: "cloud",
-//      push: "local",
-//    };
+    
+}
 
-//    let message;
+export function saveStackData(){
 
-//    switch (syncCmd) {
-//      default:
-//        message = "Data already synchronised";
-//        break;
-//      case "push":
-//        message = `The ${transpiler[syncCmd]} data is ahead. Are you sure you want to ${syncCmd} data ?`;
-//        break;
-//      case "pull":
-//        message = `The ${transpiler[syncCmd]} data is ahead. Are you sure you want to ${syncCmd} data ?`;
-//        break;
-//    }
-
-//    let confirmation;
-//    if (syncCmd) {
-//      confirmation = window.confirm(message);
-//    } else {
-//      window.alert(message);
-//    }
-
-//    if (confirmation) {
-//      syncData(syncObj);
-//    }
-//   setDataSynced(true)
-
-
-// }
+}

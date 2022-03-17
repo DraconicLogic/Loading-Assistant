@@ -8,6 +8,8 @@ import * as api from "./services/api.js"
 import * as local from "./services/local.js"
 import * as loaders from "./utils/loaders.js"
 import * as data from "./services/data.js"
+import * as err from "./utils/error.js"
+import { ErrorContext } from './context/ErrorContext';
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
 
@@ -67,7 +69,12 @@ function App () {
     }).catch((error) => {
       console.log("Save Stack DB error(App.js level)")
       console.error(error)
+      handleError(error)
     })
+  }
+
+  function handleError(error){
+    err.createErrorObj(error)
   }
 
   function toggleNotice (newNoticeStatus) {
@@ -176,7 +183,7 @@ function App () {
           
           {!!response && <ResponseModal response={response} close={closeModal} />}
           <ProductListTab setView={setView} toggleMenu={toggleMenu} />
-
+          <ErrorContext>
           <DisplayView 
           view={view} 
           addToContainer={addToContainer}
@@ -191,7 +198,7 @@ function App () {
           addContainerToDB={addContainerToDB}
           removeFromContainer={removeFromContainer}
           />
-
+          </ErrorContext>
           <StatusBar content={containerContent} date={date} synced={dataSynced}/>
           <Snackbar 
             open={noticeStatus}

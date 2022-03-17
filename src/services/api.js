@@ -13,7 +13,9 @@ export async function saveStackDB(newStack){
   })
   .catch((error) => {
     console.log("Save Stack DB error")
+    console.log(typeof error)
     console.error(error)})
+    
 }
 
 export async function getStacks(){
@@ -32,7 +34,8 @@ export async function getStacks(){
       }
     })
     .catch((error) => {
-      console.log("GET STACKS ERROR")  
+      console.log("GET STACKS ERROR") 
+      console.log(error) 
       console.error(error)
       alert("There probably an error with the network here")
     })

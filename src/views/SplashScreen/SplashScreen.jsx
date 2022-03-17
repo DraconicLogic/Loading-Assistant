@@ -20,25 +20,9 @@ const SplashScreen = (props) => {
 		/**
 		 * TODO: There needs to be another step here to compare lengths of the two stacks to ensure true syncronitity <- sp?
 		 */
-		const transpiler = {
-			pull: "cloud",
-			push: "local",
-		};
 
-		let message;
+		const message = sync.syncMsg(syncCmd);
 
-		switch (syncCmd) {
-			default:
-				message = "Data already synchronised";
-				break;
-			case "push":
-				message = `The ${transpiler[syncCmd]} data is ahead. Are you sure you want to ${syncCmd} data ?`;
-				break;
-			case "pull":
-				message = `The ${transpiler[syncCmd]} data is ahead. Are you sure you want to ${syncCmd} data ?`;
-				break;
-		}
-		console.log("SYNC OBJECT", syncObj);
 		let confirmation;
 		if (syncCmd) {
 			confirmation = window.confirm(message);
