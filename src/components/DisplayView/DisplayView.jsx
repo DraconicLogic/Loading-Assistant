@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
+import ProductListTab from "../AppTab/AppTab.jsx";
 import ProductList from "../../views/ProductList/ProductList.jsx";
 import StoredBales from "../../views/StoredBales/StoredBales.jsx";
 import ContainerOverview from "../../views/ContainerOverview/ContainerOverview.jsx";
 
 const DisplayView = ({
-	view,
 	addToContainer,
 	addStack,
 	savedStacks,
@@ -16,7 +16,10 @@ const DisplayView = ({
 	updateContainerAndSeal,
 	addContainerToDB,
 	removeFromContainer,
+	toggleMenu,
 }) => {
+	const [view, setView] = useState(0);
+
 	let screen;
 	switch (view) {
 		case 0:
@@ -51,7 +54,12 @@ const DisplayView = ({
 		default:
 			screen = <h1>500 - Something's gone horribly wrong</h1>;
 	}
-	return screen;
+	return (
+		<Fragment>
+			<ProductListTab setView={setView} toggleMenu={toggleMenu} />
+			{screen};
+		</Fragment>
+	);
 };
 
 export default DisplayView;

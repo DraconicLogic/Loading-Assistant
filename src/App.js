@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-import ProductListTab from "./components/AppTab/AppTab.jsx";
-
 import SplashScreen from './views/SplashScreen/SplashScreen.jsx'
 import * as api from "./services/api.js"
 import * as local from "./services/local.js"
 import * as loaders from "./utils/loaders.js"
 import * as data from "./services/data.js"
 import * as err from "./utils/error.js"
-import { ErrorContext } from './context/ErrorContext';
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
 
@@ -27,7 +24,6 @@ function App () {
   const [sealNumber, setSealNumber] = useState("")
   const [containerContent, setContainerContent] = useState([])
   const [containerComplete, setContainerComplete] = useState(false)
-  const [view, setView] = useState(0)
   const [response, setResponse] = useState(null)
   const [usedCodes, setUsedCodes] = useState([])
   const [menuStatus, setMenuStatus] = useState(false)
@@ -182,10 +178,10 @@ function App () {
           {peekStatus && <PeekModal savedStacks={savedStacks} togglePeek={togglePeek}/>}
           
           {!!response && <ResponseModal response={response} close={closeModal} />}
-          <ProductListTab setView={setView} toggleMenu={toggleMenu} />
-          <ErrorContext>
+          
+          
           <DisplayView 
-          view={view} 
+          toggleMenu={toggleMenu} 
           addToContainer={addToContainer}
           addStack={addStack}
           savedStacks={savedStacks}
@@ -198,7 +194,7 @@ function App () {
           addContainerToDB={addContainerToDB}
           removeFromContainer={removeFromContainer}
           />
-          </ErrorContext>
+          
           <StatusBar content={containerContent} date={date} synced={dataSynced}/>
           <Snackbar 
             open={noticeStatus}
