@@ -89,12 +89,14 @@ const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
 	};
 
 	const retrieveStack = ({ firstDigit, secondDigit, thirdDigit }, stacks) => {
+		console.log("saved stacks: ", stacks);
 		const usedCodesSet = new Set(usedCodes);
 		const formattedCode = firstDigit + secondDigit + thirdDigit;
 		if (usedCodesSet.has(formattedCode)) {
 			alert(`Stack ${formattedCode} has already being loaded`);
 		} else if (stacks[formattedCode]) {
-			setStack(stacks[formattedCode]);
+			setStack(stacks[formattedCode].content);
+			console.log("currentStack: ", currentStack);
 			setIsStackEmpty(false);
 		} else {
 			alert(

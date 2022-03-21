@@ -55,3 +55,11 @@ export function overwriteStacks(newStacks){
   localStorage.setItem("stacks", formattedStacks)
 
 }
+
+export function saveContainer(newContainer){
+  const savedContainersLocal = JSON.parse(
+    localStorage.getItem("containers")
+  )
+  
+  savedContainersLocal.push(newContainer)
+}

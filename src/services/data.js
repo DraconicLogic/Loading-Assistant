@@ -1,5 +1,6 @@
 import * as api from "./api.js"
 import * as local from "./local.js"
+import * as loaders from "../utils/loaders.js"
 
 
 export async function syncCheck(localStacks){
@@ -130,9 +131,48 @@ export async function synchronise(localStacks){
     {localStacks, remoteStacks}
   )
 
-    
+
 }
 
-export function saveStackData(){
+export function saveStackData (newStack) {
+  local.saveStackLocal(newStack)
+  alert(`Stack ${newStack.stackId} saved locally`)
 
+  api.saveStackDB(newStack)
+  .then((stack) => {    
+     alert(`Stack ${stack.stackId} has been saved in the DB`)
+  }).catch((error) => {
+    /**
+     * TODO: Handle incase of failure.
+     */
+    console.log("Save Stack DB error")
+    console.error(error)
+   
+  })
+}
+
+export async function saveContainerData(newContainer){
+  local.saveContainer(newContainer)
+  await api.saveContainerToDB(newContainer)
+  // TODO: handle if createdContainer fail to send to remote database
+  
+}
+
+export function cleanupStackIDs(usedCodes){
+  local.cleanupLocalStackIDs(usedCodes)
+  api.cleanupStackIDs(usedCodes)
+  .then((deleteReport) => {
+    return deleteReport
+  })
+}
+
+export async function startUp(){
+  await loaders.initializeLocalStorage()
+	const date = loaders.loadDate();
+	const stacks = await loaders.loadStackData();
+ 
+  return {
+    date,
+    stacks
+  }
 }

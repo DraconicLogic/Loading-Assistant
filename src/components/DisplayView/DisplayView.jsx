@@ -14,7 +14,7 @@ const DisplayView = ({
 	containerNumber,
 	sealNumber,
 	updateContainerAndSeal,
-	addContainerToDB,
+	handleSaveContainer,
 	removeFromContainer,
 	toggleMenu,
 }) => {
@@ -46,7 +46,7 @@ const DisplayView = ({
 				<ContainerOverview
 					containerDetails={{ containerContent, containerNumber, sealNumber }}
 					update={updateContainerAndSeal}
-					finish={addContainerToDB}
+					finish={handleSaveContainer}
 					remove={removeFromContainer}
 				/>
 			);

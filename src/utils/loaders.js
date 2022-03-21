@@ -23,6 +23,10 @@ export async function initializeLocalStorage(){
       key: "saveStates",
       value: "{}"
     },
+    {
+      key: "containers",
+      value: "[]"
+    }
   ]
   resourses.forEach((resource) => {
     if (!localStorage.getItem(resource.key)) {
