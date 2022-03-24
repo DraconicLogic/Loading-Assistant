@@ -13,7 +13,7 @@ test('Product selected are added to the stack editor', () => {
   const {getByText,getByTestId, debug} = render(
     <ProductList 
       add={() => console.log('ADD TO CONTAINER')} 
-      addStackToDB={() => console.log('ADD STACK TO DB')}
+      handleSaveStackToDB={() => console.log('ADD STACK TO DB')}
       savedStacks={testStacks}
     />
   )
@@ -36,7 +36,7 @@ test('Save stack to database', () => {
   const {getByText, getByTestId, debug} = render(
     <ProductList
     add={() => console.log('ADD TO CONTAINER')} 
-    addStackToDB={addToDB}
+    handleSaveStackToDB={addToDB}
     savedStacks={testStacks}
     />
     )
@@ -65,7 +65,7 @@ test('Overwrite product in the stack editor', () => {
   const { debug, getByText, getByTestId } = render(
     <ProductList
     add={() => console.log('ADD TO CONTAINER')} 
-    addStackToDB={() => console.log('ADD TO DB')}
+    handleSaveStackToDB={() => console.log('ADD TO DB')}
     savedStacks={testStacks}
     />
   )

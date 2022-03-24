@@ -5,17 +5,17 @@ import StoredBales from "../../views/StoredBales/StoredBales.jsx";
 import ContainerOverview from "../../views/ContainerOverview/ContainerOverview.jsx";
 
 const DisplayView = ({
-	addToContainer,
-	addStack,
+	handleAddToContainer,
+	handleSaveStack,
 	savedStacks,
-	usedCodes,
-	saveUsedCode,
+	// usedCodes,
+	// saveUsedCode,
 	containerContent,
 	containerNumber,
 	sealNumber,
 	updateContainerAndSeal,
 	handleSaveContainer,
-	removeFromContainer,
+	handleRemoveFromContainer,
 	toggleMenu,
 }) => {
 	const [view, setView] = useState(0);
@@ -25,8 +25,8 @@ const DisplayView = ({
 		case 0:
 			screen = (
 				<ProductList
-					addToContainer={addToContainer}
-					addStack={addStack}
+					handleAddToContainer={handleAddToContainer}
+					handleSaveStack={handleSaveStack}
 					savedStacks={savedStacks}
 				/>
 			);
@@ -35,9 +35,10 @@ const DisplayView = ({
 			screen = (
 				<StoredBales
 					stacks={savedStacks}
-					add={addToContainer}
-					saveUsedCode={saveUsedCode}
-					usedCodes={usedCodes}
+					add={handleAddToContainer}
+					// saveUsedCode={saveUsedCode}
+					// usedCodes={usedCodes}
+					containerContent={containerContent}
 				/>
 			);
 			break;
@@ -47,7 +48,7 @@ const DisplayView = ({
 					containerDetails={{ containerContent, containerNumber, sealNumber }}
 					update={updateContainerAndSeal}
 					finish={handleSaveContainer}
-					remove={removeFromContainer}
+					remove={handleRemoveFromContainer}
 				/>
 			);
 			break;

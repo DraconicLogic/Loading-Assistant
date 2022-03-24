@@ -3,6 +3,7 @@ import './App.css';
 
 import SplashScreen from './views/SplashScreen/SplashScreen.jsx'
 import * as data from "./services/data.js"
+import * as utils from "./utils/utils.js"
 import ResponseModal from './components/Modal/ResponseModal.jsx';
 import StatusBar from './components/StatusBar/StatusBar.jsx';
 
@@ -21,7 +22,7 @@ function App () {
   const [containerContent, setContainerContent] = useState([])
   const [containerComplete, setContainerComplete] = useState(false)
   const [response, setResponse] = useState(null)
-  const [usedCodes, setUsedCodes] = useState([])
+  // const [usedCodes, setUsedCodes] = useState([])
   const [menuStatus, setMenuStatus] = useState(false)
   const [peekStatus, setPeekStatus] = useState(false)
   const [noticeStatus, setNoticeStatus] = useState(false)
@@ -43,9 +44,6 @@ function App () {
     data.saveState({
       date,
       containerContent,
-      usedCodes,
-      containerNumber,
-      sealNumber
     })
   })
 
@@ -53,8 +51,8 @@ function App () {
     setNoticeStatus(newNoticeStatus)
   }
 
-  function addToContainer (stack) {
-    //TODO: change name to handleAddToContainer
+  function handleAddToContainer (stack) {
+    //TODO: change name to handlehandleAddToContainer
     if (!containerComplete) {
       const newContent = [...containerContent]
       newContent.push(stack)
@@ -64,25 +62,23 @@ function App () {
     }
   }
 
-  function removeFromContainer (deleteId) {
-    // Change name to handleRemoveFromContainer
+  function handleRemoveFromContainer (deleteId) {
+    // Change name to handlehandleRemoveFromContainer
     if (!containerComplete) {
       const newContent = [...containerContent]
-      const newCodes = new Set([...usedCodes])
-      newCodes.delete(deleteId)
-      const stackIndex = newContent.findIndex((stack) => {
-        return stack.stackId === deleteId;
-      });
-      newContent.splice(stackIndex, 1)
+      console.log("Container Content Copy: ", newContent)
+      const index = newContent.findIndex((stack) => {
+        return stack.stackId === deleteId
+      })
+      newContent.splice(index, 1)
       setContainerContent(newContent)
-      setUsedCodes(newCodes)
+      
     } else {
       alert("The Container is compete. No more stacks can be removed")
     }
   }
 
-  function addStack (stack) {
-    // TODO: rename function to handleSaveStack
+  function handleSaveStack (stack) {
     const {stackId, content, date} = stack
     const newSavedStacks = {...savedStacks}
     newSavedStacks[stackId] = {stackId, content, date}
@@ -98,9 +94,10 @@ function App () {
     container.date = date
     setContainerComplete(true)
     data.saveContainerData(container)
-    .then(() => {
+    .then(({containerContent}) => {
       console.log("Saved Container")
-      const deletedStacks = data.cleanupStackIDs(usedCodes)
+      const usedIds = utils.listIDs(containerContent)
+      const deletedStacks = data.cleanupStackIDs(usedIds)
       console.log("Stacks Deleted: ", deletedStacks)
     })
     .catch((error) => console.error(error))
@@ -113,11 +110,11 @@ function App () {
     setResponse(null)
   }
 
-  function saveUsedCode (code) {
-    const newUsedCodes = [...usedCodes]
-    newUsedCodes.push(code)
-    setUsedCodes(newUsedCodes)
-  }
+  // function saveUsedCode (code) {
+  //   const newUsedCodes = [...usedCodes]
+  //   newUsedCodes.push(code)
+  //   setUsedCodes(newUsedCodes)
+  // }
 
   function updateContainerAndSeal ({containerNumber, sealNumber}) {
     setContainerNumber(containerNumber)
@@ -156,17 +153,17 @@ function App () {
           
           <DisplayView 
           toggleMenu={toggleMenu} 
-          addToContainer={addToContainer}
-          addStack={addStack}
+          handleAddToContainer={handleAddToContainer}
+          handleSaveStack={handleSaveStack}
           savedStacks={savedStacks}
-          usedCodes={usedCodes}
-          saveUsedCode={saveUsedCode}
+          // usedCodes={usedCodes}
+          // saveUsedCode={saveUsedCode}
           containerContent={containerContent}
           containerNumber={containerNumber}
           sealNumber={sealNumber}
           updateContainerAndSeal={updateContainerAndSeal}
           handleSaveContainer={handleSaveContainer}
-          removeFromContainer={removeFromContainer}
+          handleRemoveFromContainer={handleRemoveFromContainer}
           />
           
           <StatusBar content={containerContent} date={date} synced={dataSynced}/>

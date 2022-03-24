@@ -75,3 +75,11 @@ export async function syncData(localStacks){
   }
 }
   
+export function listIDs(loadedStacks){
+  // If this function is only used in StoredBales view this function should be just a helper of that component.
+
+  if (loadedStacks.length > 0) {
+    return loadedStacks.map(({stackId}) => stackId)
+  }
+  // Might be better to return a new Set
+}

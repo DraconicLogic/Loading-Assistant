@@ -4,8 +4,15 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import PropTypes from "prop-types";
 import StackIDHistory from "../../components/StackIDHistory/StackIDHistory.jsx";
+import { listIDs } from "../../utils/utils.js";
 
-const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
+const StoredBales = ({
+	stacks,
+	add,
+	saveUsedCode,
+	usedCodes,
+	containerContent,
+}) => {
 	const [currentStack, setStack] = useState(Array(12));
 	// rename to Stack ID
 	const [code, setCode] = useState({
@@ -74,7 +81,11 @@ const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
 		setIsStackEmpty(true);
 	};
 
-	const handleAddToContainer = ({ firstDigit, secondDigit, thirdDigit }) => {
+	const handlehandleAddToContainer = ({
+		firstDigit,
+		secondDigit,
+		thirdDigit,
+	}) => {
 		const formattedCode = firstDigit + secondDigit + thirdDigit;
 		const newStack = {
 			stackId: formattedCode,
@@ -89,10 +100,11 @@ const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
 	};
 
 	const retrieveStack = ({ firstDigit, secondDigit, thirdDigit }, stacks) => {
-		console.log("saved stacks: ", stacks);
-		const usedCodesSet = new Set(usedCodes);
+		console.log("container content ", containerContent);
+		const containerContentSet = new Set(listIDs(containerContent));
+
 		const formattedCode = firstDigit + secondDigit + thirdDigit;
-		if (usedCodesSet.has(formattedCode)) {
+		if (containerContentSet.has(formattedCode)) {
 			alert(`Stack ${formattedCode} has already being loaded`);
 		} else if (stacks[formattedCode]) {
 			setStack(stacks[formattedCode].content);
@@ -145,7 +157,7 @@ const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
 						/>
 					</span>
 				</form>
-				<StackIDHistory usedCodes={usedCodes} />
+				<StackIDHistory containerContent={containerContent} />
 			</div>
 
 			<div id="stack-section">
@@ -153,7 +165,7 @@ const StoredBales = ({ stacks, add, saveUsedCode, usedCodes }) => {
 				<div id="stack-options--2">
 					<button
 						className="stack-options__button"
-						onClick={() => handleAddToContainer(code)}
+						onClick={() => handlehandleAddToContainer(code)}
 						disabled={isStackEmpty}
 						data-testid="add-to-container">
 						<LocalShippingIcon />
