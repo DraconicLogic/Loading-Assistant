@@ -9,9 +9,9 @@ import StatusBar from './components/StatusBar/StatusBar.jsx';
 
 import { Snackbar } from '@material-ui/core';
 
-import PeekModal from './components/Modal/PeekModal.jsx';
+
 import PropTypes from 'prop-types'
-import Menu from './components/Menu/Menu.jsx';
+
 import DisplayView from './components/DisplayView/DisplayView.jsx';
 
 function App () {
@@ -22,8 +22,8 @@ function App () {
   const [containerContent, setContainerContent] = useState([])
   const [containerComplete, setContainerComplete] = useState(false)
   const [response, setResponse] = useState(null)
-  const [menuStatus, setMenuStatus] = useState(false)
-  const [peekStatus, setPeekStatus] = useState(false)
+  
+  
   const [noticeStatus, setNoticeStatus] = useState(false)
   const [dataSynced, setDataSynced] = useState(false)
   const [initialStartup, setInitialStartup] = useState(false)
@@ -117,14 +117,6 @@ function App () {
     setSealNumber(sealNumber)
   }
 
-  function toggleMenu () {
-    setMenuStatus(!menuStatus)
-  }
-
-  function togglePeek() {
-    setPeekStatus(!peekStatus)
-  }
-
       return (    
         <div id="App">
           <SplashScreen 
@@ -135,20 +127,15 @@ function App () {
            >
             <div id="main" className="fade-in"> 
 
-            <Menu 
-             peekState={{peekStatus, setPeekStatus}}
-             menuState={{menuStatus, setMenuStatus}}
-             />
-
+            
           
 
-          {peekStatus && <PeekModal savedStacks={savedStacks} togglePeek={togglePeek}/>}
-          
+           
           {!!response && <ResponseModal response={response} close={closeModal} />}
           
           
           <DisplayView 
-          toggleMenu={toggleMenu} 
+          
           handleAddToContainer={handleAddToContainer}
           handleSaveStack={handleSaveStack}
           savedStacks={savedStacks}

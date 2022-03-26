@@ -3,6 +3,8 @@ import ProductListTab from "../AppTab/AppTab.jsx";
 import ProductList from "../../views/ProductList/ProductList.jsx";
 import StoredBales from "../../views/StoredBales/StoredBales.jsx";
 import ContainerOverview from "../../views/ContainerOverview/ContainerOverview.jsx";
+import PeekModal from "../Modal/PeekModal.jsx";
+import Menu from "../Menu/Menu.jsx";
 
 const DisplayView = ({
 	handleAddToContainer,
@@ -14,9 +16,18 @@ const DisplayView = ({
 	updateContainerAndSeal,
 	handleSaveContainer,
 	handleRemoveFromContainer,
-	toggleMenu,
 }) => {
 	const [view, setView] = useState(0);
+	const [peekStatus, setPeekStatus] = useState(false);
+	const [menuStatus, setMenuStatus] = useState(false);
+
+	function togglePeek() {
+		setPeekStatus(!peekStatus);
+	}
+
+	function toggleMenu() {
+		setMenuStatus(!menuStatus);
+	}
 
 	let screen;
 	switch (view) {
@@ -53,7 +64,14 @@ const DisplayView = ({
 	}
 	return (
 		<Fragment>
+			<Menu
+				peekState={{ peekStatus, setPeekStatus }}
+				menuState={{ menuStatus, setMenuStatus }}
+			/>
 			<ProductListTab setView={setView} toggleMenu={toggleMenu} />
+			{peekStatus && (
+				<PeekModal savedStacks={savedStacks} togglePeek={togglePeek} />
+			)}
 			{screen};
 		</Fragment>
 	);
