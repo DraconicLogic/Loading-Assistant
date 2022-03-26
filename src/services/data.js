@@ -164,6 +164,10 @@ export function cleanupStackIDs(usedCodes){
   .then((deleteReport) => {
     return deleteReport
   })
+  .catch((error) => {
+    console.log("Cleanup StackId error")
+    console.error(error)
+  })
 }
 
 export async function startUp(){

@@ -8,8 +8,6 @@ const DisplayView = ({
 	handleAddToContainer,
 	handleSaveStack,
 	savedStacks,
-	// usedCodes,
-	// saveUsedCode,
 	containerContent,
 	containerNumber,
 	sealNumber,
@@ -36,8 +34,6 @@ const DisplayView = ({
 				<StoredBales
 					stacks={savedStacks}
 					add={handleAddToContainer}
-					// saveUsedCode={saveUsedCode}
-					// usedCodes={usedCodes}
 					containerContent={containerContent}
 				/>
 			);

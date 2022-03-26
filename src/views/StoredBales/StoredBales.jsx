@@ -6,13 +6,7 @@ import PropTypes from "prop-types";
 import StackIDHistory from "../../components/StackIDHistory/StackIDHistory.jsx";
 import { listIDs } from "../../utils/utils.js";
 
-const StoredBales = ({
-	stacks,
-	add,
-	saveUsedCode,
-	usedCodes,
-	containerContent,
-}) => {
+const StoredBales = ({ stacks, add, saveUsedCode, containerContent }) => {
 	const [currentStack, setStack] = useState(Array(12));
 	// rename to Stack ID
 	const [code, setCode] = useState({

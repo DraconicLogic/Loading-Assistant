@@ -22,7 +22,6 @@ function App () {
   const [containerContent, setContainerContent] = useState([])
   const [containerComplete, setContainerComplete] = useState(false)
   const [response, setResponse] = useState(null)
-  // const [usedCodes, setUsedCodes] = useState([])
   const [menuStatus, setMenuStatus] = useState(false)
   const [peekStatus, setPeekStatus] = useState(false)
   const [noticeStatus, setNoticeStatus] = useState(false)
@@ -63,7 +62,6 @@ function App () {
   }
 
   function handleRemoveFromContainer (deleteId) {
-    // Change name to handlehandleRemoveFromContainer
     if (!containerComplete) {
       const newContent = [...containerContent]
       console.log("Container Content Copy: ", newContent)
@@ -89,14 +87,18 @@ function App () {
   }
   
   function handleSaveContainer  (container) {
-    // need to add functionallity to remove stacks loaded from state and localStorage storage. Remove from should be reviewed at this time.
     console.log("Saving Container:", container)
     container.date = date
     setContainerComplete(true)
     data.saveContainerData(container)
     .then(({containerContent}) => {
+      const newSavedStacks = {...savedStacks}
       console.log("Saved Container")
       const usedIds = utils.listIDs(containerContent)
+      usedIds.forEach((stackId) => {
+        delete newSavedStacks[stackId]
+      })
+      setSavedStacks(newSavedStacks)
       const deletedStacks = data.cleanupStackIDs(usedIds)
       console.log("Stacks Deleted: ", deletedStacks)
     })
@@ -109,12 +111,6 @@ function App () {
   function closeModal () {
     setResponse(null)
   }
-
-  // function saveUsedCode (code) {
-  //   const newUsedCodes = [...usedCodes]
-  //   newUsedCodes.push(code)
-  //   setUsedCodes(newUsedCodes)
-  // }
 
   function updateContainerAndSeal ({containerNumber, sealNumber}) {
     setContainerNumber(containerNumber)
@@ -156,8 +152,6 @@ function App () {
           handleAddToContainer={handleAddToContainer}
           handleSaveStack={handleSaveStack}
           savedStacks={savedStacks}
-          // usedCodes={usedCodes}
-          // saveUsedCode={saveUsedCode}
           containerContent={containerContent}
           containerNumber={containerNumber}
           sealNumber={sealNumber}
