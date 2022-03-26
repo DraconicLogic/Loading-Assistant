@@ -5,19 +5,11 @@ import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
 import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-// import {makeStyles} from "@material-ui/core/styles"
 import dayjs from "dayjs";
 import PropTypes from "prop-types";
 import { accendingOrder, descendingOrder } from "../../utils/utils.js";
 
-// const useStyles = makeStyles({
-//   cancel : {
-//     float: "right"
-//   }
-// })
-
 const PeekModal = ({ savedStacks, togglePeek }) => {
-	// const classes = useStyles();
 	const [dateSortAccending, setDateSortAccending] = useState(false);
 
 	const handleClose = (event) => {
@@ -68,7 +60,7 @@ const PeekModal = ({ savedStacks, togglePeek }) => {
 											fontSize: "x-small",
 											display: "flow-root",
 										}}>
-										{dayjs(savedStack[1].date).format("DD/MM/YYYY")}
+										{dayjs(savedStack[1].date).format("H:mm - DD/MM/YYYY")}
 									</span>
 									<span style={{ fontWeight: "bold" }}>{savedStack[0]}</span> :{" "}
 									{savedStack[1].content.map((product, index) => {
