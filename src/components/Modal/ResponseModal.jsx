@@ -1,39 +1,17 @@
 import React from "react";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import StackEditor from "../StackEditor/StackEditor.jsx";
 import PropTypes from "prop-types";
 
 const ResponseModal = ({ response, close }) => {
 	const handleClose = () => {
-		const options = {
-			title: "Close Stack ID Box",
-			message:
-				"Have you written the ID on the stack?\b It is difficult to retrieve the code if you do not",
-			buttons: [
-				{
-					label: "Yes",
-					onClick: () => close(),
-				},
-				{
-					label: "No",
-				},
-			],
-			childrenElement: () => <div />,
-
-			closeOnEscape: true,
-			closeOnClickOutside: true,
-			onClickOutside: () => {},
-			onKeypressEscape: () => {},
-		};
-
-		confirmAlert(options);
+		close();
 	};
 
 	return (
 		<div className="model">
 			<div id="response-modal__content">
 				<span id="response-modal__close" onClick={handleClose}>
+					{/* TODO: Use MUI to style this element */}
 					<h1>X</h1>
 				</span>
 				<p>
