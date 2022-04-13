@@ -25,7 +25,7 @@ export async function initializeLocalStorage(){
     },
     {
       key: "containers",
-      value: "[]"
+      value: "{}"
     }
   ]
   resourses.forEach((resource) => {

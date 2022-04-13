@@ -44,7 +44,7 @@ export async function getStacks(){
 export async function saveContainerToDB(newContainer){
   return axios.post(containersUrl, {newContainer})
   .then((savedContainer) => {
-    return savedContainer.data
+    return savedContainer.data.createdContainer
   })
   .catch((error) => console.error(error))
 }
@@ -55,6 +55,7 @@ export async function cleanupStackIDs(usedCodes){
    }
    return axios.delete(stacksUrl, requestConfig)
     .then((deleteReport) => {
+      console.log("api delete report: ", deleteReport)
       return deleteReport
     })
     .catch((error) => console.error(error))

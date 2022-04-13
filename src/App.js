@@ -61,6 +61,8 @@ function App () {
     }
   }
 
+  
+
   function handleRemoveFromContainer (deleteId) {
     if (!containerComplete) {
       const newContent = [...containerContent]
@@ -85,27 +87,33 @@ function App () {
     data.saveStackData(stack)
 
   }
+
+  async function handleCleanup(finishedContainer){
+    console.log("handling cleanup")
+    console.log(finishedContainer)
+    const newSavedStacks = {...savedStacks}      
+    const usedIds = utils.listIDs(finishedContainer.containerContent)
+    console.log("usedIds: ", usedIds)
+    usedIds.forEach((stackId) => {
+      delete newSavedStacks[stackId]
+    })
+    setSavedStacks(newSavedStacks)
+    const deletedStacks = await data.cleanupStackIDs(usedIds)
+    console.log("Stacks Deleted: ", deletedStacks)
+  }
   
   function handleSaveContainer  (container) {
     console.log("Saving Container:", container)
     container.date = date
     setContainerComplete(true)
     data.saveContainerData(container)
-    .then(({containerContent}) => {
-      const newSavedStacks = {...savedStacks}
-      console.log("Saved Container")
-      const usedIds = utils.listIDs(containerContent)
-      usedIds.forEach((stackId) => {
-        delete newSavedStacks[stackId]
-      })
-      setSavedStacks(newSavedStacks)
-      const deletedStacks = data.cleanupStackIDs(usedIds)
-      console.log("Stacks Deleted: ", deletedStacks)
+    .then((savedContainer) => {
+      console.log("SavedContainer", savedContainer)
+      handleCleanup(savedContainer)
+      toggleNotice(!noticeStatus)
     })
-    .catch((error) => console.error(error))
-    
-    toggleNotice(!noticeStatus)
-    document.getElementById('loading-modal').style.display = 'none'
+    // Complete container. If no effect delete this. 
+    // document.getElementById('loading-modal').style.display = 'none'
   }
 
   function closeModal () {

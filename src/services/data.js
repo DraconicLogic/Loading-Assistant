@@ -152,16 +152,28 @@ export function saveStackData (newStack) {
 }
 
 export async function saveContainerData(newContainer){
+  // 1. Save Container Locally
+  // 2. Save Container on cloud
+  // 3. Remove loaded stacks from cloud stack collection 
+  // 4. Remove loaded stacks from local stack collection
+  // 5. Remove loaded stack from state
   local.saveContainer(newContainer)
-  await api.saveContainerToDB(newContainer)
+  return api.saveContainerToDB(newContainer)
+  .then((savedContainer) => {
+    console.log("savedContainer: ", savedContainer)
+    return savedContainer
+  })
+  .catch((error) => console.error(error))
   // TODO: handle if createdContainer fail to send to remote database
   
 }
-
-export function cleanupStackIDs(usedCodes){
-  local.cleanupLocalStackIDs(usedCodes)
-  api.cleanupStackIDs(usedCodes)
+ 
+export async function cleanupStackIDs(usedCodes){
+  const localDeletedStacks = local.cleanupLocalStackIDs(usedCodes)
+  console.log("local deleted Stacks: ", localDeletedStacks)
+  return api.cleanupStackIDs(usedCodes)
   .then((deleteReport) => {
+    console.log("deleteReport: ", deleteReport)
     return deleteReport
   })
   .catch((error) => {

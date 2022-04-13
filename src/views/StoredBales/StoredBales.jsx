@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import StackIDHistory from "../../components/StackIDHistory/StackIDHistory.jsx";
 import { listIDs } from "../../utils/utils.js";
 
-const StoredBales = ({ stacks, add, saveUsedCode, containerContent }) => {
+const StoredBales = ({ stacks, add, containerContent }) => {
 	const [currentStack, setStack] = useState(Array(12));
 	// rename to Stack ID
 	const [code, setCode] = useState({
@@ -75,17 +75,12 @@ const StoredBales = ({ stacks, add, saveUsedCode, containerContent }) => {
 		setIsStackEmpty(true);
 	};
 
-	const handlehandleAddToContainer = ({
-		firstDigit,
-		secondDigit,
-		thirdDigit,
-	}) => {
+	const handleAddToContainer = ({ firstDigit, secondDigit, thirdDigit }) => {
 		const formattedCode = firstDigit + secondDigit + thirdDigit;
 		const newStack = {
 			stackId: formattedCode,
 			stackContent: currentStack,
 		};
-		saveUsedCode(formattedCode);
 		add(newStack);
 		setIsStackEmpty(true);
 		clearStack();
@@ -159,7 +154,7 @@ const StoredBales = ({ stacks, add, saveUsedCode, containerContent }) => {
 				<div id="stack-options--2">
 					<button
 						className="stack-options__button"
-						onClick={() => handlehandleAddToContainer(code)}
+						onClick={() => handleAddToContainer(code)}
 						disabled={isStackEmpty}
 						data-testid="add-to-container">
 						<LocalShippingIcon />
@@ -177,7 +172,6 @@ const StoredBales = ({ stacks, add, saveUsedCode, containerContent }) => {
 StoredBales.propTypes = {
 	stacks: PropTypes.object.isRequired,
 	add: PropTypes.func,
-	saveUsedCode: PropTypes.func,
 };
 
 export default StoredBales;

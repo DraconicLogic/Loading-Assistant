@@ -24,16 +24,30 @@ export async function setProducts(products){
   localStorage.setItem("products", JSON.stringify(products))
 }
 
-export async function cleanupLocalStackIDs(usedCodes){
-  const currentStacks = JSON.parse(localStorage.getItem("stacks"))
-  const cleanedStacks = currentStacks.filter((stack) => (
-    !usedCodes.some(stack.stackId)
-  ))
-  const deletedStacks = currentStacks.filter((stack) => (
-    usedCodes.some(stack.stackId)
-  ))
-  localStorage.setItem("stacks",JSON.stringify(cleanedStacks))
+export function cleanupLocalStackIDs(usedCodes){
+  // Get stacks from localStorage
+  // remove stacks that match stackid in used codes
 
+  console.log("Used Codes: ", usedCodes)
+  const currentStacks = JSON.parse(localStorage.getItem("stacks"))
+
+  // Examine cleanedStacks & deletedStack more closely to fully comprehened whats happing
+  const cleanedStacks = currentStacks.filter((stack) => {
+    return usedCodes.every((usedStackId) => {
+      return usedStackId !== stack.stackId
+    })
+  })
+
+  const deletedStacks = currentStacks.filter((stack) => {
+    return usedCodes.some((usedStackId) => {
+      return usedStackId === stack.stackId
+    })
+  })
+  console.log("cleanedStacks: ", cleanedStacks)
+  console.log("deletedStacks: ",deletedStacks)
+
+  
+  localStorage.setItem("stacks",JSON.stringify(cleanedStacks))
   return deletedStacks
 }
 
@@ -57,9 +71,12 @@ export function overwriteStacks(newStacks){
 }
 
 export function saveContainer(newContainer){
+  const {date} = newContainer
+  console.log("newContainer: ", newContainer)
   const savedContainersLocal = JSON.parse(
     localStorage.getItem("containers")
   )
   
-  savedContainersLocal.push(newContainer)
+  savedContainersLocal[date] = newContainer
+  localStorage.setItem("containers", JSON.stringify(savedContainersLocal))
 }
