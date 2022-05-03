@@ -26,7 +26,7 @@ export async function initializeLocalStorage(){
     {
       key: "containers",
       value: "{}"
-    }
+    },
   ]
   resourses.forEach((resource) => {
     if (!localStorage.getItem(resource.key)) {

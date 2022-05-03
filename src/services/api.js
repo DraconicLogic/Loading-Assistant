@@ -7,15 +7,12 @@ const containersUrl = `${REACT_APP_API_URL}/containers`
 const productsUrl = `${REACT_APP_API_URL}/products`
 
 export async function saveStackDB(newStack){
-  return axios.post(stacksUrl,{newStack})
-  .then((savedStack) => {
-    return savedStack.data.createdStack
-  })
-  .catch((error) => {
-    console.log("Save Stack DB error")
-    console.log(typeof error)
-    console.error(error)})
-    
+  try {
+    const {data: { createdStack }} = await axios.post(stacksUrl, {newStack})
+    return createdStack
+  } catch (error) {
+    throw Error(error)
+  }
 }
 
 export async function getStacks(){
@@ -41,12 +38,13 @@ export async function getStacks(){
     })
 }
 
-export async function saveContainerToDB(newContainer){
-  return axios.post(containersUrl, {newContainer})
-  .then((savedContainer) => {
-    return savedContainer.data.createdContainer
-  })
-  .catch((error) => console.error(error))
+export async function saveContainerToDB(newContainer){ 
+  try {
+    const {data: {createdContainer}} = await axios.post(containersUrl, {newContainer})
+    return createdContainer
+  } catch (error){
+    throw Error(error)
+  }
 }
 
 export async function cleanupStackIDs(usedCodes){

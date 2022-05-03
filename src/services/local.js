@@ -10,6 +10,21 @@ export async function saveStackLocal(newStack) {
   return;
 }
 
+export function saveUnsentStack(newStack){
+  const unsentStacks = JSON.parse(
+    localStorage.getItem("unsentStacks") 
+  ) || []
+  unsentStacks.push(newStack)
+  localStorage.setItem("unsentStacks", JSON.stringify(unsentStacks))
+  alert(`Stack ${newStack.stackId} failed to upload to cloud.`)
+}
+
+export function getUnsentStacks(){
+  return (
+    JSON.parse(localStorage.getItem("unsentStacks"))
+  )
+}
+
 export function getStacks(){
   return utils.convertStacksToStateFormat(
     JSON.parse(localStorage.getItem("stacks"))

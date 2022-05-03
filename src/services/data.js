@@ -3,6 +3,7 @@ import * as local from "./local.js"
 import * as loaders from "../utils/loaders.js"
 
 
+
 export async function syncCheck(localStacks){
   console.log("sycnCheck")
   console.log("localStacks: ", localStacks)
@@ -115,39 +116,17 @@ export function syncMsg(syncCmd){
   return message;
 }
 
-// TODO: implement synchronise()
-
-export async function synchronise(localStacks){
-  /**
-   * Get stacks from remote. If no
-   */
-  const remoteStacks = await api.getStacks()
-  if (!remoteStacks) {
-    // return error here
-    console.log("Need to return error here")
-    return;
-  }
-  const syncObj = await syncCheck(
-    {localStacks, remoteStacks}
-  )
-
-
-}
-
 export function saveStackData (newStack) {
   local.saveStackLocal(newStack)
-  alert(`Stack ${newStack.stackId} saved locally`)
+  console.info(`Stack ${newStack.stackId} saved locally`)
 
   api.saveStackDB(newStack)
   .then((stack) => {    
-     alert(`Stack ${stack.stackId} has been saved in the DB`)
+    alert(`Stack ${stack.stackId} has been uploaded to the DB`)
+    handleUnsent()
   }).catch((error) => {
-    /**
-     * TODO: Handle incase of failure.
-     */
-    console.log("Save Stack DB error")
     console.error(error)
-   
+    local.saveUnsentStack(newStack)
   })
 }
 
@@ -192,3 +171,49 @@ export async function startUp(){
     stacks
   }
 }
+
+function handleUnsent(){
+  const unsentStacks = local.getUnsentStacks()
+  if(unsentStacks) {
+    const resendFailures = unsentStacks.reduce((failures, unsent) => {
+      api.saveStackDB(unsent)
+      .then(({stackId}) => {
+        console.log(`Stack ${stackId} resent succesfully`)
+      })
+      .catch(() => {
+        console.log(`Stack ${unsent.stackId} upload failed`)
+        failures.push(unsent)
+      })
+      return failures
+    }, [])
+
+    if (resendFailures.length > 0) {
+      resendFailures.forEach((failure) => {
+        local.saveUnsentStack(failure)
+      })
+    } else {
+      localStorage.removeItem("unsentStacks")
+    }
+  } else {
+    console.info("No Unsent stacks to upload")
+  }
+}
+
+// TODO: implement synchronise()
+
+// export async function synchronise(localStacks){
+//   /**
+//    * Get stacks from remote. If no
+//    */
+//   const remoteStacks = await api.getStacks()
+//   if (!remoteStacks) {
+//     // return error here
+//     console.log("Need to return error here")
+//     return;
+//   }
+//   const syncObj = await syncCheck(
+//     {localStacks, remoteStacks}
+//   )
+
+
+// }
