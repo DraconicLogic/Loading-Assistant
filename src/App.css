@@ -286,6 +286,10 @@ MuiAppBar {
   margin-right: 1em; */
 }
 
+#product-list__buttons::-webkit-scrollbar {
+	display: none;
+}
+
 .product-button {
 	margin: 2px;
 	font-weight: bold;
@@ -458,7 +462,6 @@ MuiAppBar {
 
 .stack-editor__bale {
 	border: solid;
-	height: 50px;
 }
 
 .stack-editor__bale--selected {
