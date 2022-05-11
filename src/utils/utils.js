@@ -83,3 +83,15 @@ export function listIDs(loadedStacks){
   }
   // Might be better to return a new Set
 }
+
+export function transformText(text) {
+  const glossary = {
+    PARTYDRESS: "PARTY DRESS",
+    SCHUNI: "SCH UNI",
+    WHAT: "W/S HAT",
+    "L POLO D": "L-POLO-D",
+    LEATHER: "LTHER",
+    BLANKET: "BLNKT",
+  };
+  return glossary[text] ? glossary[text] : text;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as utils from "../../utils/utils.js";
 
 const ProductButton = ({ product, add }) => {
 	const handleClick = (event) => {
@@ -7,21 +8,9 @@ const ProductButton = ({ product, add }) => {
 		add(value);
 	};
 
-	function transformText(text) {
-		const glossary = {
-			PARTYDRESS: "PARTY DRESS",
-			SCHUNI: "SCH UNI",
-			WHAT: "W/S HAT",
-			"L POLO D": "L-POLO-D",
-			LEATHER: "LTHER",
-			BLANKET: "BLNKT",
-		};
-		return glossary[text] ? glossary[text] : text;
-	}
-
 	return (
 		<button className="product-button" onClick={handleClick} value={product}>
-			{transformText(product)}
+			{utils.transformText(product)}
 		</button>
 	);
 };
