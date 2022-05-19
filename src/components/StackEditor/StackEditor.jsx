@@ -59,17 +59,3 @@ StackEditor.propTypes = {
 };
 
 export default StackEditor;
-
-/* -------------------------- Refactor to function -------------------------- */
-
-// import React from 'react';
-
-// const StackEditor = () => {
-//   return (
-//     <div>
-
-//     </div>
-//   );
-// };
-
-// export default StackEditor;
