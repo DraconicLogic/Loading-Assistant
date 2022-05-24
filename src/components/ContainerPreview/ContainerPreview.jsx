@@ -96,6 +96,7 @@ const ContainerPreview = ({ container, remove }) => {
 													backgroundColor: "white",
 													border: "black",
 													zIndex: "1",
+													position: "relative",
 												}}>
 												{stack.stackId}
 											</span>

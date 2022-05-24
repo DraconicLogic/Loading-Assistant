@@ -141,6 +141,7 @@ input::-webkit-inner-spin-button {
 	animation-duration: 1s;
 	animation-iteration-count: infinite;
 	animation-direction: alternate-reverse;
+	width: max-content;
 }
 
 @keyframes stack--selected {
@@ -469,6 +470,7 @@ MuiAppBar {
 
 .stack-editor__bale {
 	border: solid;
+	overflow: hidden;
 }
 
 .stack-editor__bale--selected {

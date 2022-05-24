@@ -8,10 +8,11 @@ class StackEditor extends Component {
 		const stackStyle = {
 			height: "100%",
 			width: "100%",
+			fontSize: "xx-small",
 		};
 
 		const editorStyle = {
-			fontSize: "150%",
+			fontSize: "100%",
 			fontWeight: "bolder",
 		};
 
