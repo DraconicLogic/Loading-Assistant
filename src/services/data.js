@@ -5,12 +5,13 @@ import * as loaders from "../utils/loaders.js"
 
 
 export async function syncCheck(localStacks){
+
   console.log("sycnCheck")
   console.log("localStacks: ", localStacks)
   const localLastEdited = local.getLastEdited()
   const remoteStacks = await api.getStacks()
   //TODO: Guard clause here. If api call fails end function.
-  if (!remoteStacks) return;
+  if (!remoteStacks) return {netError: true};
   console.log("waiting for remote stacks: ", remoteStacks)
   console.log("waiting for localLastEditted:", localLastEdited)
   console.log("Compare Dates: ", remoteStacks.lastEdited === localLastEdited)

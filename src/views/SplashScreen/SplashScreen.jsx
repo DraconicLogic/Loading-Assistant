@@ -14,8 +14,12 @@ const SplashScreen = (props) => {
 
 	async function handleSync() {
 		const syncObj = await sync.syncCheck(savedStacks);
+		if (syncObj.netError) {
+			window.alert("Cannot synchronise right now");
+			return;
+		}
+		console.log("syncObj: ", syncObj);
 		syncObj.setter = stacksSetter;
-		console.log("handleSync() await syncObj: ", syncObj);
 		const { syncCmd } = syncObj;
 		/**
 		 * TODO: There needs to be another step here to compare lengths of the two stacks to ensure true syncronitity <- sp?

@@ -25,7 +25,7 @@ function App () {
   
   
   const [noticeStatus, setNoticeStatus] = useState(false)
-  const [dataSynced, setDataSynced] = useState(false)
+  const [dataSynced, setDataSynced] = useState(null)
   const [initialStartup, setInitialStartup] = useState(false)
 
 
