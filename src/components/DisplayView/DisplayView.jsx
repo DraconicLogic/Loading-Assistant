@@ -72,7 +72,7 @@ const DisplayView = ({
 			{peekStatus && (
 				<PeekModal savedStacks={savedStacks} togglePeek={togglePeek} />
 			)}
-			{screen};
+			{screen}
 		</Fragment>
 	);
 };
