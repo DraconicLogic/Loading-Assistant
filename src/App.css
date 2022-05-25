@@ -411,9 +411,11 @@ MuiAppBar {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
+	background-color: #3f51b5;
 }
 
 .status-bar__item {
+	color: #fdfefe;
 }
 
 #stack-section {
