@@ -89,7 +89,6 @@ export function transformText(text) {
     PARTYDRESS: "PARTY DRESS",
     SCHUNI: "SCH UNI",
     WHAT: "W/S HAT",
-    "L POLO D": "L-POLO-D",
     LEATHER: "LTHER",
     BLANKET: "BLNKT",
   };
