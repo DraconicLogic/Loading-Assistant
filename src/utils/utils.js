@@ -1,4 +1,5 @@
 import * as api from "../services/api.js"
+import dayjs from "dayjs";
 
 export function findEmptyPosition (array) {
   let emptyPosition;
@@ -13,6 +14,10 @@ export function findEmptyPosition (array) {
 
 export function getDate () {
   return new Date().toISOString()
+}
+
+export function formatDate(date) {
+  return dayjs(date).format("DD/MM/YYYY")
 }
 
 export function accendingOrder (a, b) {

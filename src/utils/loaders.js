@@ -5,12 +5,12 @@ export async function loadStackData(){
   return localStacks ? localStacks : {}
 }
 
-export function loadDate () {
+export function loadDate () { 
   return new Date().toISOString()
 }
 
 export async function initializeLocalStorage(){
-  const resourses = [
+  const resources = [
     {
       key: "lastEdited",
       value: "1970-01-01T00:00:00Z"
@@ -28,7 +28,10 @@ export async function initializeLocalStorage(){
       value: "{}"
     },
   ]
-  resourses.forEach((resource) => {
+  resources.forEach((resource) => {
+    console.log(Boolean(localStorage.getItem(resource.key)))
+    console.log(`LocalStorage - ${resource.key}: `, localStorage.getItem(resource.key))
+
     if (!localStorage.getItem(resource.key)) {
       localStorage.setItem(`${resource.key}`, `${resource.value}`)
     }

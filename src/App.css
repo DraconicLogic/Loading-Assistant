@@ -343,24 +343,21 @@ MuiAppBar {
 	width: 100vw;
 }
 
+#splash-top {
+	grid-row: 1;
+}
+
 #splash-center {
 	grid-row: 2;
-	text-align: center;
 }
 
 /* #splash-center__kinrich-logo {} */
 
 #splash-bottom {
 	grid-row: 3;
-	text-align: center;
-}
-
-#splash-bottom__buttons {
-	text-align: center;
 }
 
 #splash-bottom__information {
-	text-align: center;
 	min-height: 5.5em;
 }
 

@@ -3,7 +3,7 @@ import products from "../../products/products.json";
 import PropTypes from "prop-types";
 import SyncStatus from "../SyncStatus/SyncStatus.jsx";
 import { Popover } from "@material-ui/core";
-import dayjs from "dayjs";
+import * as utils from "../../utils/utils.js";
 
 const StatusBar = ({ content, date, synced }) => {
 	const [extraInfo, setExtraInfo] = useState(false);
@@ -67,7 +67,8 @@ const StatusBar = ({ content, date, synced }) => {
 				<SyncStatus synced={synced} />
 			</span>
 			<span className="status-bar__item">
-				Date: {dayjs(date).format("DD/MM/YYYY")}
+				{/* extract dayjs function and define in utils */}
+				Date: {utils.formatDate(date)}
 			</span>
 		</div>
 	);

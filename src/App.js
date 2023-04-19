@@ -30,7 +30,7 @@ function App () {
 
 
   useEffect(() => {
-		(async function () {
+		(async function runStartUp () {
 			console.log("Running Startup...");
       const {date, stacks} =  await data.startUp()
 			setSavedStacks(stacks);
@@ -44,7 +44,7 @@ function App () {
       date,
       containerContent,
     })
-  })
+  },[containerContent])
 
   function toggleNotice (newNoticeStatus) {
     setNoticeStatus(newNoticeStatus)
@@ -100,6 +100,7 @@ function App () {
     setSavedStacks(newSavedStacks)
     const deletedStacks = await data.cleanupStackIDs(usedIds)
     console.log("Stacks Deleted: ", deletedStacks)
+    data.removeState()
   }
   
   function handleSaveContainer  (container) {
@@ -132,6 +133,8 @@ function App () {
            initialStartup={initialStartup}
            stacksSetter={setSavedStacks}
            dataSyncedSetter={setDataSynced}
+           containerContentState={{containerContent, setContainerContent}}
+           date
            >
             <div id="main" className="fade-in"> 
 
