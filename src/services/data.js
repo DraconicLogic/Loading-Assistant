@@ -108,7 +108,9 @@ export function loadState() {
   return loadedStates
 }
 
-export function removeState(currentState){
+export function removeState(){
+  console.info("Remove Saved State")
+  localStorage.removeItem("saveStates")
 
 }
 

@@ -22,12 +22,9 @@ function App () {
   const [containerContent, setContainerContent] = useState([])
   const [containerComplete, setContainerComplete] = useState(false)
   const [response, setResponse] = useState(null)
-  
-  
   const [noticeStatus, setNoticeStatus] = useState(false)
   const [dataSynced, setDataSynced] = useState(null)
   const [initialStartup, setInitialStartup] = useState(false)
-
 
   useEffect(() => {
 		(async function runStartUp () {
@@ -61,8 +58,6 @@ function App () {
     }
   }
 
-  
-
   function handleRemoveFromContainer (deleteId) {
     if (!containerComplete) {
       const newContent = [...containerContent]
@@ -90,7 +85,7 @@ function App () {
 
   async function handleCleanup(finishedContainer){
     console.log("handling cleanup")
-    console.log(finishedContainer)
+    
     const newSavedStacks = {...savedStacks}      
     const usedIds = utils.listIDs(finishedContainer.containerContent)
     console.log("usedIds: ", usedIds)
