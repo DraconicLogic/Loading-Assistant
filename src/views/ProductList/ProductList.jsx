@@ -8,13 +8,20 @@ import { generateUniqueCode } from "../../utils/stackIDGenerator.js";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import SaveSharpIcon from "@material-ui/icons/SaveSharp";
+import { TextField } from "@material-ui/core";
 import PropTypes from "prop-types";
 
+// convert to a functional component
 class ProductList extends Component {
 	state = {
 		stackPosition: 0,
 		currentStack: Array(12),
+		bales: [],
 	};
+
+	componentDidMount() {
+		// bales state should be populated when the component is mounted
+	}
 
 	render() {
 		const { stackPosition, currentStack } = this.state;
@@ -22,8 +29,20 @@ class ProductList extends Component {
 
 		const bales = productCodes.sort();
 
+		const handleSearch = (event) => {
+			console.log("filter products");
+		};
+
 		return (
 			<div id="product-list" className="App__view">
+				<div id="product-list__search">
+					<TextField
+						label="Search Products"
+						variant="filled"
+						type="search"
+						onChange={handleSearch}
+					/>
+				</div>
 				<div id="product-list__buttons">
 					{bales.map((bale) => {
 						return (
