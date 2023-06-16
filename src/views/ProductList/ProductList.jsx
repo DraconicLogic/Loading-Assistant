@@ -15,20 +15,36 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 	const [stackPosition, setStackPosition] = useState(0);
 	const [currentStack, setCurrentStack] = useState(Array(12));
 	const [bales, setBales] = useState([]);
+	const [searchField, setSearchField] = useState("");
 
 	useEffect(() => {
-		const productCodes = Object.keys(products).sort();
-		console.log("ProductCodes: ", productCodes);
-		setBales(productCodes);
+		if (searchField) {
+			const filteredBales = bales.filter((bale) => {
+				return bale.includes(searchField);
+			});
+			setBales(filteredBales);
+		} else {
+			unfilteredBales();
+		}
+	}, [searchField]);
+
+	useEffect(() => {
+		unfilteredBales();
 	}, []);
 
 	useEffect(() => {
 		highlightNextPosition();
 	}, [currentStack]);
 
+	function unfilteredBales() {
+		const productCodes = Object.keys(products).sort();
+		console.log("ProductCodes: ", productCodes);
+		setBales(productCodes);
+	}
+
 	function handleSearch(event) {
-		// TODO: Implement this handler
-		console.log("filter products");
+		const newChar = String(event.target.value).toUpperCase();
+		setSearchField(newChar);
 	}
 
 	function markPosition(marker) {
@@ -107,6 +123,7 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 					variant="filled"
 					type="search"
 					onChange={handleSearch}
+					value={searchField}
 				/>
 			</div>
 			<div id="product-list__buttons">
