@@ -18,25 +18,28 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 	const [searchField, setSearchField] = useState("");
 
 	useEffect(() => {
-		if (searchField) {
-			const filteredBales = bales.filter((bale) => {
-				return bale.includes(searchField);
-			});
-			setBales(filteredBales);
-		} else {
-			unfilteredBales();
-		}
+		(function searchBales(query) {
+			if (searchField) {
+				const filteredBales = bales.filter((bale) => {
+					const isFirstCharSame = bale[0] === query[0];
+					return isFirstCharSame ? bale.includes(query) : null;
+				});
+				setBales(filteredBales);
+			} else {
+				unfilterBales();
+			}
+		})(searchField);
 	}, [searchField]);
 
 	useEffect(() => {
-		unfilteredBales();
+		unfilterBales();
 	}, []);
 
 	useEffect(() => {
 		highlightNextPosition();
 	}, [currentStack]);
 
-	function unfilteredBales() {
+	function unfilterBales() {
 		const productCodes = Object.keys(products).sort();
 		console.log("ProductCodes: ", productCodes);
 		setBales(productCodes);
@@ -56,6 +59,8 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 			const newStack = [...currentStack];
 			newStack[stackPosition] = baleCode;
 			setCurrentStack(newStack);
+			setSearchField("");
+			document.getElementById("search-field").focus();
 		}
 	}
 
@@ -119,11 +124,13 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 		<div id="product-list" className="App__view">
 			<div id="product-list__search">
 				<TextField
+					id="search-field"
 					label="Search Products"
 					variant="filled"
 					type="search"
 					onChange={handleSearch}
 					value={searchField}
+					autoFocus={true}
 				/>
 			</div>
 			<div id="product-list__buttons">
