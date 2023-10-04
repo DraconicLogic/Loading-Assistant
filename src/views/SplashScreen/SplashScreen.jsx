@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as data from "../../services/data";
 import * as sync from "../../services/data";
-import * as utils from "../../utils/utils.js";
+// import * as utils from "../../utils/utils.js";
 import logo from "../../assets/kinrich-logo-200.png";
 import footer from "../../assets/kinrich-footer-250.png";
 // import CircularProgress from "@material-ui/core/CircularProgress";

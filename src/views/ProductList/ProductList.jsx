@@ -134,9 +134,10 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 				/>
 			</div>
 			<div id="product-list__buttons">
-				{bales.map((bale) => {
-					return <ProductButton add={addToStack} product={bale} key={bale} />;
-				})}
+				{searchField &&
+					bales.map((bale) => {
+						return <ProductButton add={addToStack} product={bale} key={bale} />;
+					})}
 			</div>
 			<div id="stack-section">
 				<StackSize size={toggleStackSize} />
