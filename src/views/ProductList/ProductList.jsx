@@ -8,28 +8,12 @@ import { generateUniqueCode } from "../../utils/stackIDGenerator.js";
 import CancelIcon from "@material-ui/icons/Cancel";
 import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import SaveSharpIcon from "@material-ui/icons/SaveSharp";
-import { TextField } from "@material-ui/core";
 import PropTypes from "prop-types";
 
 function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 	const [stackPosition, setStackPosition] = useState(0);
 	const [currentStack, setCurrentStack] = useState(Array(12));
 	const [bales, setBales] = useState([]);
-	const [searchField, setSearchField] = useState("");
-
-	useEffect(() => {
-		(function searchBales(query) {
-			if (searchField) {
-				const filteredBales = bales.filter((bale) => {
-					const isFirstCharSame = bale[0] === query[0];
-					return isFirstCharSame ? bale.includes(query) : null;
-				});
-				setBales(filteredBales);
-			} else {
-				unfilterBales();
-			}
-		})(searchField);
-	}, [searchField]);
 
 	useEffect(() => {
 		unfilterBales();
@@ -45,11 +29,6 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 		setBales(productCodes);
 	}
 
-	function handleSearch(event) {
-		const newChar = String(event.target.value).toUpperCase();
-		setSearchField(newChar);
-	}
-
 	function markPosition(marker) {
 		setStackPosition(marker);
 	}
@@ -59,8 +38,6 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 			const newStack = [...currentStack];
 			newStack[stackPosition] = baleCode;
 			setCurrentStack(newStack);
-			setSearchField("");
-			// document.getElementById("search-field").focus();
 		}
 	}
 
@@ -122,24 +99,10 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 
 	return (
 		<div id="product-list" className="App__view">
-			<div id="product-list__search">
-				<TextField
-					id="search-field"
-					label="Search Products"
-					variant="filled"
-					type="search"
-					onChange={handleSearch}
-					value={searchField}
-					autoFocus={true}
-				/>
-			</div>
 			<div id="product-list__buttons">
-				{
-					// searchField &&
-					bales.map((bale) => {
-						return <ProductButton add={addToStack} product={bale} key={bale} />;
-					})
-				}
+				{bales.map((bale) => {
+					return <ProductButton add={addToStack} product={bale} key={bale} />;
+				})}
 			</div>
 			<div id="stack-section">
 				<StackSize size={toggleStackSize} />
