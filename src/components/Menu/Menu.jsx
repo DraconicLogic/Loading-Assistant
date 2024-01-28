@@ -22,7 +22,7 @@ const Menu = ({
 						setPeekStatus(!peekStatus);
 						setMenuStatus(!menuStatus);
 					}}>
-					<ListItemText primary={"Check Imported Stacks"} />
+					<ListItemText primary={"Saved Strapped-Bales"} />
 				</ListItem>
 			</List>
 		</Drawer>
