@@ -304,7 +304,7 @@ MuiAppBar {
 .product-button {
 	margin: 2px;
 	font-weight: bold;
-	font-size: large;
+	font-size: small;
 	border: solid;
 	border-radius: 10px;
 	height: 50px;
