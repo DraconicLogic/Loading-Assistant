@@ -60,7 +60,7 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 			newStack[stackPosition] = baleCode;
 			setCurrentStack(newStack);
 			setSearchField("");
-			document.getElementById("search-field").focus();
+			// document.getElementById("search-field").focus();
 		}
 	}
 
@@ -134,10 +134,12 @@ function ProductList({ savedStacks, handleSaveStack, handleAddToContainer }) {
 				/>
 			</div>
 			<div id="product-list__buttons">
-				{searchField &&
+				{
+					// searchField &&
 					bales.map((bale) => {
 						return <ProductButton add={addToStack} product={bale} key={bale} />;
-					})}
+					})
+				}
 			</div>
 			<div id="stack-section">
 				<StackSize size={toggleStackSize} />
