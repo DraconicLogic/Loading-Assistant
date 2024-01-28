@@ -33,9 +33,9 @@ body {
 }
 
 .code-input {
-	height: 50px;
-	width: 50px;
-	font-size: 50px;
+	height: 15%;
+	width: 10%;
+	font-size: 50%;
 	border: solid;
 	margin: 2px;
 }
@@ -568,8 +568,8 @@ MuiAppBar {
 }
 
 #stackId-input {
-	display: block;
-	margin: 5em;
+	/* display: inline-block; */
+	/* margin: 5em; */
 	grid-column: 1;
 }
 
