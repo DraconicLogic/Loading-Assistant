@@ -1,16 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import * as data from "../../services/data";
 import * as sync from "../../services/data";
+// import * as utils from "../../utils/utils.js";
 import logo from "../../assets/kinrich-logo-200.png";
 import footer from "../../assets/kinrich-footer-250.png";
 // import CircularProgress from "@material-ui/core/CircularProgress";
 
 const SplashScreen = (props) => {
-	const { savedStacks, initialStartup, stacksSetter, dataSyncedSetter } = props;
+	const {
+		savedStacks,
+		initialStartup,
+		stacksSetter,
+		dataSyncedSetter,
+		containerContentState,
+	} = props;
+
 	const [started, setStarted] = useState(false);
+	const [unfinishedContainers, setUnfinishedContainers] = useState(null);
 
 	function handleStart(event) {
 		setStarted(true);
 	}
+
+	function handleRestoreState(previousContent) {
+		containerContentState.setContainerContent(previousContent);
+		handleStart();
+	}
+
+	function displayUnfinishedContainers(containers) {
+		if (containers) {
+			const containersArray = Object.entries(containers);
+			return containersArray.map((container) => {
+				const date = container[0];
+				const containerContent = container[1].containerContent;
+				console.log("Unfinished ContainerContent: ", containerContent);
+				return (
+					<div>
+						{date} - {containerContent.length} straps
+						<button onClick={() => handleRestoreState(containerContent)}>
+							Continue
+						</button>
+						<button>Clear</button>
+					</div>
+				);
+			});
+		}
+	}
+
+	useEffect(() => {
+		(function retrieveUnfinishedContainers() {
+			console.info("Checking for unfinished...");
+			const loadedStates = data.loadState();
+			console.log("loadedStates: ", loadedStates);
+			setUnfinishedContainers(loadedStates);
+		})();
+	}, []);
 
 	async function handleSync() {
 		const syncObj = await sync.syncCheck(savedStacks);
@@ -40,8 +84,16 @@ const SplashScreen = (props) => {
 		dataSyncedSetter(true);
 	}
 
+	// const recoveredStateDates = Object.entries(recoveredState);
+
 	const display = (
 		<div id="splash" className={started ? "fade-out" : null}>
+			{unfinishedContainers && (
+				<div id="splash-top">
+					Unfinished Containers
+					{displayUnfinishedContainers(unfinishedContainers)}
+				</div>
+			)}
 			<div id="splash-center">
 				<img id="splash-center__kinrich-logo" src={logo} alt="Kinrich Logo" />
 				<h1 id="App-title">Loading Assistant</h1>

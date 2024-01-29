@@ -1,6 +1,7 @@
 import * as api from "./api.js"
 import * as local from "./local.js"
 import * as loaders from "../utils/loaders.js"
+import * as utils from "../utils/utils.js"
 
 
 
@@ -90,10 +91,27 @@ export async function syncData(syncObj){
 }
 
 export function saveState(currentState){
-  const savedStates = JSON.parse(localStorage.getItem('savedStates')) || {}
-  savedStates[currentState.date] = currentState
-  localStorage.setItem("saveStates", JSON.stringify(savedStates))
+  console.log(Boolean(currentState.date))
+  if(currentState.date) {
+    console.log("current state: ", currentState)
+    const date = utils.formatDate(currentState.date)
+    console.log("Format date for save state: ", date)
+    const savedStates = JSON.parse(localStorage.getItem('saveStates')) || {}
+    savedStates[date] = currentState
+    localStorage.setItem("saveStates", JSON.stringify(savedStates))
+  }
   return;
+}
+
+export function loadState() {
+  const loadedStates = JSON.parse(localStorage.getItem('saveStates'))
+  return loadedStates
+}
+
+export function removeState(){
+  console.info("Remove Saved State")
+  localStorage.removeItem("saveStates")
+
 }
 
 export function syncMsg(syncCmd){

@@ -33,9 +33,9 @@ body {
 }
 
 .code-input {
-	height: 50px;
-	width: 50px;
-	font-size: 50px;
+	height: 15%;
+	width: 10%;
+	font-size: 50%;
 	border: solid;
 	margin: 2px;
 }
@@ -282,8 +282,13 @@ MuiAppBar {
 	/* overflow: hidden; */
 }
 
-#product-list__buttons {
+#product-list__search {
+	/* background-color: #3f51b5; */
 	grid-row: 1;
+}
+
+#product-list__buttons {
+	grid-row: 2;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: auto;
@@ -299,7 +304,7 @@ MuiAppBar {
 .product-button {
 	margin: 2px;
 	font-weight: bold;
-	font-size: large;
+	font-size: small;
 	border: solid;
 	border-radius: 10px;
 	height: 50px;
@@ -343,24 +348,21 @@ MuiAppBar {
 	width: 100vw;
 }
 
+#splash-top {
+	grid-row: 1;
+}
+
 #splash-center {
 	grid-row: 2;
-	text-align: center;
 }
 
 /* #splash-center__kinrich-logo {} */
 
 #splash-bottom {
 	grid-row: 3;
-	text-align: center;
-}
-
-#splash-bottom__buttons {
-	text-align: center;
 }
 
 #splash-bottom__information {
-	text-align: center;
 	min-height: 5.5em;
 }
 
@@ -419,7 +421,7 @@ MuiAppBar {
 }
 
 #stack-section {
-	grid-row: 2;
+	grid-row: 3;
 	border: solid;
 	height: 30vh;
 	max-height: 30vh;
@@ -437,7 +439,7 @@ MuiAppBar {
 	margin-left: 5px;
 	margin-right: 5px;
 	font-weight: bolder;
-	font-size: xx-large;
+	/* font-size: medium; */
 }
 
 #stack-tab {
@@ -566,8 +568,8 @@ MuiAppBar {
 }
 
 #stackId-input {
-	display: block;
-	margin: 5em;
+	/* display: inline-block; */
+	/* margin: 5em; */
 	grid-column: 1;
 }
 

@@ -22,15 +22,13 @@ function App () {
   const [containerContent, setContainerContent] = useState([])
   const [containerComplete, setContainerComplete] = useState(false)
   const [response, setResponse] = useState(null)
-  
-  
   const [noticeStatus, setNoticeStatus] = useState(false)
   const [dataSynced, setDataSynced] = useState(null)
   const [initialStartup, setInitialStartup] = useState(false)
-
+  // const [started, setStarted] = useState(false)
 
   useEffect(() => {
-		(async function () {
+		(async function runStartUp () {
 			console.log("Running Startup...");
       const {date, stacks} =  await data.startUp()
 			setSavedStacks(stacks);
@@ -44,7 +42,7 @@ function App () {
       date,
       containerContent,
     })
-  })
+  },[containerContent])
 
   function toggleNotice (newNoticeStatus) {
     setNoticeStatus(newNoticeStatus)
@@ -60,8 +58,6 @@ function App () {
       alert("The Container is compete. No more stacks can be added")
     }
   }
-
-  
 
   function handleRemoveFromContainer (deleteId) {
     if (!containerComplete) {
@@ -90,7 +86,7 @@ function App () {
 
   async function handleCleanup(finishedContainer){
     console.log("handling cleanup")
-    console.log(finishedContainer)
+    
     const newSavedStacks = {...savedStacks}      
     const usedIds = utils.listIDs(finishedContainer.containerContent)
     console.log("usedIds: ", usedIds)
@@ -100,6 +96,7 @@ function App () {
     setSavedStacks(newSavedStacks)
     const deletedStacks = await data.cleanupStackIDs(usedIds)
     console.log("Stacks Deleted: ", deletedStacks)
+    data.removeState()
   }
   
   function handleSaveContainer  (container) {
@@ -132,6 +129,8 @@ function App () {
            initialStartup={initialStartup}
            stacksSetter={setSavedStacks}
            dataSyncedSetter={setDataSynced}
+           containerContentState={{containerContent, setContainerContent}}
+           date
            >
             <div id="main" className="fade-in"> 
 
