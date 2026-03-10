@@ -575,5 +575,21 @@
     "price": 35,
     "units": "KG",
     "size": 55
+  },
+  "GDR": {
+    "code": "GDR",
+    "item": "Girls Dress",
+    "baleSize": "small",
+    "price": 0,
+    "units": "KG",
+    "size": 55
+  },
+  "NEW HHR": {
+    "code": "NEW HHR",
+    "item": "New Household Rumage",
+    "baleSize": "small",
+    "price": 0,
+    "units": "KG",
+    "size": 55
   }
 }
